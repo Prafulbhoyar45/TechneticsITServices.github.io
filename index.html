@@ -168,6 +168,119 @@
         .delay-300 { transition-delay: 150ms; }
         .delay-400 { transition-delay: 200ms; }
 
+        /* Journey Section - Directional Flow Arrows */
+        .journey-step-wrapper {
+            position: relative;
+        }
+
+        /* Desktop: Horizontal arrows between steps (left-to-right) */
+        .journey-arrow {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .journey-arrow {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                top: 1rem;
+                left: calc(100% + 0.5rem);
+                width: 1.85rem;
+                height: 40px;
+                z-index: 1;
+            }
+
+            .journey-arrow::before {
+                content: '';
+                width: 100%;
+                height: 3px;
+                background: linear-gradient(90deg, #6B7280 0%, #4B5563 100%);
+            }
+
+            .journey-arrow::after {
+                content: '';
+                position: absolute;
+                right: -10px;
+                width: 0;
+                height: 0;
+                border-left: 14px solid #4B5563;
+                border-top: 10px solid transparent;
+                border-bottom: 10px solid transparent;
+            }
+
+            /* Hide arrow after last step */
+            .journey-step-wrapper:last-child .journey-arrow {
+                display: none;
+            }
+        }
+
+        /* Mobile & Tablet: Vertical arrows between steps (top-to-bottom) */
+        @media (max-width: 767px) {
+            .journey-step-wrapper {
+                position: relative;
+            }
+
+            /* Individual vertical arrow between each step */
+            .journey-arrow {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                left: 2rem;
+                top: calc(100% + 0.5rem);
+                width: 40px;
+                height: calc(2rem - 1rem);
+                z-index: 1;
+                transform: translateX(-50%);
+            }
+
+            .journey-arrow::before {
+                content: '';
+                width: 2px;
+                height: 100%;
+                background: linear-gradient(180deg, #6B7280 0%, #4B5563 100%);
+            }
+
+            .journey-arrow::after {
+                content: '';
+                position: absolute;
+                bottom: -8px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 0;
+                height: 0;
+                border-top: 10px solid #4B5563;
+                border-left: 7px solid transparent;
+                border-right: 7px solid transparent;
+            }
+
+            /* Hide arrow after last step */
+            .journey-step-wrapper:last-child .journey-arrow {
+                display: none;
+            }
+
+            /* Adjust alignment for mobile */
+            .journey-step-wrapper {
+                text-align: left;
+                padding-left: 4.5rem;
+                padding-top: 1rem;
+            }
+
+            .journey-step-wrapper .w-16 {
+                margin-left: 0;
+                position: absolute;
+                left: 0;
+                top: 1rem;
+            }
+
+            /* Adjust content alignment */
+            .journey-step-wrapper h4,
+            .journey-step-wrapper p {
+                text-align: left;
+            }
+        }
+
         /* Glassmorphism utility - Optimized for Performance */
         .glass-panel {
             background: rgba(255, 255, 255, 0.85);
@@ -207,23 +320,151 @@
             100%  {opacity: 1; transform: translateY(0)}
         }
 
-        /* Continuous Scroll Animation for Mentors - Updated for 12 Cards */
-        @keyframes scroll-left {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-370px * 12)); }
+        /* Testimonial Carousel Styles */
+        .testimonial-carousel-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            min-height: 200px;
         }
 
-        .animate-scroll {
-            animation: scroll-left 60s linear infinite;
+        .testimonial-carousel-track {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .testimonial-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+            pointer-events: none;
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+            position: relative;
+        }
+
+        .testimonial-slide.prev {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+
+        /* Navigation Dots */
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .testimonial-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            border: none;
+            padding: 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            min-width: 10px;
+            min-height: 10px;
+        }
+
+        .testimonial-dot:hover {
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(1.2);
+        }
+
+        .testimonial-dot.active {
+            background: rgba(255, 255, 255, 1);
+            width: 28px;
+            border-radius: 5px;
+        }
+
+        /* Mobile optimizations for dots */
+        @media (max-width: 768px) {
+            .testimonial-dots {
+                gap: 0.75rem;
+                margin-top: 2rem;
+                padding: 0.5rem;
+            }
+
+            .testimonial-dot {
+                width: 12px;
+                height: 12px;
+                min-width: 12px;
+                min-height: 12px;
+                position: relative;
+            }
+
+            /* Increase touch target size without changing visual size */
+            .testimonial-dot::before {
+                content: '';
+                position: absolute;
+                top: -10px;
+                left: -10px;
+                right: -10px;
+                bottom: -10px;
+            }
+
+            .testimonial-dot.active {
+                width: 32px;
+                border-radius: 6px;
+            }
+        }
+
+        /* Touch-friendly interaction */
+        .testimonial-carousel-wrapper {
+            touch-action: pan-y;
+            user-select: none;
+        }
+
+        /* Mentor Cards - Seamless Auto-Scroll with Manual Override */
+        .mentor-scroll-container {
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Hide scrollbar in Firefox */
+            cursor: default; /* Keep default cursor, no grab cursor */
+            position: relative;
+        }
+
+        /* Hide scrollbar completely in all browsers */
+        .mentor-scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Seamless infinite scroll animation - Right to Left */
+        /* 12 cards × (350px width + 24px gap) = 4488px total */
+        @keyframes scroll-rtl {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-374px * 12)); /* Move exactly 12 cards worth */
+            }
+        }
+
+        .mentor-cards-wrapper {
+            animation: scroll-rtl 80s linear infinite;
             will-change: transform;
         }
 
-        .animate-scroll:hover {
+        /* Pause animation on hover for better UX */
+        .mentor-scroll-container:hover .mentor-cards-wrapper {
             animation-play-state: paused;
         }
 
         /* Fix mentor card description height to align LinkedIn icons */
-        #team .animate-scroll > div .text-sm.text-brand-dark\/70 {
+        #team .mentor-cards-wrapper > div .text-sm.text-brand-dark\/70 {
             min-height: 84px;
         }
 
@@ -252,6 +493,19 @@
             .tab-btn {
                 padding: 0.5rem 1rem;
                 font-size: 0.875rem;
+            }
+
+            /* Code panel - keep left-aligned on tablet */
+            #home .glass-panel {
+                text-align: left;
+            }
+
+            #home .glass-panel .space-y-3 {
+                text-align: left;
+            }
+
+            #home .glass-panel .flex {
+                justify-content: flex-start;
             }
 
             /* Mentor cards width adjustment */
@@ -421,6 +675,17 @@
                 margin-left: auto;
                 margin-right: auto;
                 max-width: 100%;
+                text-align: left; /* Keep code content left-aligned */
+            }
+
+            /* Force code lines to be left-aligned on mobile */
+            #home .glass-panel .space-y-3 {
+                text-align: left;
+            }
+
+            #home .glass-panel .flex {
+                justify-content: flex-start;
+                text-align: left;
             }
 
             #home .glass-panel .absolute {
@@ -428,6 +693,7 @@
                 margin-top: 1.5rem;
                 margin-left: auto !important;
                 margin-right: auto !important;
+                text-align: left;
             }
 
             /* Trusted by companies */
@@ -552,31 +818,45 @@
                 grid-template-columns: 1fr;
             }
 
-            /* ===== MENTOR CARDS ANIMATION FIX ===== */
+            /* ===== MENTOR CARDS - RESPONSIVE AUTO-SCROLL ===== */
             #team {
                 padding-top: 3rem !important;
                 padding-bottom: 3rem !important;
             }
 
-            #team .relative.overflow-hidden {
-                overflow-x: hidden;
+            #team .mentor-scroll-container {
+                overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                cursor: default;
             }
 
-            #team .animate-scroll {
-                display: flex;
-                animation: scroll-left 50s linear infinite;
+            #team .mentor-scroll-container::-webkit-scrollbar {
+                display: none;
             }
 
-            #team .animate-scroll > div {
+            /* Mobile animation - 12 cards × (280px width + 24px gap) = 3648px total */
+            @keyframes scroll-rtl-mobile {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(calc(-304px * 12)); /* Move exactly 12 cards worth */
+                }
+            }
+
+            #team .mentor-cards-wrapper {
+                animation: scroll-rtl-mobile 65s linear infinite;
+            }
+
+            #team .mentor-cards-wrapper > div {
                 width: 280px !important;
                 min-width: 280px !important;
                 flex-shrink: 0;
-                margin-right: 1.5rem;
             }
 
             /* Fix LinkedIn icon position - make all descriptions same height */
-            #team .animate-scroll > div p.text-sm.text-brand-dark\/70 {
+            #team .mentor-cards-wrapper > div p.text-sm.text-brand-dark\/70 {
                 min-height: 80px;
                 display: flex;
                 align-items: center;
@@ -840,21 +1120,29 @@
                 font-size: 0.75rem;
             }
             
-            /* Better code panel alignment for mobile */
+            /* Better code panel alignment for mobile - keep left-aligned */
             #home .glass-panel .space-y-3 > div {
                 display: flex;
                 gap: 0.5rem;
                 align-items: flex-start;
+                justify-content: flex-start;
+                text-align: left;
             }
             
             #home .glass-panel .space-y-3 > div > span:first-child {
                 min-width: 1.5rem;
                 flex-shrink: 0;
+                text-align: left;
+            }
+
+            #home .glass-panel .space-y-3 > div > span {
+                text-align: left;
             }
             
             /* Adjust code panel padding */
             #home .glass-panel {
                 padding: 1rem;
+                text-align: left;
             }
             
             /* Reduce code panel margin */
@@ -863,6 +1151,12 @@
                 margin-top: 1rem;
                 margin-left: 0 !important;
                 margin-right: 0 !important;
+                text-align: left;
+            }
+
+            /* Ensure code content doesn't inherit center alignment */
+            #home .glass-panel * {
+                text-align: left;
             }
         }
 
@@ -1403,34 +1697,43 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <!-- Step 1 -->
-                    <div class="relative text-center group reveal-on-scroll delay-100">
+                    <div class="journey-step-wrapper relative text-center group reveal-on-scroll delay-100">
                         <div class="w-16 h-16 mx-auto bg-white border-2 border-brand-accent rounded-full flex items-center justify-center text-xl text-slate-700 mb-4 shadow-lg transition-all group-hover:scale-110 group-hover:bg-brand-primary group-hover:text-white group-hover:border-brand-primary">
                             1
                         </div>
                         <h4 class="text-lg font-bold mb-2 text-slate-800">Profile Review</h4>
                         <p class="text-sm text-slate-500 px-2">We analyze your current skills, resume, and GitHub to identify gaps and opportunities.</p>
+                        
+                        <!-- Arrow pointing to next step -->
+                        <div class="journey-arrow"></div>
                     </div>
 
                     <!-- Step 2 -->
-                    <div class="relative text-center group reveal-on-scroll delay-200">
+                    <div class="journey-step-wrapper relative text-center group reveal-on-scroll delay-200">
                         <div class="w-16 h-16 mx-auto bg-white border-2 border-brand-accent rounded-full flex items-center justify-center text-xl text-slate-700 mb-4 shadow-lg transition-all group-hover:scale-110 group-hover:bg-brand-primary group-hover:text-white group-hover:border-brand-primary">
                             2
                         </div>
                         <h4 class="text-lg font-bold mb-2 text-slate-800">Goal Setting</h4>
                         <p class="text-sm text-slate-500 px-2">Define your target roles (e.g., SDE-1, Data Analyst) and target companies (Startups vs MNCs).</p>
+                        
+                        <!-- Arrow pointing to next step -->
+                        <div class="journey-arrow"></div>
                     </div>
 
                     <!-- Step 3 -->
-                    <div class="relative text-center group reveal-on-scroll delay-300">
+                    <div class="journey-step-wrapper relative text-center group reveal-on-scroll delay-300">
                         <div class="w-16 h-16 mx-auto bg-white border-2 border-brand-accent rounded-full flex items-center justify-center text-xl text-slate-700 mb-4 shadow-lg transition-all group-hover:scale-110 group-hover:bg-brand-primary group-hover:text-white group-hover:border-brand-primary">
                             3
                         </div>
                         <h4 class="text-lg font-bold mb-2 text-slate-800">Roadmap & Skill Up</h4>
                         <p class="text-sm text-slate-500 px-2">Execute a custom learning path involving live classes, projects, and weekly code reviews.</p>
+                        
+                        <!-- Arrow pointing to next step -->
+                        <div class="journey-arrow"></div>
                     </div>
 
                     <!-- Step 4 -->
-                    <div class="relative text-center group reveal-on-scroll delay-400">
+                    <div class="journey-step-wrapper relative text-center group reveal-on-scroll delay-400">
                         <div class="w-16 h-16 mx-auto bg-white border-2 border-brand-accent rounded-full flex items-center justify-center text-xl text-slate-700 mb-4 shadow-lg transition-all group-hover:scale-110 group-hover:bg-brand-primary group-hover:text-white group-hover:border-brand-primary">
                             4
                         </div>
@@ -1542,9 +1845,9 @@
             </div>
 
             <!-- Horizontal Slider Container -->
-            <div class="relative overflow-hidden">
+            <div class="relative mentor-scroll-container">
                 <!-- Scrollable Container -->
-                <div class="flex gap-6 py-4 animate-scroll">
+                <div class="flex gap-6 py-4 mentor-cards-wrapper">
                     <!-- Mentor Cards -->
                 <!-- Mentor 1 -->
                 <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]">
@@ -1553,12 +1856,12 @@
                      
                         <!-- Large visible avatar -->
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Yash_Modi.jpg" alt="Yash Modi - AI Chatbot Developer at Technetics" class="w-full h-full object-cover" width="112" height="112" fetchpriority="high">
+                            <img src="assets/Yash_Modi.jpg" alt="Yash Modi - AI Agents Developer at Technetics" class="w-full h-full object-cover" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Yash Modi</h3>
-                            <p class="text-brand-primary text-sm font-semibold mb-3">AI Chatbot Developer</p>
-                            <p class="text-sm text-brand-dark/70 leading-relaxed mb-4">AI Chatbot Developer scaling enterprise agents via robust LLM and microservices architectures.</p>
+                            <p class="text-brand-primary text-sm font-semibold mb-3">AI Agents Developer</p>
+                            <p class="text-sm text-brand-dark/70 leading-relaxed mb-4">AI Agents Developer scaling enterprise agents via robust LLM and microservices architectures.</p>
                             <div class="flex justify-center gap-3">
                                 <a href="https://www.linkedin.com/in/yash-moodi/" class="w-10 h-10 rounded-full bg-brand-accent/30 hover:bg-brand-primary flex items-center justify-center text-brand-primary hover:text-white transition-all"><i class="fa-brands fa-linkedin text-lg"></i></a>
                             </div>
@@ -1609,12 +1912,12 @@
                     <div class="h-32 bg-gradient-to-br from-green-100 via-green-50 to-brand-neutral relative transition-all duration-500 group-hover:from-green-400 group-hover:via-emerald-300 group-hover:to-brand-neutral rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Bhavesha_Panchal.jpeg" alt="Bhavisha Panchal - AI Chatbot Developer" class="w-full h-full" width="112" height="112" fetchpriority="high">
+                            <img src="assets/Bhavesha_Panchal.jpeg" alt="Bhavisha Panchal - AI Agents Developer" class="w-full h-full" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Bhavisha Panchal</h3>
-                            <p class="text-brand-primary text-sm font-semibold mb-3">AI Chatbot Developer</p>
-                            <p class="text-sm text-brand-dark/70 leading-relaxed mb-4">Developing scalable, enterprise-grade AI chatbots powered by LLMs and high-performance microservices.</p>
+                            <p class="text-brand-primary text-sm font-semibold mb-3">AI Agents Developer</p>
+                            <p class="text-sm text-brand-dark/70 leading-relaxed mb-4">Developing scalable, enterprise-grade AI agents powered by LLMs and high-performance microservices.</p>
                             <div class="flex justify-center gap-3">
                                 <a href="https://www.linkedin.com/in/bhavisha-panchal/" class="w-10 h-10 rounded-full bg-brand-accent/30 hover:bg-brand-primary flex items-center justify-center text-brand-primary hover:text-white transition-all"><i class="fa-brands fa-linkedin text-lg"></i></a>
                             </div>
@@ -1772,16 +2075,16 @@
 
                 <!-- DUPLICATE SET FOR SEAMLESS LOOP -->
                 <!-- Mentor 1 (Duplicate) -->
-                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]">
+                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]" aria-hidden="true">
                     <div class="h-32 bg-gradient-to-br from-blue-100 via-blue-50 to-brand-accent relative transition-all duration-500 group-hover:from-brand-primary group-hover:via-blue-400 group-hover:to-brand-accent rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Yash_Modi.jpg" alt="Yash Modi - AI Chatbot Developer at Technetics" class="w-full h-full object-cover" width="112" height="112" fetchpriority="high">
+                            <img src="assets/Yash_Modi.jpg" alt="" class="w-full h-full object-cover" width="112" height="112">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Yash Modi</h3>
-                            <p class="text-brand-primary text-sm font-semibold mb-3">AI Chatbot Developer</p>
-                            <p class="text-sm text-brand-dark/70 leading-relaxed mb-4">AI Chatbot Developer scaling enterprise agents via robust LLM and microservices architectures.</p>
+                            <p class="text-brand-primary text-sm font-semibold mb-3">AI Agents Developer</p>
+                            <p class="text-sm text-brand-dark/70 leading-relaxed mb-4">AI Agents Developer scaling enterprise agents via robust LLM and microservices architectures.</p>
                             <div class="flex justify-center gap-3">
                                 <a href="https://www.linkedin.com/in/yash-moodi/" class="w-10 h-10 rounded-full bg-brand-accent/30 hover:bg-brand-primary flex items-center justify-center text-brand-primary hover:text-white transition-all"><i class="fa-brands fa-linkedin text-lg"></i></a>
                             </div>
@@ -1790,11 +2093,11 @@
                 </div>
 
                 <!-- Mentor 2 (Duplicate) -->
-                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]">
+                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]" aria-hidden="true">
                     <div class="h-32 bg-gradient-to-br from-purple-100 via-pink-50 to-brand-soft relative transition-all duration-500 group-hover:from-purple-400 group-hover:via-pink-300 group-hover:to-brand-soft rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Dhaval.png" alt="Dhaval Kanpariya - Data Science Trainer at Technetics" class="w-full h-full" width="112" height="112" fetchpriority="high">
+                            <img src="assets/Dhaval.png" alt="" class="w-full h-full" width="112" height="112">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Dhaval Kanpariya</h3>
@@ -1808,11 +2111,11 @@
                 </div>
 
                 <!-- Mentor 3 (Duplicate) -->
-                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]">
+                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]" aria-hidden="true">
                     <div class="h-32 bg-gradient-to-br from-brand-accent via-blue-50 to-brand-neutral relative transition-all duration-500 group-hover:from-blue-400 group-hover:via-brand-accent group-hover:to-brand-neutral rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Ilesh_Patel.png" alt="Ilesh Patel - AI Backend Engineer" class="w-full h-full" width="112" height="112" fetchpriority="high">
+                            <img src="assets/Ilesh_Patel.png" alt="" class="w-full h-full" width="112" height="112">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Ilesh Patel</h3>
@@ -1826,16 +2129,16 @@
                 </div>
 
                 <!-- Mentor 4 (Duplicate) -->
-                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]">
+                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]" aria-hidden="true">
                     <div class="h-32 bg-gradient-to-br from-green-100 via-green-50 to-brand-neutral relative transition-all duration-500 group-hover:from-green-400 group-hover:via-emerald-300 group-hover:to-brand-neutral rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Bhavesha_Panchal.jpeg" alt="Bhavisha Panchal - AI Chatbot Developer" class="w-full h-full" width="112" height="112" fetchpriority="high">
+                            <img src="assets/Bhavesha_Panchal.jpeg" alt="" class="w-full h-full" width="112" height="112">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Bhavisha Panchal</h3>
-                            <p class="text-brand-primary text-sm font-semibold mb-3">AI Chatbot Developer</p>
-                            <p class="text-sm text-brand-dark/70 leading-relaxed mb-4">Developing scalable, enterprise-grade AI chatbots powered by LLMs and high-performance microservices.</p>
+                            <p class="text-brand-primary text-sm font-semibold mb-3">AI Agents Developer</p>
+                            <p class="text-sm text-brand-dark/70 leading-relaxed mb-4">Developing scalable, enterprise-grade AI agents powered by LLMs and high-performance microservices.</p>
                             <div class="flex justify-center gap-3">
                                 <a href="https://www.linkedin.com/in/bhavisha-panchal/" class="w-10 h-10 rounded-full bg-brand-accent/30 hover:bg-brand-primary flex items-center justify-center text-brand-primary hover:text-white transition-all"><i class="fa-brands fa-linkedin text-lg"></i></a>
                             </div>
@@ -1844,11 +2147,11 @@
                 </div>
 
                 <!-- Mentor 5 (Duplicate) -->
-                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]">
+                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]" aria-hidden="true">
                     <div class="h-32 bg-gradient-to-br from-orange-100 via-yellow-50 to-brand-soft relative transition-all duration-500 group-hover:from-orange-400 group-hover:via-amber-300 group-hover:to-brand-soft rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Kshipra_Rathod.png" alt="Kshipra Rathod - Associate Data Scientist" class="w-full h-full" width="112" height="112" fetchpriority="high">
+                            <img src="assets/Kshipra_Rathod.png" alt="" class="w-full h-full" width="112" height="112">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Kshipra Rathod</h3>
@@ -1862,11 +2165,11 @@
                 </div>
 
                 <!-- Mentor 6 (Duplicate) -->
-                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]">
+                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]" aria-hidden="true">
                     <div class="h-32 bg-gradient-to-br from-blue-100 via-blue-50 to-brand-accent relative transition-all duration-500 group-hover:from-brand-primary group-hover:via-blue-400 group-hover:to-brand-accent rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Rahuldev Singh.png" alt="Rahuldev Singh - Senior Data Analyst" class="w-full h-full object-cover" width="112" height="112" fetchpriority="high">
+                            <img src="assets/Rahuldev Singh.png" alt="" class="w-full h-full object-cover" width="112" height="112">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Rahuldev Singh</h3>
@@ -1880,11 +2183,11 @@
                 </div>
 
                 <!-- Mentor 7 (Duplicate) -->
-                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]">
+                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]" aria-hidden="true">
                     <div class="h-32 bg-gradient-to-br from-purple-100 via-pink-50 to-brand-soft relative transition-all duration-500 group-hover:from-purple-400 group-hover:via-pink-300 group-hover:to-brand-soft rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Muhammed_Mussani.png" alt="Muhammed Musani - Senior Data Analyst" class="w-full h-full" width="112" height="112" fetchpriority="high">
+                            <img src="assets/Muhammed_Mussani.png" alt="" class="w-full h-full" width="112" height="112">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Muhammed Musani</h3>
@@ -1898,11 +2201,11 @@
                 </div>
 
                 <!-- Mentor 8 (Duplicate) -->
-                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]">
+                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]" aria-hidden="true">
                     <div class="h-32 bg-gradient-to-br from-brand-accent via-blue-50 to-brand-neutral relative transition-all duration-500 group-hover:from-blue-400 group-hover:via-brand-accent group-hover:to-brand-neutral rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Nandini_Sukhadia.png" alt="Nandini Sukhadia - Associate Data Scientist" class="w-full h-full" width="112" height="112" fetchpriority="high">
+                            <img src="assets/Nandini_Sukhadia.png" alt="" class="w-full h-full" width="112" height="112">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Nandini Sukhadia</h3>
@@ -1916,11 +2219,11 @@
                 </div>
 
                 <!-- Mentor 9 (Duplicate) -->
-                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]">
+                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]" aria-hidden="true">
                     <div class="h-32 bg-gradient-to-br from-green-100 via-green-50 to-brand-neutral relative transition-all duration-500 group-hover:from-green-400 group-hover:via-emerald-300 group-hover:to-brand-neutral rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Vivek.png" alt="Vivek Solanki - HR Manager" class="w-full h-full" width="112" height="112" fetchpriority="high">
+                            <img src="assets/Vivek.png" alt="" class="w-full h-full" width="112" height="112">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Vivek Solanki</h3>
@@ -1934,11 +2237,11 @@
                 </div>
 
                 <!-- Mentor 10 (Duplicate) -->
-                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]">
+                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]" aria-hidden="true">
                     <div class="h-32 bg-gradient-to-br from-orange-100 via-yellow-50 to-brand-soft relative transition-all duration-500 group-hover:from-orange-400 group-hover:via-amber-300 group-hover:to-brand-soft rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/MO.Ammar Shaikh.png" alt="MO.Ammar Shaikh - Cyber Intelligence Officer" class="w-full h-full" width="112" height="112" fetchpriority="high">
+                            <img src="assets/MO.Ammar Shaikh.png" alt="" class="w-full h-full" width="112" height="112">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">MO.Ammar Shaikh</h3>
@@ -1952,11 +2255,11 @@
                 </div>
 
                 <!-- Mentor 11 (Duplicate) -->
-                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]">
+                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]" aria-hidden="true">
                     <div class="h-32 bg-gradient-to-br from-blue-100 via-blue-50 to-brand-accent relative transition-all duration-500 group-hover:from-brand-primary group-hover:via-blue-400 group-hover:to-brand-accent rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Faiz_Shaikh.jpeg" alt="Faiz Shaikh - Associate Data Engineer:" class="w-full h-full object-cover" width="112" height="112" fetchpriority="high">
+                            <img src="assets/Faiz_Shaikh.jpeg" alt="" class="w-full h-full object-cover" width="112" height="112">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Faiz Shaikh</h3>
@@ -1970,11 +2273,11 @@
                 </div>
 
                 <!-- Mentor 12 (Duplicate) -->
-                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]">
+                <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-brand-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 flex-shrink-0 w-[350px]" aria-hidden="true">
                     <div class="h-32 bg-gradient-to-br from-purple-100 via-pink-50 to-brand-soft relative transition-all duration-500 group-hover:from-purple-400 group-hover:via-pink-300 group-hover:to-brand-soft rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Kaif Dudhwala.png" alt="Kaif Dudhwala - Cyber Intelligence Officer" class="w-full h-full" width="112" height="112" fetchpriority="high">
+                            <img src="assets/Kaif Dudhwala.png" alt="" class="w-full h-full" width="112" height="112">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Kaif Dudhwala</h3>
@@ -2136,7 +2439,7 @@
     <!-- Contact Section -->
     <section id="contact" class="py-24 bg-brand-base relative overflow-hidden">
         <div class="container mx-auto px-6 max-w-6xl">
-            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden grid md:grid-cols-3 min-h-[600px] border border-brand-border reveal-on-scroll">
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden grid md:grid-cols-3 min-h-[600px] border border-brand-border">
                 
                 <!-- Left Side: Image Panel (Fixed Placement) -->
                 <div class="md:col-span-1 relative bg-brand-primary text-white flex flex-col justify-between overflow-hidden">
@@ -2151,16 +2454,115 @@
                     <!-- Gradient Overlay -->
                     <div class="absolute inset-0 bg-gradient-to-b from-brand-primary/80 via-brand-primary/60 to-brand-primary/90"></div>
 
-                    <!-- Top/Middle Content: Testimonial -->
-                    <div class="relative z-10 p-10 flex flex-col justify-center flex-grow">
+                    <!-- Top/Middle Content: Testimonial Carousel -->
+                    <div class="relative z-10 p-10 flex flex-col justify-center flex-grow overflow-hidden">
                         <i class="fa-solid fa-quote-left text-4xl text-brand-primary mb-6 opacity-80"></i>
-                        <blockquote class="text-lg font-medium leading-relaxed mb-8">
-                            "The mentorship at Technetics transformed my career path. I went from confused graduate to a AI Chatbots Developer in 6 months."
-                        </blockquote>
-                        <div class="flex items-center gap-4">
-                              <div>
-                                <p class="font-bold text-white">Yash Modi</p>
+                        
+                        <!-- Testimonial Carousel Container -->
+                        <div class="testimonial-carousel-wrapper relative">
+                            <div class="testimonial-carousel-track">
+                                <!-- Testimonial 1 -->
+                                <div class="testimonial-slide active">
+                                    <blockquote class="text-lg font-medium leading-relaxed mb-8">
+                                        "The mentorship at Technetics transformed my career path. I went from confused graduate to a AI Chatbots Developer in 6 months."
+                                    </blockquote>
+                                    <div class="flex items-center gap-4">
+                                        <div>
+                                            <p class="font-bold text-white">Yash Modi</p>
+                                            <p class="text-sm text-slate-300 opacity-80">AI Agents Developer</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Testimonial 2 -->
+                                <div class="testimonial-slide">
+                                    <blockquote class="text-lg font-medium leading-relaxed mb-8">
+                                        "Best decision of my life! The hands-on projects and industry mentorship helped me land my dream role in just 4 months."
+                                    </blockquote>
+                                    <div class="flex items-center gap-4">
+                                        <div>
+                                            <p class="font-bold text-white">Priya Sharma</p>
+                                            <p class="text-sm text-slate-300 opacity-80">Data Analyst at TCS</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Testimonial 3 -->
+                                <div class="testimonial-slide">
+                                    <blockquote class="text-lg font-medium leading-relaxed mb-8">
+                                        "From zero coding knowledge to full-stack developer. The structured learning path and constant support made all the difference."
+                                    </blockquote>
+                                    <div class="flex items-center gap-4">
+                                        <div>
+                                            <p class="font-bold text-white">Rahul Desai</p>
+                                            <p class="text-sm text-slate-300 opacity-80">Full Stack Developer</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Testimonial 4 -->
+                                <div class="testimonial-slide">
+                                    <blockquote class="text-lg font-medium leading-relaxed mb-8">
+                                        "The placement support is phenomenal. They don't just train you, they ensure you succeed. Got placed with 8 LPA package!"
+                                    </blockquote>
+                                    <div class="flex items-center gap-4">
+                                        <div>
+                                            <p class="font-bold text-white">Sneha Patel</p>
+                                            <p class="text-sm text-slate-300 opacity-80">Software Engineer at Infosys</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Testimonial 5 -->
+                                <div class="testimonial-slide">
+                                    <blockquote class="text-lg font-medium leading-relaxed mb-8">
+                                        "Real-world projects and expert guidance gave me the confidence to switch from mechanical to IT. Forever grateful!"
+                                    </blockquote>
+                                    <div class="flex items-center gap-4">
+                                        <div>
+                                            <p class="font-bold text-white">Amit Mehta</p>
+                                            <p class="text-sm text-slate-300 opacity-80">Python Developer</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Testimonial 6 -->
+                                <div class="testimonial-slide">
+                                    <blockquote class="text-lg font-medium leading-relaxed mb-8">
+                                        "Outstanding curriculum and mentors who genuinely care. Transitioned from teaching to data science seamlessly!"
+                                    </blockquote>
+                                    <div class="flex items-center gap-4">
+                                        <div>
+                                            <p class="font-bold text-white">Kavya Joshi</p>
+                                            <p class="text-sm text-slate-300 opacity-80">Data Science Professional</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Testimonial 7 -->
+                                <div class="testimonial-slide">
+                                    <blockquote class="text-lg font-medium leading-relaxed mb-8">
+                                        "The community and learning environment are exceptional. Started as a fresher, now working on enterprise AI solutions!"
+                                    </blockquote>
+                                    <div class="flex items-center gap-4">
+                                        <div>
+                                            <p class="font-bold text-white">Karan Shah</p>
+                                            <p class="text-sm text-slate-300 opacity-80">ML Engineer at Wipro</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                        
+                        <!-- Navigation Dots -->
+                        <div class="testimonial-dots flex justify-center gap-2 mt-6">
+                            <button class="testimonial-dot active" data-slide="0" aria-label="View testimonial 1"></button>
+                            <button class="testimonial-dot" data-slide="1" aria-label="View testimonial 2"></button>
+                            <button class="testimonial-dot" data-slide="2" aria-label="View testimonial 3"></button>
+                            <button class="testimonial-dot" data-slide="3" aria-label="View testimonial 4"></button>
+                            <button class="testimonial-dot" data-slide="4" aria-label="View testimonial 5"></button>
+                            <button class="testimonial-dot" data-slide="5" aria-label="View testimonial 6"></button>
+                            <button class="testimonial-dot" data-slide="6" aria-label="View testimonial 7"></button>
                         </div>
                     </div>
 
@@ -2237,7 +2639,7 @@
 
                         <!-- Submit -->
                         <div class="flex items-center justify-between pt-4">
-                            <button type="submit" class="px-8 py-4 rounded-xl bg-brand-primary hover:bg-brand-primary/90 text-white font-bold text-lg transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                            <button type="submit" class="px-8 py-4 rounded-xl bg-brand-primary text-white font-bold text-lg shadow-lg">
                                 Send Message
                             </button>
                             <div id="formFeedback" class="hidden text-green-600 font-medium text-sm animate-pulse">
@@ -2527,63 +2929,315 @@
             statsObserver.observe(statsSection);
         }
 
-        // 7. Stop Mentor Card Animation on Click (Mobile Only)
-        function isMobileDevice() {
-            return window.innerWidth <= 768;
-        }
-
-        const mentorScrollContainer = document.querySelector('#team .animate-scroll');
-        const mentorCards = document.querySelectorAll('#team .animate-scroll > div');
-
-        if (mentorScrollContainer && mentorCards.length > 0) {
-            let isAnimationPaused = false;
-
-            mentorCards.forEach(card => {
-                // Add click/tap event listener
-                card.addEventListener('click', function() {
-                    // Only work on mobile devices
-                    if (isMobileDevice()) {
-                        if (!isAnimationPaused) {
-                            // Pause the animation
-                            mentorScrollContainer.style.animationPlayState = 'paused';
-                            isAnimationPaused = true;
-                            
-                            // Add visual feedback
-                            card.style.transform = 'scale(1.05)';
-                            card.style.transition = 'transform 0.3s ease';
-                            
-                            // Optional: Resume after 1.5 seconds
-                            setTimeout(() => {
-                                mentorScrollContainer.style.animationPlayState = 'running';
-                                card.style.transform = 'scale(1)';
-                                isAnimationPaused = false;
-                            }, 1500);
+        // 7. Mentor Cards - Mobile Touch Interaction & Scroll Control
+        const mentorScrollContainer = document.querySelector('.mentor-scroll-container');
+        const mentorCardsWrapper = document.querySelector('.mentor-cards-wrapper');
+        
+        if (mentorScrollContainer && mentorCardsWrapper) {
+            let isUserScrolling = false;
+            let isTouching = false;
+            let scrollTimeout;
+            let isMobile = window.innerWidth <= 768;
+            
+            // Update isMobile on resize
+            window.addEventListener('resize', function() {
+                isMobile = window.innerWidth <= 768;
+            });
+            
+            // Calculate the width of one card + gap
+            const cardWidth = isMobile ? 304 : 374; // Mobile: 280px + 24px, Desktop: 350px + 24px
+            const totalOriginalCards = 12;
+            const maxScrollPosition = cardWidth * totalOriginalCards;
+            
+            // MOBILE ONLY: Touch start - pause animation immediately
+            mentorScrollContainer.addEventListener('touchstart', function() {
+                if (isMobile) {
+                    isTouching = true;
+                    mentorCardsWrapper.style.animationPlayState = 'paused';
+                    clearTimeout(scrollTimeout);
+                }
+            }, { passive: true });
+            
+            // MOBILE ONLY: Touch end - resume animation after brief delay
+            mentorScrollContainer.addEventListener('touchend', function() {
+                if (isMobile) {
+                    isTouching = false;
+                    
+                    // Resume animation after 1.5 seconds of no touch
+                    scrollTimeout = setTimeout(() => {
+                        if (!isTouching && !isUserScrolling) {
+                            mentorCardsWrapper.style.animationPlayState = 'running';
                         }
+                    }, 1500);
+                }
+            }, { passive: true });
+            
+            // MOBILE ONLY: Touch cancel - handle interrupted touches
+            mentorScrollContainer.addEventListener('touchcancel', function() {
+                if (isMobile) {
+                    isTouching = false;
+                    scrollTimeout = setTimeout(() => {
+                        if (!isTouching && !isUserScrolling) {
+                            mentorCardsWrapper.style.animationPlayState = 'running';
+                        }
+                    }, 1500);
+                }
+            }, { passive: true });
+            
+            // Detect when user starts scrolling (both mobile and desktop)
+            mentorScrollContainer.addEventListener('scroll', function() {
+                // Pause animation when user scrolls
+                if (!isUserScrolling) {
+                    isUserScrolling = true;
+                    mentorCardsWrapper.style.animationPlayState = 'paused';
+                }
+                
+                clearTimeout(scrollTimeout);
+                
+                // Get current scroll position
+                const currentScroll = mentorScrollContainer.scrollLeft;
+                
+                // If user scrolls beyond the first 12 cards, reset to beginning
+                if (currentScroll >= maxScrollPosition) {
+                    mentorScrollContainer.scrollLeft = 0;
+                }
+                // If user scrolls backward past 0, jump to end of original 12 cards
+                else if (currentScroll < 0) {
+                    mentorScrollContainer.scrollLeft = maxScrollPosition - cardWidth;
+                }
+                
+                // Resume animation after user stops scrolling
+                const resumeDelay = isMobile ? 2000 : 2000; // 2 seconds for both
+                scrollTimeout = setTimeout(() => {
+                    isUserScrolling = false;
+                    if (!isTouching) {
+                        mentorCardsWrapper.style.animationPlayState = 'running';
                     }
-                });
-
-                // Add touch event for better mobile experience
-                card.addEventListener('touchstart', function() {
-                    if (isMobileDevice() && !isAnimationPaused) {
-                        mentorScrollContainer.style.animationPlayState = 'paused';
-                        isAnimationPaused = true;
-                        card.style.transform = 'scale(1.05)';
-                        card.style.transition = 'transform 0.3s ease';
-                    }
-                });
-
-                card.addEventListener('touchend', function() {
-                    if (isMobileDevice()) {
-                        // Resume after 1.5 seconds
-                        setTimeout(() => {
-                            mentorScrollContainer.style.animationPlayState = 'running';
-                            card.style.transform = 'scale(1)';
-                            isAnimationPaused = false;
-                        }, 1500);
-                    }
-                });
+                }, resumeDelay);
+            });
+            
+            // DESKTOP ONLY: Pause animation on hover
+            mentorScrollContainer.addEventListener('mouseenter', function() {
+                if (!isMobile) {
+                    mentorCardsWrapper.style.animationPlayState = 'paused';
+                }
+            });
+            
+            // DESKTOP ONLY: Resume animation when mouse leaves
+            mentorScrollContainer.addEventListener('mouseleave', function() {
+                if (!isMobile && !isUserScrolling) {
+                    mentorCardsWrapper.style.animationPlayState = 'running';
+                }
             });
         }
+
+        // 8. Testimonial Carousel - Enhanced with Smooth Pause/Resume
+        const testimonialCarousel = (function() {
+            const track = document.querySelector('.testimonial-carousel-track');
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const dots = document.querySelectorAll('.testimonial-dot');
+            const wrapper = document.querySelector('.testimonial-carousel-wrapper');
+            const carouselContainer = wrapper ? wrapper.closest('.relative.z-10.p-10') : null;
+            
+            if (!track || slides.length === 0 || dots.length === 0) return;
+            
+            let currentSlide = 0;
+            let autoPlayInterval;
+            let isHovering = false;
+            let isTouching = false;
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let touchStartY = 0;
+            let touchTimeout;
+            let isMobile = window.innerWidth <= 768;
+            
+            // Update isMobile on resize
+            window.addEventListener('resize', function() {
+                isMobile = window.innerWidth <= 768;
+            });
+            
+            // Function to show specific slide
+            function goToSlide(index) {
+                // Remove active class from all slides
+                slides.forEach(slide => {
+                    slide.classList.remove('active', 'prev');
+                });
+                
+                // Remove active class from all dots
+                dots.forEach(dot => {
+                    dot.classList.remove('active');
+                });
+                
+                // Add prev class to current slide (for exit animation)
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.add('prev');
+                }
+                
+                // Update current slide
+                currentSlide = index;
+                
+                // Add active class to new slide
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+            }
+            
+            // Next slide
+            function nextSlide() {
+                const next = (currentSlide + 1) % slides.length;
+                goToSlide(next);
+            }
+            
+            // Previous slide
+            function prevSlide() {
+                const prev = (currentSlide - 1 + slides.length) % slides.length;
+                goToSlide(prev);
+            }
+            
+            // Check if should auto-advance
+            function shouldAutoAdvance() {
+                // Don't auto-advance if hovering (desktop) or touching (mobile)
+                return !isHovering && !isTouching;
+            }
+            
+            // Start auto-play with continuous checking
+            function startAutoPlay() {
+                stopAutoPlay(); // Clear any existing interval
+                autoPlayInterval = setInterval(() => {
+                    if (shouldAutoAdvance()) {
+                        nextSlide();
+                    }
+                }, 3500); // Change slide every 3.5 seconds
+            }
+            
+            // Stop auto-play
+            function stopAutoPlay() {
+                if (autoPlayInterval) {
+                    clearInterval(autoPlayInterval);
+                }
+            }
+            
+            // DESKTOP: Hover pause/resume on carousel container
+            if (carouselContainer && !isMobile) {
+                carouselContainer.addEventListener('mouseenter', () => {
+                    isHovering = true;
+                });
+                
+                carouselContainer.addEventListener('mouseleave', () => {
+                    isHovering = false;
+                });
+            }
+            
+            // Also add hover listeners to wrapper for redundancy
+            if (wrapper) {
+                wrapper.addEventListener('mouseenter', () => {
+                    if (!isMobile) {
+                        isHovering = true;
+                    }
+                });
+                
+                wrapper.addEventListener('mouseleave', () => {
+                    if (!isMobile) {
+                        isHovering = false;
+                    }
+                });
+            }
+            
+            // MOBILE/TABLET: Touch-based pause/resume
+            if (wrapper) {
+                // Touch start - pause scrolling
+                wrapper.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                    touchStartY = e.changedTouches[0].screenY;
+                    isTouching = true;
+                    
+                    // Clear any existing timeout
+                    if (touchTimeout) {
+                        clearTimeout(touchTimeout);
+                    }
+                }, { passive: true });
+                
+                // Touch move - detect if it's a swipe
+                wrapper.addEventListener('touchmove', (e) => {
+                    // Keep touch active during move
+                    isTouching = true;
+                }, { passive: true });
+                
+                // Touch end - resume scrolling after delay
+                wrapper.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                    
+                    // Resume auto-scroll smoothly after touch release
+                    touchTimeout = setTimeout(() => {
+                        isTouching = false;
+                    }, 500); // Half-second delay before resuming
+                }, { passive: true });
+                
+                // Touch cancel - resume scrolling
+                wrapper.addEventListener('touchcancel', () => {
+                    touchTimeout = setTimeout(() => {
+                        isTouching = false;
+                    }, 500);
+                }, { passive: true });
+            }
+            
+            // Swipe detection
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        // Swiped left - go to next
+                        nextSlide();
+                    } else {
+                        // Swiped right - go to previous
+                        prevSlide();
+                    }
+                }
+            }
+            
+            // Dot navigation with pause
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
+                    // Temporarily pause after manual navigation
+                    isTouching = true;
+                    setTimeout(() => {
+                        isTouching = false;
+                    }, 2000);
+                });
+            });
+            
+            // Keyboard navigation (desktop only)
+            document.addEventListener('keydown', (e) => {
+                if (!isMobile && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+                    if (e.key === 'ArrowLeft') {
+                        prevSlide();
+                    } else if (e.key === 'ArrowRight') {
+                        nextSlide();
+                    }
+                    // Temporarily pause after keyboard navigation
+                    isHovering = true;
+                    setTimeout(() => {
+                        isHovering = false;
+                    }, 2000);
+                }
+            });
+            
+            // Initialize: Show first slide and start auto-play
+            goToSlide(0);
+            startAutoPlay();
+            
+            // Return public methods
+            return {
+                next: nextSlide,
+                prev: prevSlide,
+                goTo: goToSlide,
+                pause: stopAutoPlay,
+                play: startAutoPlay
+            };
+        })();
 
     </script>
 </body>
