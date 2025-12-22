@@ -67,6 +67,11 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
         body {
             font-family: var(--font-body);
             background-color: var(--brand-base);
@@ -77,6 +82,7 @@
             justify-content: center;
             background-image: radial-gradient(circle at 50% 50%, rgba(211, 220, 232, 0.4) 0%, rgba(246, 246, 246, 0) 50%);
             padding: 40px 20px;
+            overflow-x: hidden;
         }
 
         .container {
@@ -120,7 +126,32 @@
         }
 
         /* Form Side */
-        .form-side { width: 65%; padding: 60px; max-height: 90vh; overflow-y: auto; }
+        .form-side { 
+            width: 65%; 
+            padding: 60px; 
+            max-height: 90vh; 
+            overflow-y: auto;
+            overflow-x: hidden;
+            scrollbar-width: thin;
+            scrollbar-color: var(--brand-border) transparent;
+        }
+        
+        .form-side::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .form-side::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .form-side::-webkit-scrollbar-thumb {
+            background-color: var(--brand-border);
+            border-radius: 4px;
+        }
+        
+        .form-side::-webkit-scrollbar-thumb:hover {
+            background-color: var(--brand-accent);
+        }
         .form-header h1 { font-family: var(--font-heading); font-size: 2rem; color: var(--brand-primary); margin-bottom: 8px; }
         .section-title { font-family: var(--font-heading); font-size: 1.1rem; color: var(--brand-primary); margin: 40px 0 20px 0; font-weight: 700; display: flex; align-items: center; gap: 10px; }
         
@@ -200,6 +231,10 @@
 
         /* Mobile Devices (max-width: 768px) */
         @media (max-width: 768px) {
+            html {
+                overflow-x: hidden;
+            }
+            
             body {
                 padding: 20px 10px;
                 overflow-x: hidden;
@@ -209,6 +244,7 @@
                 flex-direction: column;
                 max-width: 100%;
                 margin: 0;
+                overflow-x: hidden;
             }
             
             /* ===== VISUAL SIDE - HEADER SPACING FIX ===== */
@@ -251,6 +287,7 @@
                 padding: 30px 25px;
                 max-height: none;
                 overflow-y: visible;
+                overflow-x: hidden;
             }
             
             .form-grid { 
@@ -553,13 +590,18 @@
             <div class="blob blob-2"></div>
             
             <div class="brand-logo">
-                <img src="assets/Logo.png" alt="Technetics IT Services Logo - Career Training Institute">
+                <a href="index.html" style="display: inline-block; cursor: pointer;" title="Back to Home">
+                    <img src="assets/Logo.png" alt="Technetics IT Services Logo - Career Training Institute" style="cursor: pointer;">
+                </a>
             </div>
             
             <div class="visual-content">
-                <div style="display: inline-block; padding: 6px 16px; background: rgba(255,255,255,0.15); border-radius: 20px; font-size: 0.85rem; margin-bottom: 20px; backdrop-filter: blur(10px);">
+                <a href="index.html#programs" style="display: inline-block; padding: 6px 16px; background: rgba(255,255,255,0.15); border-radius: 20px; font-size: 0.85rem; margin-bottom: 20px; backdrop-filter: blur(10px); text-decoration: none; color: inherit; transition: all 0.3s ease; cursor: pointer;" 
+                   onmouseover="this.style.background='rgba(255,255,255,0.25)'" 
+                   onmouseout="this.style.background='rgba(255,255,255,0.15)'"
+                   title="View Our Programs">
                     ✨ Start Your Journey
-                </div>
+                </a>
                 <h2>Transform<br>Your Future</h2>
                 <p style="font-size: 1rem; opacity: 0.85; line-height: 1.7;">
                     Join professionals building careers in tech. Learn from industry experts and land your dream role.
@@ -620,7 +662,7 @@
                         <span class="error-message">Name is required.</span>
                     </div>
                     <div class="form-group">
-                        <input type="date" id="dob" class="form-input" autocomplete="bday" required aria-required="true">
+                        <input type="date" id="dob" class="form-input" autocomplete="bday" min="1940-01-01" max="2010-12-31" required aria-required="true">
                         <label for="dob" class="form-label">Date of Birth</label>
                         <span class="error-message">Please select your date of birth.</span>
                     </div>
@@ -786,7 +828,7 @@
                     </div>
                 </div>
                 <div style="text-align: center; margin-top: 2rem;">
-                    <a href="index.html" style="display: inline-block; padding: 0.75rem 2rem; background: #667EEA; color: white; border-radius: 9999px; font-weight: 600; text-decoration: none; transition: all 0.3s;" onmouseover="this.style.background='#5A67D8'" onmouseout="this.style.background='#667EEA'">
+                    <a href="index.html#programs" style="display: inline-block; padding: 0.75rem 2rem; background: #667EEA; color: white; border-radius: 9999px; font-weight: 600; text-decoration: none; transition: all 0.3s;" onmouseover="this.style.background='#5A67D8'" onmouseout="this.style.background='#667EEA'" title="View Programs Section">
                         Explore Our Programs →
                     </a>
                 </div>
@@ -805,8 +847,29 @@
         function isValidEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
         function isValidUrl(url) { if(!url) return true; try { new URL(url); return true; } catch (_) { return false; } }
         
+        // Date validation helper
+        function isValidDate(dateString) {
+            if (!dateString) return false;
+            const date = new Date(dateString);
+            const year = date.getFullYear();
+            // Check if date is valid and year is 4 digits (between 1940 and 2010)
+            return !isNaN(date.getTime()) && year >= 1940 && year <= 2010 && dateString.length === 10;
+        }
+        
         // Input Restrictions
         document.getElementById('phone').addEventListener('input', function(e) { this.value = this.value.replace(/[^0-9]/g, ''); });
+        
+        // Date of Birth input validation
+        document.getElementById('dob').addEventListener('change', function(e) {
+            const dateValue = this.value;
+            if (dateValue) {
+                const parts = dateValue.split('-');
+                if (parts[0] && parts[0].length !== 4) {
+                    this.value = '';
+                    this.parentElement.classList.add('error');
+                }
+            }
+        });
 
         // Clear Errors on Interaction
         document.querySelectorAll('.form-input').forEach(input => {
@@ -835,7 +898,7 @@
 
             // 1. Validate Fields
             validate('fullName', document.getElementById('fullName').value.trim() === '');
-            validate('dob', document.getElementById('dob').value === '');
+            validate('dob', !isValidDate(document.getElementById('dob').value));
             validate('email', !isValidEmail(document.getElementById('email').value));
             validate('phone', document.getElementById('phone').value.length < 10);
             

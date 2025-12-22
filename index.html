@@ -81,6 +81,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Preload Critical Images -->
+    <link rel="preload" as="image" href="assets/Logo.png" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/Yash_Modi.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/Dhaval.png" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/Ilesh_Patel.png" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/Bhavesha_Panchal.jpeg" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/Kshipra_Rathod.png">
+    <link rel="preload" as="image" href="assets/Rahuldev Singh.png">
+    <link rel="preload" as="image" href="assets/Muhammed_Mussani.png">
+    <link rel="preload" as="image" href="assets/Nandini_Sukhadia.png">
+    <link rel="preload" as="image" href="assets/Vivek.png">
+    <link rel="preload" as="image" href="assets/MO.Ammar Shaikh.png">
+    <link rel="preload" as="image" href="assets/Faiz_Shaikh.jpeg">
+    <link rel="preload" as="image" href="assets/Kaif Dudhwala.png">
+    
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -117,6 +132,16 @@
     </script>
 
     <style>
+        /* Global Smooth Scrolling & Overflow Control */
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        
+        body {
+            overflow-x: hidden;
+        }
+        
         /* Custom Animation Utilities - Optimized */
         .reveal-on-scroll {
             opacity: 0;
@@ -814,6 +839,31 @@
             .font-mono {
                 font-size: 0.75rem;
             }
+            
+            /* Better code panel alignment for mobile */
+            #home .glass-panel .space-y-3 > div {
+                display: flex;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+            
+            #home .glass-panel .space-y-3 > div > span:first-child {
+                min-width: 1.5rem;
+                flex-shrink: 0;
+            }
+            
+            /* Adjust code panel padding */
+            #home .glass-panel {
+                padding: 1rem;
+            }
+            
+            /* Reduce code panel margin */
+            #home .glass-panel .absolute {
+                position: static !important;
+                margin-top: 1rem;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
         }
 
         /* Landscape mode for mobile devices */
@@ -848,7 +898,7 @@
         <div class="container mx-auto px-6 flex justify-between items-center relative z-50">
             <!-- Logo -->
             <a href="#home" class="flex items-center gap-3" aria-label="Technetics IT Services Home">
-                <img src="assets/logo.png" alt="Technetics IT Services Logo - Career Guidance and IT Training" class="h-12 w-auto" width="180" height="48">
+                <img src="assets/Logo.png" alt="Technetics IT Services Logo - Career Guidance and IT Training" class="h-12 w-auto" width="180" height="48">
             </a>
 
             <!-- Desktop Menu -->
@@ -1503,7 +1553,7 @@
                      
                         <!-- Large visible avatar -->
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Yash_Modi.jpg" alt="Yash Modi - AI Chatbot Developer at Technetics" class="w-full h-full object-cover" width="112" height="112" loading="lazy">
+                            <img src="assets/Yash_Modi.jpg" alt="Yash Modi - AI Chatbot Developer at Technetics" class="w-full h-full object-cover" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Yash Modi</h3>
@@ -1522,7 +1572,7 @@
                     <div class="px-6 pb-8 pt-4 relative">
                         <!-- Large visible avatar -->
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Dhaval.png" alt="Dhaval Kanpariya - Data Science Trainer at Technetics" class="w-full h-full" width="112" height="112" loading="lazy">
+                            <img src="assets/Dhaval.png" alt="Dhaval Kanpariya - Data Science Trainer at Technetics" class="w-full h-full" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Dhaval Kanpariya</h3>
@@ -1541,7 +1591,7 @@
                     <div class="px-6 pb-8 pt-4 relative">
                         <!-- Large visible avatar -->
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Ilesh_Patel.png" alt="Ilesh Patel - AI Backend Engineer" class="w-full h-full" width="112" height="112" loading="lazy">
+                            <img src="assets/Ilesh_Patel.png" alt="Ilesh Patel - AI Backend Engineer" class="w-full h-full" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Ilesh Patel</h3>
@@ -1559,7 +1609,7 @@
                     <div class="h-32 bg-gradient-to-br from-green-100 via-green-50 to-brand-neutral relative transition-all duration-500 group-hover:from-green-400 group-hover:via-emerald-300 group-hover:to-brand-neutral rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Bhavesha_Panchal.jpeg" alt="Bhavisha Panchal - AI Chatbot Developer" class="w-full h-full" width="112" height="112" loading="lazy">
+                            <img src="assets/Bhavesha_Panchal.jpeg" alt="Bhavisha Panchal - AI Chatbot Developer" class="w-full h-full" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Bhavisha Panchal</h3>
@@ -1577,7 +1627,7 @@
                     <div class="h-32 bg-gradient-to-br from-orange-100 via-yellow-50 to-brand-soft relative transition-all duration-500 group-hover:from-orange-400 group-hover:via-amber-300 group-hover:to-brand-soft rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Kshipra_Rathod.png" alt="Kshipra Rathod - Associate Data Scientist" class="w-full h-full" width="112" height="112" loading="lazy">
+                            <img src="assets/Kshipra_Rathod.png" alt="Kshipra Rathod - Associate Data Scientist" class="w-full h-full" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Kshipra Rathod</h3>
@@ -1597,7 +1647,7 @@
                      
                         <!-- Large visible avatar -->
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Rahuldev Singh.png" alt="Rahuldev Singh - Senior Data Analyst" class="w-full h-full object-cover" width="112" height="112" loading="lazy">
+                            <img src="assets/Rahuldev Singh.png" alt="Rahuldev Singh - Senior Data Analyst" class="w-full h-full object-cover" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Rahuldev Singh</h3>
@@ -1616,7 +1666,7 @@
                     <div class="px-6 pb-8 pt-4 relative">
                         <!-- Large visible avatar -->
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Muhammed_Mussani.png" alt="Muhammed Musani - Senior Data Analyst" class="w-full h-full" width="112" height="112" loading="lazy">
+                            <img src="assets/Muhammed_Mussani.png" alt="Muhammed Musani - Senior Data Analyst" class="w-full h-full" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Muhammed Musani</h3>
@@ -1635,7 +1685,7 @@
                     <div class="px-6 pb-8 pt-4 relative">
                         <!-- Large visible avatar -->
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Nandini_Sukhadia.png" alt="Nandini Sukhadia - Associate Data Scientist" class="w-full h-full" width="112" height="112" loading="lazy">
+                            <img src="assets/Nandini_Sukhadia.png" alt="Nandini Sukhadia - Associate Data Scientist" class="w-full h-full" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Nandini Sukhadia</h3>
@@ -1653,7 +1703,7 @@
                     <div class="h-32 bg-gradient-to-br from-green-100 via-green-50 to-brand-neutral relative transition-all duration-500 group-hover:from-green-400 group-hover:via-emerald-300 group-hover:to-brand-neutral rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Vivek.png" alt="Vivek Solanki - HR Manager" class="w-full h-full" width="112" height="112" loading="lazy">
+                            <img src="assets/Vivek.png" alt="Vivek Solanki - HR Manager" class="w-full h-full" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Vivek Solanki</h3>
@@ -1671,7 +1721,7 @@
                     <div class="h-32 bg-gradient-to-br from-orange-100 via-yellow-50 to-brand-soft relative transition-all duration-500 group-hover:from-orange-400 group-hover:via-amber-300 group-hover:to-brand-soft rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/MO.Ammar Shaikh.png" alt="MO.Ammar Shaikh - Cyber Intelligence Officer" class="w-full h-full" width="112" height="112" loading="lazy">
+                            <img src="assets/MO.Ammar Shaikh.png" alt="MO.Ammar Shaikh - Cyber Intelligence Officer" class="w-full h-full" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">MO.Ammar Shaikh</h3>
@@ -1689,7 +1739,7 @@
                     <div class="h-32 bg-gradient-to-br from-blue-100 via-blue-50 to-brand-accent relative transition-all duration-500 group-hover:from-brand-primary group-hover:via-blue-400 group-hover:to-brand-accent rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Faiz_Shaikh.jpeg" alt="Faiz Shaikh - Associate Data Engineer:" class="w-full h-full object-cover" width="112" height="112" loading="lazy">
+                            <img src="assets/Faiz_Shaikh.jpeg" alt="Faiz Shaikh - Associate Data Engineer:" class="w-full h-full object-cover" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Faiz Shaikh</h3>
@@ -1707,7 +1757,7 @@
                     <div class="h-32 bg-gradient-to-br from-purple-100 via-pink-50 to-brand-soft relative transition-all duration-500 group-hover:from-purple-400 group-hover:via-pink-300 group-hover:to-brand-soft rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Kaif Dudhwala.png" alt="Kaif Dudhwala - Cyber Intelligence Officer" class="w-full h-full" width="112" height="112" loading="lazy">
+                            <img src="assets/Kaif Dudhwala.png" alt="Kaif Dudhwala - Cyber Intelligence Officer" class="w-full h-full" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Kaif Dudhwala</h3>
@@ -1726,7 +1776,7 @@
                     <div class="h-32 bg-gradient-to-br from-blue-100 via-blue-50 to-brand-accent relative transition-all duration-500 group-hover:from-brand-primary group-hover:via-blue-400 group-hover:to-brand-accent rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Yash_Modi.jpg" alt="Yash Modi - AI Chatbot Developer at Technetics" class="w-full h-full object-cover" width="112" height="112" loading="lazy">
+                            <img src="assets/Yash_Modi.jpg" alt="Yash Modi - AI Chatbot Developer at Technetics" class="w-full h-full object-cover" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Yash Modi</h3>
@@ -1744,7 +1794,7 @@
                     <div class="h-32 bg-gradient-to-br from-purple-100 via-pink-50 to-brand-soft relative transition-all duration-500 group-hover:from-purple-400 group-hover:via-pink-300 group-hover:to-brand-soft rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Dhaval.png" alt="Dhaval Kanpariya - Data Science Trainer at Technetics" class="w-full h-full" width="112" height="112" loading="lazy">
+                            <img src="assets/Dhaval.png" alt="Dhaval Kanpariya - Data Science Trainer at Technetics" class="w-full h-full" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Dhaval Kanpariya</h3>
@@ -1762,7 +1812,7 @@
                     <div class="h-32 bg-gradient-to-br from-brand-accent via-blue-50 to-brand-neutral relative transition-all duration-500 group-hover:from-blue-400 group-hover:via-brand-accent group-hover:to-brand-neutral rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Ilesh_Patel.png" alt="Ilesh Patel - AI Backend Engineer" class="w-full h-full" width="112" height="112" loading="lazy">
+                            <img src="assets/Ilesh_Patel.png" alt="Ilesh Patel - AI Backend Engineer" class="w-full h-full" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Ilesh Patel</h3>
@@ -1780,7 +1830,7 @@
                     <div class="h-32 bg-gradient-to-br from-green-100 via-green-50 to-brand-neutral relative transition-all duration-500 group-hover:from-green-400 group-hover:via-emerald-300 group-hover:to-brand-neutral rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Bhavesha_Panchal.jpeg" alt="Bhavisha Panchal - AI Chatbot Developer" class="w-full h-full" width="112" height="112" loading="lazy">
+                            <img src="assets/Bhavesha_Panchal.jpeg" alt="Bhavisha Panchal - AI Chatbot Developer" class="w-full h-full" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Bhavisha Panchal</h3>
@@ -1798,7 +1848,7 @@
                     <div class="h-32 bg-gradient-to-br from-orange-100 via-yellow-50 to-brand-soft relative transition-all duration-500 group-hover:from-orange-400 group-hover:via-amber-300 group-hover:to-brand-soft rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Kshipra_Rathod.png" alt="Kshipra Rathod - Associate Data Scientist" class="w-full h-full" width="112" height="112" loading="lazy">
+                            <img src="assets/Kshipra_Rathod.png" alt="Kshipra Rathod - Associate Data Scientist" class="w-full h-full" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Kshipra Rathod</h3>
@@ -1816,7 +1866,7 @@
                     <div class="h-32 bg-gradient-to-br from-blue-100 via-blue-50 to-brand-accent relative transition-all duration-500 group-hover:from-brand-primary group-hover:via-blue-400 group-hover:to-brand-accent rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Rahuldev Singh.png" alt="Rahuldev Singh - Senior Data Analyst" class="w-full h-full object-cover" width="112" height="112" loading="lazy">
+                            <img src="assets/Rahuldev Singh.png" alt="Rahuldev Singh - Senior Data Analyst" class="w-full h-full object-cover" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Rahuldev Singh</h3>
@@ -1834,7 +1884,7 @@
                     <div class="h-32 bg-gradient-to-br from-purple-100 via-pink-50 to-brand-soft relative transition-all duration-500 group-hover:from-purple-400 group-hover:via-pink-300 group-hover:to-brand-soft rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Muhammed_Mussani.png" alt="Muhammed Musani - Senior Data Analyst" class="w-full h-full" width="112" height="112" loading="lazy">
+                            <img src="assets/Muhammed_Mussani.png" alt="Muhammed Musani - Senior Data Analyst" class="w-full h-full" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Muhammed Musani</h3>
@@ -1852,7 +1902,7 @@
                     <div class="h-32 bg-gradient-to-br from-brand-accent via-blue-50 to-brand-neutral relative transition-all duration-500 group-hover:from-blue-400 group-hover:via-brand-accent group-hover:to-brand-neutral rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Nandini_Sukhadia.png" alt="Nandini Sukhadia - Associate Data Scientist" class="w-full h-full" width="112" height="112" loading="lazy">
+                            <img src="assets/Nandini_Sukhadia.png" alt="Nandini Sukhadia - Associate Data Scientist" class="w-full h-full" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Nandini Sukhadia</h3>
@@ -1870,7 +1920,7 @@
                     <div class="h-32 bg-gradient-to-br from-green-100 via-green-50 to-brand-neutral relative transition-all duration-500 group-hover:from-green-400 group-hover:via-emerald-300 group-hover:to-brand-neutral rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Vivek.png" alt="Vivek Solanki - HR Manager" class="w-full h-full" width="112" height="112" loading="lazy">
+                            <img src="assets/Vivek.png" alt="Vivek Solanki - HR Manager" class="w-full h-full" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Vivek Solanki</h3>
@@ -1888,7 +1938,7 @@
                     <div class="h-32 bg-gradient-to-br from-orange-100 via-yellow-50 to-brand-soft relative transition-all duration-500 group-hover:from-orange-400 group-hover:via-amber-300 group-hover:to-brand-soft rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/MO.Ammar Shaikh.png" alt="MO.Ammar Shaikh - Cyber Intelligence Officer" class="w-full h-full" width="112" height="112" loading="lazy">
+                            <img src="assets/MO.Ammar Shaikh.png" alt="MO.Ammar Shaikh - Cyber Intelligence Officer" class="w-full h-full" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">MO.Ammar Shaikh</h3>
@@ -1906,7 +1956,7 @@
                     <div class="h-32 bg-gradient-to-br from-blue-100 via-blue-50 to-brand-accent relative transition-all duration-500 group-hover:from-brand-primary group-hover:via-blue-400 group-hover:to-brand-accent rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Faiz_Shaikh.jpeg" alt="Faiz Shaikh - Associate Data Engineer:" class="w-full h-full object-cover" width="112" height="112" loading="lazy">
+                            <img src="assets/Faiz_Shaikh.jpeg" alt="Faiz Shaikh - Associate Data Engineer:" class="w-full h-full object-cover" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Faiz Shaikh</h3>
@@ -1924,7 +1974,7 @@
                     <div class="h-32 bg-gradient-to-br from-purple-100 via-pink-50 to-brand-soft relative transition-all duration-500 group-hover:from-purple-400 group-hover:via-pink-300 group-hover:to-brand-soft rounded-t-2xl"></div>
                     <div class="px-6 pb-8 pt-4 relative">
                         <div class="w-28 h-28 rounded-full bg-white border-4 border-white shadow-xl absolute -top-14 left-1/2 transform -translate-x-1/2 flex items-center justify-center overflow-hidden z-10 group-hover:scale-110 group-hover:border-brand-primary transition-all duration-500">
-                            <img src="assets/Kaif Dudhwala.png" alt="Kaif Dudhwala - Cyber Intelligence Officer" class="w-full h-full" width="112" height="112" loading="lazy">
+                            <img src="assets/Kaif Dudhwala.png" alt="Kaif Dudhwala - Cyber Intelligence Officer" class="w-full h-full" width="112" height="112" fetchpriority="high">
                         </div>
                         <div class="mt-20 text-center">
                             <h3 class="text-xl font-bold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors duration-300">Kaif Dudhwala</h3>
@@ -2096,7 +2146,7 @@
                          class="absolute inset-0 w-full h-full object-cover opacity-40"
                          width="800"
                          height="600"
-                         loading="lazy">
+                         fetchpriority="high">
                     
                     <!-- Gradient Overlay -->
                     <div class="absolute inset-0 bg-gradient-to-b from-brand-primary/80 via-brand-primary/60 to-brand-primary/90"></div>
@@ -2208,7 +2258,7 @@
             <div class="grid md:grid-cols-4 gap-12 mb-12">
                 <div class="space-y-4">
                     <a href="#" class="flex items-center">
-                        <img src="assets/logo.png" alt="Technetics IT Services Logo" class="h-12 w-auto" width="180" height="48" loading="lazy">
+                        <img src="assets/logo.png" alt="Technetics IT Services Logo" class="h-12 w-auto" width="180" height="48" fetchpriority="high">
                     </a>
                     <p class="text-brand-dark/70 text-sm leading-relaxed">
                         Empowering the next generation of tech leaders with personalized guidance and industry-relevant skills.
