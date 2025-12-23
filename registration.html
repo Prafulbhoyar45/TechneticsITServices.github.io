@@ -983,6 +983,16 @@
                 <button type="submit" class="btn-submit" id="submitBtn" aria-label="Submit Application Form">
                     Submit Application <i class="fa-solid fa-paper-plane"></i>
                 </button>
+                
+                <!-- Resend Verification Email Section (Hidden by default) -->
+                <div id="resendSection" style="display: none; margin-top: 20px; padding: 20px; background: #FEF3C7; border-radius: 8px; border: 2px solid #F59E0B;">
+                    <p style="margin-bottom: 15px; color: #92400E; font-weight: 600;">
+                        <i class="fa-solid fa-envelope"></i> Already registered but didn't receive the verification email?
+                    </p>
+                    <button type="button" id="resendBtn" class="btn-submit" style="background: #F59E0B; margin-top: 0;">
+                        <i class="fa-solid fa-paper-plane"></i> Resend Verification Email
+                    </button>
+                </div>
             </form>
 
             <!-- SEO Content Section -->
@@ -1242,6 +1252,16 @@
                 });
 
                 if (authError) {
+                    // Check if user already exists
+                    if (authError.message.includes('already registered') || authError.message.includes('User already registered')) {
+                        // Show resend option
+                        document.getElementById('resendSection').style.display = 'block';
+                        submitBtn.innerHTML = 'Submit Application <i class="fa-solid fa-paper-plane"></i>';
+                        submitBtn.disabled = false;
+                        
+                        alert('⚠️ This email is already registered!\n\nIf you haven\'t received the verification email, please use the "Resend Verification Email" button below.\n\nIf you already verified your email, please contact support.');
+                        return;
+                    }
                     throw new Error('Email authentication failed: ' + authError.message);
                 }
 
@@ -1308,6 +1328,47 @@
                 alert('❌ Registration failed: ' + error.message + '\n\nPlease try again or contact support.');
                 submitBtn.innerHTML = 'Submit Application <i class="fa-solid fa-paper-plane"></i>';
                 submitBtn.disabled = false;
+            }
+        });
+
+        // Resend Verification Email Handler
+        document.getElementById('resendBtn').addEventListener('click', async function() {
+            const emailInput = document.getElementById('email').value;
+            
+            if (!emailInput || !isValidEmail(emailInput)) {
+                alert('❌ Please enter a valid email address first.');
+                return;
+            }
+
+            const resendBtn = this;
+            resendBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sending...';
+            resendBtn.disabled = true;
+
+            try {
+                // Use Supabase resend method
+                const { data, error } = await supabaseClient.auth.resend({
+                    type: 'signup',
+                    email: emailInput,
+                    options: {
+                        emailRedirectTo: window.location.origin + '/verified.html'
+                    }
+                });
+
+                if (error) {
+                    throw new Error(error.message);
+                }
+
+                alert('✅ Verification email sent successfully!\n\n📧 Please check your inbox at:\n' + emailInput + '\n\nNote: Check your spam/junk folder if you don\'t see the email.');
+                
+                resendBtn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Email Sent!';
+                resendBtn.style.background = '#22c55e';
+                resendBtn.disabled = true;
+
+            } catch (error) {
+                console.error('Resend error:', error);
+                alert('❌ Failed to resend verification email: ' + error.message + '\n\nPlease try again or contact support.');
+                resendBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Resend Verification Email';
+                resendBtn.disabled = false;
             }
         });
     </script>
