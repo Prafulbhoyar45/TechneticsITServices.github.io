@@ -1144,24 +1144,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <script>
-        // Initialize Supabase Client - UPDATE THESE WITH YOUR REAL CREDENTIALS
-        const SUPABASE_URL = 'https://upwelsomcdfzbmudjeef.supabase.co'; // Replace with your actual Supabase URL
-        const SUPABASE_ANON_KEY = 'sb_publishable_ho8ly0ZWLl25KEEZtHwIiw_PavFhkCm'; // Replace with your actual anon key
+        // Initialize Supabase Client for Email Authentication
+        const SUPABASE_URL = 'https://upwelsomcdfzbmudjeef.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwd2Vsc29tY2RmemJtdWRqZWVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzUwMjY3MjQsImV4cCI6MjA1MDYwMjcyNH0.your-actual-anon-key';
         
-        let supabaseClient = null;
-        let useEmailAuth = false;
-        
-        // Try to initialize Supabase
-        try {
-            if (SUPABASE_URL !== 'https://upwelsomcdfzbmudjeef.supabase.co' && SUPABASE_ANON_KEY !== 'sb_publishable_ho8ly0ZWLl25KEEZtHwIiw_PavFhkCm') {
-                const { createClient } = supabase;
-                supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                useEmailAuth = true;
-            }
-        } catch (error) {
-            console.warn('Supabase not configured, using simple registration');
-            useEmailAuth = false;
-        }
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // Form Submission Handler
         form.addEventListener('submit', async function(e) {
@@ -1236,37 +1224,29 @@
             }
 
             // 2. Show Loading State
-            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Creating Account...';
+            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Verifying Email...';
             submitBtn.disabled = true;
 
             try {
-                let authData = null;
-                
-                // 3. Try Supabase Authentication if configured
-                if (useEmailAuth && supabaseClient) {
-                    try {
-                        const { data, error: authError } = await supabaseClient.auth.signUp({
-                            email: emailInput,
-                            password: password,
-                            options: {
-                                emailRedirectTo: window.location.origin + '/verified.html',
-                                data: {
-                                    full_name: document.getElementById('fullName').value,
-                                    phone: document.getElementById('countryCode').value + ' ' + phoneNumber
-                                }
-                            }
-                        });
-
-                        if (authError) {
-                            console.error('Supabase auth error:', authError);
-                            useEmailAuth = false; // Fallback to simple registration
-                        } else {
-                            authData = data;
+                // 3. Authenticate Email with Supabase - Send Verification Email
+                const { data: authData, error: authError } = await supabaseClient.auth.signUp({
+                    email: emailInput,
+                    password: password,
+                    options: {
+                        emailRedirectTo: window.location.origin + '/verified.html',
+                        data: {
+                            full_name: document.getElementById('fullName').value,
+                            phone: document.getElementById('countryCode').value + ' ' + phoneNumber
                         }
-                    } catch (authErr) {
-                        console.error('Supabase connection error:', authErr);
-                        useEmailAuth = false; // Fallback to simple registration
                     }
+                });
+
+                if (authError) {
+                    throw new Error('Email authentication failed: ' + authError.message);
+                }
+
+                if (!authData.user) {
+                    throw new Error('Failed to create user account');
                 }
 
                 // 4. Prepare Form Data for SheetDB
@@ -1290,14 +1270,10 @@
                     Course: document.getElementById('course').value,
                     Batch: document.getElementById('batch').value,
                     Mode: document.getElementById('mode').value,
-                    SOP: document.getElementById('sop').value
+                    SOP: document.getElementById('sop').value,
+                    SupabaseUserID: authData.user.id,
+                    EmailVerified: authData.user.email_confirmed_at ? 'Yes' : 'Pending Verification'
                 };
-                
-                // Add auth info if available
-                if (authData && authData.user) {
-                    formData.SupabaseUserID = authData.user.id;
-                    formData.EmailVerified = 'Pending';
-                }
 
                 // 5. Send to SheetDB API
                 const response = await fetch(API_URL, {
@@ -1311,15 +1287,10 @@
                 }
 
                 // 6. Success Message
-                submitBtn.innerHTML = '<i class="fa-solid fa-check-circle"></i> ' + 
-                    (useEmailAuth ? 'Verification Email Sent!' : 'Submitted Successfully!');
+                submitBtn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Verification Email Sent!';
                 submitBtn.classList.add('success-state');
                 
-                if (useEmailAuth && authData) {
-                    alert('✅ Registration Successful!\n\n📧 Verification email sent to: ' + emailInput + '\n\nPlease check your inbox and click the verification link to activate your account.');
-                } else {
-                    alert('✅ Registration Successful!\n\nThank you for registering. We will contact you soon via email.');
-                }
+                alert('✅ Registration Successful!\n\n📧 A verification email has been sent to:\n' + emailInput + '\n\n⚠️ IMPORTANT: Please check your inbox and click the verification link to authenticate your email and activate your account.\n\nNote: Check your spam/junk folder if you don\'t see the email.');
                 
                 form.reset();
                 
