@@ -819,6 +819,16 @@
                         <span class="error-message">Valid email is required.</span>
                     </div>
                     <div class="form-group">
+                        <input type="password" id="password" class="form-input" placeholder=" " autocomplete="new-password" minlength="6" required aria-required="true">
+                        <label for="password" class="form-label">Create Password (min 6 characters)</label>
+                        <span class="error-message">Password must be at least 6 characters.</span>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="confirmPassword" class="form-input" placeholder=" " autocomplete="new-password" required aria-required="true">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <span class="error-message">Passwords must match.</span>
+                    </div>
+                    <div class="form-group">
                         <span class="phone-label">Contact No.</span>
                         <div class="phone-input-wrapper">
                             <select id="countryCode" class="country-code-select" required aria-required="true" aria-label="Country Code">
@@ -1130,8 +1140,18 @@
 
     </script>
 
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <script>
-        // Form Submission Handler
+        // Initialize Supabase Client
+        const SUPABASE_URL = 'https://gccvpfidyzybfwojsqlo.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjY3ZwZmlkeXp5YmZ3b2pzcWxvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzUwMjY3MjQsImV4cCI6MjA1MDYwMjcyNH0.Z5F1qBXZvdY5sB_3F0qHJXqKz4x5vKPxZ2YqNLQZ5jI';
+        
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Form Submission Handler with Email Authentication
         form.addEventListener('submit', async function(e) {
             e.preventDefault(); // STOP PAGE RELOAD
             
@@ -1148,10 +1168,18 @@
                 }
             };
 
-            // 1. Validate Fields
+            // 1. Validate All Fields
             validate('fullName', document.getElementById('fullName').value.trim() === '');
             validate('dob', !isValidDate(document.getElementById('dob').value));
-            validate('email', !isValidEmail(document.getElementById('email').value));
+            
+            const emailInput = document.getElementById('email').value;
+            validate('email', !isValidEmail(emailInput));
+            
+            // Password validation
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            validate('password', password.length < 6);
+            validate('confirmPassword', password !== confirmPassword);
             
             const phoneNumber = document.getElementById('phone').value.trim();
             validate('phone', !isValidPhone(phoneNumber));
@@ -1196,61 +1224,85 @@
             }
 
             // 2. Show Loading State
-            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Submitting...';
+            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Creating Account...';
             submitBtn.disabled = true;
 
             try {
-                // 3. Prepare Form Data
-                const formData = {
-                    Date: new Date().toLocaleString(),
-                    FullName: document.getElementById('fullName').value,
-                    DOB: document.getElementById('dob').value,
-                    Email: document.getElementById('email').value,
-                    CountryCode: document.getElementById('countryCode').value,
-                    Phone: phoneNumber,
-                    FullPhoneNumber: document.getElementById('countryCode').value + ' ' + phoneNumber,
-                    LinkedIn: document.getElementById('linkedin').value,
-                    Status: document.querySelector('input[name="status"]:checked').value,
-                    Degree: document.getElementById('degree').value,
-                    YearOfPassing: document.getElementById('yop').value,
-                    College: document.getElementById('orgName').value,
-                    Skills: document.getElementById('skills').value,
-                    ExperienceLevel: document.getElementById('expLevel').value,
-                    Portfolio: document.getElementById('portfolio').value,
-                    ResumeLink: document.getElementById('resumeLink').value,
-                    Course: document.getElementById('course').value,
-                    Batch: document.getElementById('batch').value,
-                    Mode: document.getElementById('mode').value,
-                    SOP: document.getElementById('sop').value
-                };
-
-                // 4. Send to SheetDB API
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ data: formData })
+                // 3. Create Supabase Account with Email Verification
+                const { data: authData, error: authError } = await supabaseClient.auth.signUp({
+                    email: emailInput,
+                    password: password,
+                    options: {
+                        emailRedirectTo: window.location.origin + '/verified.html',
+                        data: {
+                            full_name: document.getElementById('fullName').value,
+                            phone: document.getElementById('countryCode').value + ' ' + phoneNumber
+                        }
+                    }
                 });
 
-                if (!response.ok) throw new Error('Failed to submit form');
-
-                // 5. Success State
-                submitBtn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Submitted Successfully!';
-                submitBtn.classList.add('success-state');
-                alert('✅ Registration Successful!\n\nThank you for registering. We will contact you soon.');
-                form.reset();
-                
-                // Disable all form inputs
-                const elements = form.elements;
-                for (let i = 0; i < elements.length; i++) {
-                    elements[i].disabled = true;
+                if (authError) {
+                    throw new Error(authError.message);
                 }
-                
-                // Scroll to top
-                document.querySelector('.form-side').scrollTo({ top: 0, behavior: 'smooth' });
+
+                // Check if email confirmation is required
+                if (authData.user && !authData.user.confirmed_at) {
+                    // 4. Prepare Form Data for SheetDB
+                    const formData = {
+                        Date: new Date().toLocaleString(),
+                        FullName: document.getElementById('fullName').value,
+                        DOB: document.getElementById('dob').value,
+                        Email: emailInput,
+                        CountryCode: document.getElementById('countryCode').value,
+                        Phone: phoneNumber,
+                        FullPhoneNumber: document.getElementById('countryCode').value + ' ' + phoneNumber,
+                        LinkedIn: document.getElementById('linkedin').value,
+                        Status: document.querySelector('input[name="status"]:checked').value,
+                        Degree: document.getElementById('degree').value,
+                        YearOfPassing: document.getElementById('yop').value,
+                        College: document.getElementById('orgName').value,
+                        Skills: document.getElementById('skills').value,
+                        ExperienceLevel: document.getElementById('expLevel').value,
+                        Portfolio: document.getElementById('portfolio').value,
+                        ResumeLink: document.getElementById('resumeLink').value,
+                        Course: document.getElementById('course').value,
+                        Batch: document.getElementById('batch').value,
+                        Mode: document.getElementById('mode').value,
+                        SOP: document.getElementById('sop').value,
+                        SupabaseUserID: authData.user.id,
+                        EmailVerified: 'Pending'
+                    };
+
+                    // 5. Send to SheetDB API
+                    await fetch(API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ data: formData })
+                    });
+
+                    // 6. Success Message
+                    submitBtn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Verification Email Sent!';
+                    submitBtn.classList.add('success-state');
+                    
+                    alert('✅ Registration Successful!\n\n📧 Verification email sent to: ' + emailInput + '\n\nPlease check your inbox and click the verification link to activate your account.');
+                    
+                    form.reset();
+                    
+                    // Disable all form inputs
+                    const elements = form.elements;
+                    for (let i = 0; i < elements.length; i++) {
+                        elements[i].disabled = true;
+                    }
+                    
+                    // Scroll to top
+                    document.querySelector('.form-side').scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    throw new Error('Email verification setup failed. Please try again.');
+                }
 
             } catch (error) {
                 console.error('Error:', error);
-                alert('❌ Submission failed. Please try again or contact support.');
+                alert('❌ Registration failed: ' + error.message + '\n\nPlease try again or contact support.');
                 submitBtn.innerHTML = 'Submit Application <i class="fa-solid fa-paper-plane"></i>';
                 submitBtn.disabled = false;
             }
