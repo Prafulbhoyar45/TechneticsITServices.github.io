@@ -2929,106 +2929,214 @@
             statsObserver.observe(statsSection);
         }
 
-        // 7. Mentor Cards - Mobile Touch Interaction & Scroll Control
+        // 7. Mentor Cards - Enhanced Bidirectional Smooth Scrolling (Left ↔ Right)
         const mentorScrollContainer = document.querySelector('.mentor-scroll-container');
         const mentorCardsWrapper = document.querySelector('.mentor-cards-wrapper');
         
         if (mentorScrollContainer && mentorCardsWrapper) {
-            let isUserScrolling = false;
-            let isTouching = false;
+            let isUserInteracting = false;
             let scrollTimeout;
+            let autoScrollInterval;
+            let lastScrollLeft = 0;
+            let isScrollingLeft = false;
+            let scrollVelocity = 0;
             let isMobile = window.innerWidth <= 768;
             
             // Update isMobile on resize
             window.addEventListener('resize', function() {
+                const wasMobile = isMobile;
                 isMobile = window.innerWidth <= 768;
+                
+                // Restart auto-scroll with new dimensions if device type changed
+                if (wasMobile !== isMobile) {
+                    stopAutoScroll();
+                    if (!isUserInteracting) {
+                        setTimeout(() => startAutoScroll(), 500);
+                    }
+                }
             });
             
             // Calculate the width of one card + gap
-            const cardWidth = isMobile ? 304 : 374; // Mobile: 280px + 24px, Desktop: 350px + 24px
+            function getCardWidth() {
+                return window.innerWidth <= 768 ? 304 : 374; // Mobile: 280px + 24px, Desktop: 350px + 24px
+            }
+            
             const totalOriginalCards = 12;
-            const maxScrollPosition = cardWidth * totalOriginalCards;
             
-            // MOBILE ONLY: Touch start - pause animation immediately
-            mentorScrollContainer.addEventListener('touchstart', function() {
-                if (isMobile) {
-                    isTouching = true;
-                    mentorCardsWrapper.style.animationPlayState = 'paused';
-                    clearTimeout(scrollTimeout);
-                }
-            }, { passive: true });
+            // Get max scroll position (end of first 12 cards)
+            function getMaxScrollPosition() {
+                return getCardWidth() * totalOriginalCards;
+            }
             
-            // MOBILE ONLY: Touch end - resume animation after brief delay
-            mentorScrollContainer.addEventListener('touchend', function() {
-                if (isMobile) {
-                    isTouching = false;
-                    
-                    // Resume animation after 1.5 seconds of no touch
-                    scrollTimeout = setTimeout(() => {
-                        if (!isTouching && !isUserScrolling) {
-                            mentorCardsWrapper.style.animationPlayState = 'running';
-                        }
-                    }, 1500);
-                }
-            }, { passive: true });
-            
-            // MOBILE ONLY: Touch cancel - handle interrupted touches
-            mentorScrollContainer.addEventListener('touchcancel', function() {
-                if (isMobile) {
-                    isTouching = false;
-                    scrollTimeout = setTimeout(() => {
-                        if (!isTouching && !isUserScrolling) {
-                            mentorCardsWrapper.style.animationPlayState = 'running';
-                        }
-                    }, 1500);
-                }
-            }, { passive: true });
-            
-            // Detect when user starts scrolling (both mobile and desktop)
-            mentorScrollContainer.addEventListener('scroll', function() {
-                // Pause animation when user scrolls
-                if (!isUserScrolling) {
-                    isUserScrolling = true;
-                    mentorCardsWrapper.style.animationPlayState = 'paused';
+            // Auto-scroll function - smooth continuous scrolling
+            function startAutoScroll() {
+                if (autoScrollInterval) {
+                    clearInterval(autoScrollInterval);
                 }
                 
+                const scrollSpeed = isMobile ? 0.8 : 1; // Slower on mobile for better touch control
+                
+                autoScrollInterval = setInterval(() => {
+                    if (!isUserInteracting) {
+                        const currentScroll = mentorScrollContainer.scrollLeft;
+                        const maxScroll = getMaxScrollPosition();
+                        
+                        // Smoothly increment scroll position
+                        mentorScrollContainer.scrollLeft = currentScroll + scrollSpeed;
+                        
+                        // Seamless loop: if we've scrolled past the original 12 cards, reset to start
+                        if (mentorScrollContainer.scrollLeft >= maxScroll) {
+                            mentorScrollContainer.scrollLeft = 0;
+                        }
+                    }
+                }, 20); // 20ms interval for smooth 50fps animation
+            }
+            
+            // Stop auto-scroll
+            function stopAutoScroll() {
+                if (autoScrollInterval) {
+                    clearInterval(autoScrollInterval);
+                    autoScrollInterval = null;
+                }
+            }
+            
+            // Handle seamless boundary wrapping for manual scroll
+            function handleScrollBoundaries() {
+                const currentScroll = mentorScrollContainer.scrollLeft;
+                const maxScroll = getMaxScrollPosition();
+                const cardWidth = getCardWidth();
+                
+                // Detect scroll direction
+                if (currentScroll < lastScrollLeft) {
+                    isScrollingLeft = true;
+                } else if (currentScroll > lastScrollLeft) {
+                    isScrollingLeft = false;
+                }
+                
+                // RIGHT BOUNDARY: User scrolled past the original 12 cards (scrolling right/forward)
+                if (currentScroll >= maxScroll - 10) {
+                    // Seamlessly jump back to the start (which looks identical due to duplicates)
+                    mentorScrollContainer.scrollLeft = 5;
+                }
+                // LEFT BOUNDARY: User scrolled backward past the start (scrolling left/backward)
+                else if (currentScroll <= 5) {
+                    // If user is actively scrolling left, jump to the end of the original set
+                    if (isScrollingLeft && scrollVelocity < -0.5) {
+                        mentorScrollContainer.scrollLeft = maxScroll - cardWidth;
+                    }
+                }
+                
+                lastScrollLeft = currentScroll;
+            }
+            
+            // Detect user scroll interaction (works for mouse wheel, trackpad, touch)
+            let lastScrollTime = Date.now();
+            mentorScrollContainer.addEventListener('scroll', function() {
+                const now = Date.now();
+                const timeDelta = now - lastScrollTime;
+                
+                // Calculate scroll velocity for better left-scroll detection
+                if (timeDelta > 0) {
+                    const scrollDelta = mentorScrollContainer.scrollLeft - lastScrollLeft;
+                    scrollVelocity = scrollDelta / timeDelta;
+                }
+                
+                lastScrollTime = now;
+                
+                // Mark user as interacting
+                if (!isUserInteracting) {
+                    isUserInteracting = true;
+                    stopAutoScroll();
+                }
+                
+                // Clear existing timeout
                 clearTimeout(scrollTimeout);
                 
-                // Get current scroll position
-                const currentScroll = mentorScrollContainer.scrollLeft;
+                // Handle infinite loop boundaries
+                handleScrollBoundaries();
                 
-                // If user scrolls beyond the first 12 cards, reset to beginning
-                if (currentScroll >= maxScrollPosition) {
-                    mentorScrollContainer.scrollLeft = 0;
-                }
-                // If user scrolls backward past 0, jump to end of original 12 cards
-                else if (currentScroll < 0) {
-                    mentorScrollContainer.scrollLeft = maxScrollPosition - cardWidth;
-                }
-                
-                // Resume animation after user stops scrolling
-                const resumeDelay = isMobile ? 2000 : 2000; // 2 seconds for both
+                // Resume auto-scroll after 2 seconds of inactivity
                 scrollTimeout = setTimeout(() => {
-                    isUserScrolling = false;
-                    if (!isTouching) {
-                        mentorCardsWrapper.style.animationPlayState = 'running';
-                    }
-                }, resumeDelay);
-            });
+                    isUserInteracting = false;
+                    scrollVelocity = 0;
+                    isScrollingLeft = false;
+                    startAutoScroll();
+                }, 2000);
+            }, { passive: true });
             
-            // DESKTOP ONLY: Pause animation on hover
+            // DESKTOP: Mouse wheel support for bidirectional horizontal scrolling
+            mentorScrollContainer.addEventListener('wheel', function(e) {
+                // Convert vertical scroll to horizontal for better UX
+                if (Math.abs(e.deltaY) > 0) {
+                    e.preventDefault();
+                    mentorScrollContainer.scrollLeft += e.deltaY;
+                } else if (Math.abs(e.deltaX) > 0) {
+                    // Already horizontal scroll, let it through
+                }
+            }, { passive: false });
+            
+            // MOBILE/TABLET: Touch start - pause auto-scroll
+            mentorScrollContainer.addEventListener('touchstart', function(e) {
+                isUserInteracting = true;
+                stopAutoScroll();
+                clearTimeout(scrollTimeout);
+                lastScrollLeft = mentorScrollContainer.scrollLeft;
+            }, { passive: true });
+            
+            // MOBILE/TABLET: Touch move - track scrolling
+            mentorScrollContainer.addEventListener('touchmove', function(e) {
+                // Keep user interaction active during touch move
+                isUserInteracting = true;
+            }, { passive: true });
+            
+            // MOBILE/TABLET: Touch end - resume auto-scroll after delay
+            mentorScrollContainer.addEventListener('touchend', function(e) {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    isUserInteracting = false;
+                    scrollVelocity = 0;
+                    isScrollingLeft = false;
+                    startAutoScroll();
+                }, 2000);
+            }, { passive: true });
+            
+            // MOBILE/TABLET: Touch cancel - handle interrupted touches
+            mentorScrollContainer.addEventListener('touchcancel', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    isUserInteracting = false;
+                    scrollVelocity = 0;
+                    isScrollingLeft = false;
+                    startAutoScroll();
+                }, 2000);
+            }, { passive: true });
+            
+            // DESKTOP: Pause on hover
             mentorScrollContainer.addEventListener('mouseenter', function() {
                 if (!isMobile) {
-                    mentorCardsWrapper.style.animationPlayState = 'paused';
+                    isUserInteracting = true;
+                    stopAutoScroll();
+                    clearTimeout(scrollTimeout);
                 }
             });
             
-            // DESKTOP ONLY: Resume animation when mouse leaves
+            // DESKTOP: Resume when mouse leaves (with short delay)
             mentorScrollContainer.addEventListener('mouseleave', function() {
-                if (!isMobile && !isUserScrolling) {
-                    mentorCardsWrapper.style.animationPlayState = 'running';
+                if (!isMobile) {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(() => {
+                        isUserInteracting = false;
+                        scrollVelocity = 0;
+                        isScrollingLeft = false;
+                        startAutoScroll();
+                    }, 1000);
                 }
             });
+            
+            // Initialize: Set initial scroll position and start auto-scroll
+            mentorScrollContainer.scrollLeft = 0;
+            lastScrollLeft = 0;
+            startAutoScroll();
         }
 
         // 8. Testimonial Carousel - Enhanced with Smooth Pause/Resume

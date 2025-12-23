@@ -167,6 +167,126 @@
             border-radius: 8px; background: transparent; transition: all 0.3s ease; outline: none;
             color: var(--text-dark); font-family: var(--font-body);
         }
+        
+        /* Phone Input with Country Code */
+        .phone-input-wrapper {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+        
+        .country-code-select {
+            width: 110px;
+            padding: 16px 10px;
+            font-size: 0.95rem;
+            border: 2px solid var(--brand-border);
+            border-radius: 8px;
+            background: transparent;
+            transition: all 0.3s ease;
+            outline: none;
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            cursor: pointer;
+            flex-shrink: 0;
+            font-weight: 500;
+            /* Appearance */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23395886' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            padding-right: 35px;
+        }
+        
+        .country-code-select:focus {
+            border-color: var(--brand-primary);
+        }
+        
+        .country-code-select option {
+            font-family: var(--font-body);
+            font-weight: 500;
+            padding: 10px 8px;
+            line-height: 1.5;
+            background-color: white;
+            color: var(--text-dark);
+        }
+        
+        .country-code-select option:hover,
+        .country-code-select option:focus,
+        .country-code-select option:checked {
+            background-color: var(--brand-accent);
+            color: var(--brand-primary);
+        }
+        
+        /* When dropdown is expanded (size attribute set) */
+        .country-code-select[size] {
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            scrollbar-width: thin;
+            scrollbar-color: var(--brand-primary) var(--brand-border);
+        }
+        
+        /* Scrollbar for expanded dropdown (Webkit browsers) */
+        .country-code-select[size]::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .country-code-select[size]::-webkit-scrollbar-track {
+            background: var(--brand-border);
+            border-radius: 4px;
+        }
+        
+        .country-code-select[size]::-webkit-scrollbar-thumb {
+            background-color: var(--brand-primary);
+            border-radius: 4px;
+        }
+        
+        .country-code-select[size]::-webkit-scrollbar-thumb:hover {
+            background-color: var(--brand-primary-dark);
+        }
+        
+        /* Smooth scrolling for dropdown */
+        .country-code-select[size] {
+            scroll-behavior: smooth;
+        }
+        
+        .phone-number-input {
+            flex: 1;
+            padding: 16px 15px;
+            font-size: 0.95rem;
+            border: 2px solid var(--brand-border);
+            border-radius: 8px;
+            background: transparent;
+            transition: all 0.3s ease;
+            outline: none;
+            color: var(--text-dark);
+            font-family: var(--font-body);
+        }
+        
+        .phone-number-input:focus {
+            border-color: var(--brand-primary);
+        }
+        
+        .phone-number-input:focus ~ .phone-label,
+        .phone-number-input:not(:placeholder-shown) ~ .phone-label {
+            color: var(--brand-primary);
+        }
+        
+        .phone-label {
+            position: absolute;
+            left: 15px;
+            top: -11px;
+            color: var(--brand-primary);
+            pointer-events: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 0 5px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 2;
+            font-family: var(--font-body);
+        }
         .form-label {
             position: absolute; left: 15px; top: 16px; color: var(--text-light); pointer-events: none;
             transition: all 0.3s ease; background-color: rgba(255, 255, 255, 0.9); padding: 0 5px;
@@ -326,6 +446,31 @@
                 justify-content: flex-start;
                 padding: 14px 16px;
                 min-height: 48px;
+            }
+
+            /* Phone input responsive */
+            .phone-input-wrapper {
+                flex-direction: row;
+                gap: 8px;
+            }
+            
+            .country-code-select {
+                width: 95px;
+                font-size: 0.875rem;
+                padding: 14px 8px;
+                padding-right: 30px;
+            }
+            
+            /* Expanded dropdown on mobile */
+            .country-code-select[size] {
+                width: 95px;
+                font-size: 0.875rem;
+                max-height: 180px;
+            }
+            
+            .phone-number-input {
+                font-size: 0.875rem;
+                padding: 14px 12px;
             }
 
             /* Form inputs touch-friendly */
@@ -674,9 +819,38 @@
                         <span class="error-message">Valid email is required.</span>
                     </div>
                     <div class="form-group">
-                        <input type="tel" id="phone" class="form-input" placeholder=" " autocomplete="tel" maxlength="15" required aria-required="true">
-                        <label for="phone" class="form-label">Phone Number</label>
-                        <span class="error-message">Valid phone number required.</span>
+                        <span class="phone-label">Contact No.</span>
+                        <div class="phone-input-wrapper">
+                            <select id="countryCode" class="country-code-select" required aria-required="true" aria-label="Country Code">
+                                <option value="+971">AE +971</option>
+                                <option value="+61">AU +61</option>
+                                <option value="+880">BD +880</option>
+                                <option value="+55">BR +55</option>
+                                <option value="+86">CN +86</option>
+                                <option value="+49">DE +49</option>
+                                <option value="+34">ES +34</option>
+                                <option value="+33">FR +33</option>
+                                <option value="+44">GB +44</option>
+                                <option value="+62">ID +62</option>
+                                <option value="+91" selected>IN +91</option>
+                                <option value="+39">IT +39</option>
+                                <option value="+81">JP +81</option>
+                                <option value="+82">KR +82</option>
+                                <option value="+94">LK +94</option>
+                                <option value="+52">MX +52</option>
+                                <option value="+60">MY +60</option>
+                                <option value="+977">NP +977</option>
+                                <option value="+63">PH +63</option>
+                                <option value="+92">PK +92</option>
+                                <option value="+7">RU +7</option>
+                                <option value="+65">SG +65</option>
+                                <option value="+66">TH +66</option>
+                                <option value="+1">US +1</option>
+                                <option value="+27">ZA +27</option>
+                            </select>
+                            <input type="tel" id="phone" class="phone-number-input" placeholder=" " autocomplete="tel" maxlength="15" required aria-required="true" aria-label="Phone Number">
+                        </div>
+                        <span class="error-message">Valid phone number required (7-15 digits).</span>
                     </div>
                     <div class="form-group full-width">
                         <input type="url" id="linkedin" class="form-input" placeholder=" " autocomplete="off">
@@ -741,9 +915,9 @@
                         <span class="error-message">Invalid URL.</span>
                     </div>
                     <div class="form-group full-width">
-                        <input type="url" id="resumeLink" class="form-input" placeholder=" " autocomplete="off">
-                        <label for="resumeLink" class="form-label">Resume Link (Google Drive / Dropbox)</label>
-                        <span class="error-message">Please provide a valid resume link.</span>
+                        <input type="url" id="resumeLink" class="form-input" placeholder=" " autocomplete="off" required aria-required="true">
+                        <label for="resumeLink" class="form-label">Resume Link (Google Drive / Dropbox Only)</label>
+                        <span class="error-message">Please provide a valid Google Drive or Dropbox link.</span>
                     </div>
                 </div>
 
@@ -849,6 +1023,34 @@
         function isValidEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
         function isValidUrl(url) { if(!url) return true; try { new URL(url); return true; } catch (_) { return false; } }
         
+        // Validate phone number (7-15 digits)
+        function isValidPhone(phone) {
+            const cleaned = phone.replace(/\D/g, '');
+            return cleaned.length >= 7 && cleaned.length <= 15;
+        }
+        
+        // Validate resume link (Google Drive or Dropbox only)
+        function isValidResumeLink(url) {
+            if (!url || url.trim() === '') return false;
+            try {
+                const urlObj = new URL(url);
+                const hostname = urlObj.hostname.toLowerCase();
+                
+                // Check for Google Drive
+                const isGoogleDrive = hostname.includes('drive.google.com') || 
+                                     hostname.includes('docs.google.com') ||
+                                     hostname === 'google.com' && url.includes('/drive/');
+                
+                // Check for Dropbox
+                const isDropbox = hostname.includes('dropbox.com') || 
+                                 hostname.includes('dl.dropboxusercontent.com');
+                
+                return isGoogleDrive || isDropbox;
+            } catch (_) {
+                return false;
+            }
+        }
+        
         // Date validation helper
         function isValidDate(dateString) {
             if (!dateString) return false;
@@ -859,7 +1061,19 @@
         }
         
         // Input Restrictions
-        document.getElementById('phone').addEventListener('input', function(e) { this.value = this.value.replace(/[^0-9]/g, ''); });
+        document.getElementById('phone').addEventListener('input', function(e) { 
+            this.value = this.value.replace(/[^0-9]/g, ''); 
+        });
+        
+        // Real-time resume link validation feedback
+        document.getElementById('resumeLink').addEventListener('input', function(e) {
+            const url = this.value.trim();
+            if (url && !isValidResumeLink(url)) {
+                this.parentElement.classList.add('error');
+            } else {
+                this.parentElement.classList.remove('error');
+            }
+        });
         
         // Date of Birth input validation
         document.getElementById('dob').addEventListener('change', function(e) {
@@ -872,6 +1086,39 @@
                 }
             }
         });
+
+        // Country Code Dropdown - Limit to 5 visible items with scrolling
+        const countryCodeSelect = document.getElementById('countryCode');
+        if (countryCodeSelect) {
+            // Set size attribute dynamically when dropdown is clicked/focused
+            countryCodeSelect.addEventListener('focus', function() {
+                this.setAttribute('size', '5');
+                this.style.position = 'absolute';
+                this.style.zIndex = '1000';
+                this.style.maxHeight = '200px';
+                this.style.overflowY = 'auto';
+                this.style.backgroundColor = 'white';
+                this.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';
+            });
+            
+            // Reset size when selection is made or focus is lost
+            countryCodeSelect.addEventListener('blur', function() {
+                setTimeout(() => {
+                    this.removeAttribute('size');
+                    this.style.position = '';
+                    this.style.zIndex = '';
+                    this.style.maxHeight = '';
+                    this.style.overflowY = '';
+                    this.style.backgroundColor = '';
+                    this.style.boxShadow = '';
+                }, 200);
+            });
+            
+            // Handle selection
+            countryCodeSelect.addEventListener('change', function() {
+                this.blur(); // Close dropdown after selection
+            });
+        }
 
         // Clear Errors on Interaction
         document.querySelectorAll('.form-input').forEach(input => {
@@ -902,7 +1149,10 @@
             validate('fullName', document.getElementById('fullName').value.trim() === '');
             validate('dob', !isValidDate(document.getElementById('dob').value));
             validate('email', !isValidEmail(document.getElementById('email').value));
-            validate('phone', document.getElementById('phone').value.length < 10);
+            
+            // Validate phone number with country code
+            const phoneNumber = document.getElementById('phone').value.trim();
+            validate('phone', !isValidPhone(phoneNumber));
             
             // LinkedIn (Optional but must be URL if present)
             const liVal = document.getElementById('linkedin').value;
@@ -924,9 +1174,9 @@
             const portVal = document.getElementById('portfolio').value;
             validate('portfolio', portVal !== '' && !isValidUrl(portVal));
             
-            // Resume Link Validation
-            const resumeVal = document.getElementById('resumeLink').value;
-            validate('resumeLink', resumeVal === '' || !isValidUrl(resumeVal));
+            // Resume Link Validation (Required and must be Google Drive or Dropbox)
+            const resumeVal = document.getElementById('resumeLink').value.trim();
+            validate('resumeLink', !isValidResumeLink(resumeVal));
 
             validate('course', document.getElementById('course').value === '');
             validate('batch', document.getElementById('batch').value === '');
@@ -952,7 +1202,9 @@
                 FullName: document.getElementById('fullName').value,
                 DOB: document.getElementById('dob').value,
                 Email: document.getElementById('email').value,
+                CountryCode: document.getElementById('countryCode').value,
                 Phone: document.getElementById('phone').value,
+                FullPhoneNumber: document.getElementById('countryCode').value + ' ' + document.getElementById('phone').value,
                 LinkedIn: document.getElementById('linkedin').value,
                 Status: document.querySelector('input[name="status"]:checked').value,
                 Degree: document.getElementById('degree').value,
