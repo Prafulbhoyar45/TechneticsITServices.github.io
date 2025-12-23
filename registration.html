@@ -1128,8 +1128,11 @@
         document.getElementById('terms').addEventListener('change', () => document.getElementById('termsError').parentElement.classList.remove('error'));
         document.getElementsByName('status').forEach(r => r.addEventListener('change', () => document.querySelector('#statusGroup').parentElement.classList.remove('error')));
 
-        // SUBMIT HANDLER
-        form.addEventListener('submit', function(e) {
+    </script>
+
+    <script>
+        // Form Submission Handler
+        form.addEventListener('submit', async function(e) {
             e.preventDefault(); // STOP PAGE RELOAD
             
             let isValid = true;
@@ -1150,7 +1153,6 @@
             validate('dob', !isValidDate(document.getElementById('dob').value));
             validate('email', !isValidEmail(document.getElementById('email').value));
             
-            // Validate phone number with country code
             const phoneNumber = document.getElementById('phone').value.trim();
             validate('phone', !isValidPhone(phoneNumber));
             
@@ -1193,58 +1195,66 @@
                 return; // Stop if invalid
             }
 
-            // 2. Prepare Data
-            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sending...';
+            // 2. Show Loading State
+            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Submitting...';
             submitBtn.disabled = true;
 
-            const formData = {
-                Date: new Date().toLocaleString(),
-                FullName: document.getElementById('fullName').value,
-                DOB: document.getElementById('dob').value,
-                Email: document.getElementById('email').value,
-                CountryCode: document.getElementById('countryCode').value,
-                Phone: document.getElementById('phone').value,
-                FullPhoneNumber: document.getElementById('countryCode').value + ' ' + document.getElementById('phone').value,
-                LinkedIn: document.getElementById('linkedin').value,
-                Status: document.querySelector('input[name="status"]:checked').value,
-                Degree: document.getElementById('degree').value,
-                YearOfPassing: document.getElementById('yop').value,
-                College: document.getElementById('orgName').value,
-                Skills: document.getElementById('skills').value,
-                ExperienceLevel: document.getElementById('expLevel').value,
-                Portfolio: document.getElementById('portfolio').value,
-                ResumeLink: document.getElementById('resumeLink').value,
-                Course: document.getElementById('course').value,
-                Batch: document.getElementById('batch').value,
-                Mode: document.getElementById('mode').value,
-                SOP: document.getElementById('sop').value
-            };
+            try {
+                // 3. Prepare Form Data
+                const formData = {
+                    Date: new Date().toLocaleString(),
+                    FullName: document.getElementById('fullName').value,
+                    DOB: document.getElementById('dob').value,
+                    Email: document.getElementById('email').value,
+                    CountryCode: document.getElementById('countryCode').value,
+                    Phone: phoneNumber,
+                    FullPhoneNumber: document.getElementById('countryCode').value + ' ' + phoneNumber,
+                    LinkedIn: document.getElementById('linkedin').value,
+                    Status: document.querySelector('input[name="status"]:checked').value,
+                    Degree: document.getElementById('degree').value,
+                    YearOfPassing: document.getElementById('yop').value,
+                    College: document.getElementById('orgName').value,
+                    Skills: document.getElementById('skills').value,
+                    ExperienceLevel: document.getElementById('expLevel').value,
+                    Portfolio: document.getElementById('portfolio').value,
+                    ResumeLink: document.getElementById('resumeLink').value,
+                    Course: document.getElementById('course').value,
+                    Batch: document.getElementById('batch').value,
+                    Mode: document.getElementById('mode').value,
+                    SOP: document.getElementById('sop').value
+                };
 
-            // 3. Send to API
-            fetch(API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ data: formData })
-            })
-            .then(response => response.json())
-            .then(data => {
-                submitBtn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Application Submitted!';
+                // 4. Send to SheetDB API
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ data: formData })
+                });
+
+                if (!response.ok) throw new Error('Failed to submit form');
+
+                // 5. Success State
+                submitBtn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Submitted Successfully!';
                 submitBtn.classList.add('success-state');
+                alert('✅ Registration Successful!\n\nThank you for registering. We will contact you soon.');
                 form.reset();
-                // Disable inputs
-                const elements = form.elements;
-                for (let i = 0; i < elements.length; i++) elements[i].disabled = true;
                 
+                // Disable all form inputs
+                const elements = form.elements;
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].disabled = true;
+                }
+                
+                // Scroll to top
                 document.querySelector('.form-side').scrollTo({ top: 0, behavior: 'smooth' });
-            })
-            .catch(error => {
+
+            } catch (error) {
                 console.error('Error:', error);
-                alert("Connection failed. Please check the API URL.");
+                alert('❌ Submission failed. Please try again or contact support.');
                 submitBtn.innerHTML = 'Submit Application <i class="fa-solid fa-paper-plane"></i>';
                 submitBtn.disabled = false;
-            });
+            }
         });
-        
     </script>
 
 </body>
