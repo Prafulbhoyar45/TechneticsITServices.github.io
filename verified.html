@@ -212,5 +212,63 @@
             <a href="tel:+917066880124" style="color: #395886; text-decoration: none; font-weight: 600;">+91 70668 80124</a>
         </p>
     </div>
+
+    <!-- Supabase SDK and Data Saving Script -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Initialize Supabase
+        const SUPABASE_URL = 'https://upwelsomcdfzbmudjeef.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_ho8ly0ZWLl25KEEZtHwIiw_PavFhkCm';
+        const SHEETDB_API_URL = 'https://sheetdb.io/api/v1/2arin0nlif2y2?sheet=Registration';
+        
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Save data to SheetDB after email verification
+        async function saveVerifiedData() {
+            try {
+                // Get current user session (they just verified email)
+                const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
+                
+                if (userError || !user) {
+                    console.error('No authenticated user found');
+                    return;
+                }
+
+                // Get form data from user metadata (stored during registration)
+                const userData = user.user_metadata;
+                
+                if (!userData || !userData.FullName) {
+                    console.warn('No registration data found in user metadata');
+                    return;
+                }
+
+                // Add email verification status
+                userData.EmailVerified = 'Yes - Verified on ' + new Date().toLocaleString();
+                userData.VerificationDate = new Date().toLocaleString();
+                userData.SupabaseUserID = user.id;
+                userData.Email = user.email;
+
+                // Send to SheetDB
+                const response = await fetch(SHEETDB_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ data: userData })
+                });
+
+                if (response.ok) {
+                    console.log('✅ Data saved to SheetDB successfully!');
+                } else {
+                    console.error('Failed to save data to SheetDB');
+                }
+
+            } catch (error) {
+                console.error('Error saving verified data:', error);
+            }
+        }
+
+        // Run when page loads
+        window.addEventListener('load', saveVerifiedData);
+    </script>
 </body>
 </html>

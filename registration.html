@@ -1212,30 +1212,8 @@
             submitBtn.disabled = true;
 
             try {
-                // 3. Send Email Verification using Supabase (Always sends, even for existing emails)
-                const { data: authData, error: authError } = await supabaseClient.auth.signInWithOtp({
-                    email: emailInput,
-                    options: {
-                        emailRedirectTo: window.location.origin + '/verified.html',
-                        shouldCreateUser: true, // Always allow sending email
-                        data: {
-                            full_name: document.getElementById('fullName').value,
-                            phone: document.getElementById('countryCode').value + ' ' + phoneNumber,
-                            timestamp: new Date().toISOString()
-                        }
-                    }
-                });
-
-                // Note: Supabase may not return an error even if email already verified
-                // We'll save data regardless to allow re-registration
-                
-                if (authError) {
-                    console.warn('Supabase warning:', authError.message);
-                    // Don't throw error, continue with data saving
-                }
-
-                // 4. Prepare Form Data for SheetDB
-                const formData = {
+                // 3. Send Email Verification and Store Form Data in User Metadata
+                const formDataForStorage = {
                     Date: new Date().toLocaleString(),
                     FullName: document.getElementById('fullName').value,
                     DOB: document.getElementById('dob').value,
@@ -1255,26 +1233,28 @@
                     Course: document.getElementById('course').value,
                     Batch: document.getElementById('batch').value,
                     Mode: document.getElementById('mode').value,
-                    SOP: document.getElementById('sop').value,
-                    EmailVerified: 'Pending Verification'
+                    SOP: document.getElementById('sop').value
                 };
 
-                // 5. Send to SheetDB API
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ data: formData })
+                // Store all form data in user metadata (will be saved after email verification)
+                const { data: authData, error: authError } = await supabaseClient.auth.signInWithOtp({
+                    email: emailInput,
+                    options: {
+                        emailRedirectTo: window.location.origin + '/verified.html',
+                        shouldCreateUser: true,
+                        data: formDataForStorage // Store complete form data
+                    }
                 });
-
-                if (!response.ok) {
-                    throw new Error('Failed to save registration data');
+                
+                if (authError) {
+                    console.warn('Supabase warning:', authError.message);
                 }
 
-                // 6. Success Message
+                // 4. Success Message (Data will be saved AFTER email verification)
                 submitBtn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Verification Email Sent!';
                 submitBtn.classList.add('success-state');
                 
-                alert('✅ Form Submitted Successfully!\n\n📧 A verification email has been sent to:\n' + emailInput + '\n\n⚠️ IMPORTANT: Please check your inbox and click the verification link.\n\n💡 TIP:\n• Check your spam/junk folder\n• Email may take 1-2 minutes to arrive\n• You can register again anytime with the same email');
+                alert('✅ Verification Email Sent!\n\n📧 Please check your inbox at:\n' + emailInput + '\n\n⚠️ IMPORTANT:\n• Click the verification link in your email\n• Your registration will be saved AFTER you verify\n• Check spam/junk folder if needed\n• Email may take 1-2 minutes to arrive');
                 
                 form.reset();
                 
