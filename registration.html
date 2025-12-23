@@ -1145,7 +1145,7 @@
     
     <script>
         // Initialize Supabase Client - UPDATE THESE WITH YOUR REAL CREDENTIALS
-        const SUPABASE_URL = 'upwelsomcdfzbmudjeef'; // Replace with your actual Supabase URL
+        const SUPABASE_URL = 'https://upwelsomcdfzbmudjeef.supabase.co'; // Replace with your actual Supabase URL
         const SUPABASE_ANON_KEY = 'sb_publishable_ho8ly0ZWLl25KEEZtHwIiw_PavFhkCm'; // Replace with your actual anon key
         
         let supabaseClient = null;
@@ -1153,7 +1153,7 @@
         
         // Try to initialize Supabase
         try {
-            if (SUPABASE_URL !== 'upwelsomcdfzbmudjeef' && SUPABASE_ANON_KEY !== 'sb_publishable_ho8ly0ZWLl25KEEZtHwIiw_PavFhkCm') {
+            if (SUPABASE_URL !== 'https://upwelsomcdfzbmudjeef.supabase.co' && SUPABASE_ANON_KEY !== 'sb_publishable_ho8ly0ZWLl25KEEZtHwIiw_PavFhkCm') {
                 const { createClient } = supabase;
                 supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
                 useEmailAuth = true;
