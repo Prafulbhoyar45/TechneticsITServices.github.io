@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -1146,26 +1146,9 @@
 
     </script>
 
-    <!-- Firebase Integration Script -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-        // 🔥 Firebase Configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyAbc3FDifPdCsOxgSl12W_L_k7EAvkgCjU",
-            authDomain: "technetics-it-services.firebaseapp.com",
-            projectId: "technetics-it-services",
-            storageBucket: "technetics-it-services.firebasestorage.app",
-            messagingSenderId: "16876036396",
-            appId: "1:16876036396:web:4917746b718ae552dfcc89",
-            measurementId: "G-KFBW0TKKTV"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        
-        // Form Submission Handler
+    <!-- Form Submission Script -->
+    <script>
+        // Form Submission Handler - Direct to Google Sheets
         form.addEventListener('submit', async function(e) {
             e.preventDefault(); // STOP PAGE RELOAD
             
@@ -1237,14 +1220,19 @@
                 return; // Stop if invalid
             }
 
-            // 3. Show Loading State
+            // 2. Show Loading State
             submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Submitting Application...';
             submitBtn.disabled = true;
 
             try {
-                // 4. Prepare Form Data for SheetDB
-                const formDataForStorage = {
-                    Date: new Date().toLocaleString(),
+                // 3. Prepare Form Data for SheetDB
+                const now = new Date();
+                const dateString = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear() + ' ' + 
+                                  now.getHours() + ':' + String(now.getMinutes()).padStart(2, '0') + ':' + 
+                                  String(now.getSeconds()).padStart(2, '0');
+                
+                const formData = {
+                    Date: dateString,
                     FullName: document.getElementById('fullName').value,
                     DOB: document.getElementById('dob').value,
                     Email: emailInput,
@@ -1266,44 +1254,29 @@
                     SOP: document.getElementById('sop').value
                 };
 
-                // 4. Send verification email (DON'T save to sheet yet)
-                console.log('📧 Creating Firebase account and sending verification email...');
+                // 4. Send Data to Google Sheets via SheetDB
+                console.log(' Sending data to Google Sheets...');
                 
-                // Create temp password
-                const tempPass = "TechPass" + Math.random().toString(36).substring(2, 15) + "!@#";
-                
-                // Encode form data to pass to verified page
-                const formDataEncoded = encodeURIComponent(JSON.stringify(formDataForStorage));
-                const verifyUrl = window.location.origin + '/verified.html?formData=' + formDataEncoded;
-                
-                try {
-                    // Try creating new user
-                    const userCredential = await createUserWithEmailAndPassword(auth, emailInput, tempPass);
-                    await sendEmailVerification(userCredential.user, {
-                        url: verifyUrl,
-                        handleCodeInApp: false
-                    });
-                    console.log('✅ Verification email sent to:', emailInput);
-                } catch (error) {
-                    if (error.code === 'auth/email-already-in-use') {
-                        // If email exists, sign in and resend
-                        const userCredential = await signInWithEmailAndPassword(auth, emailInput, tempPass);
-                        await sendEmailVerification(userCredential.user, {
-                            url: verifyUrl,
-                            handleCodeInApp: false
-                        });
-                        console.log('✅ Existing user - verification email resent');
-                    } else {
-                        throw error;
-                    }
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ data: formData })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to submit form. Please try again.');
                 }
 
-                // 5. Success Message - Email sent, waiting for verification
-                submitBtn.innerHTML = '<i class="fa-solid fa-envelope-circle-check"></i> Verification Email Sent!';
+                const result = await response.json();
+                console.log(' Data saved successfully:', result);
+
+                // 5. Success State
+                submitBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Application Submitted!';
                 submitBtn.classList.add('success-state');
                 
-                alert('📧 Verification Email Sent!\n\n✅ Please check your email: ' + emailInput + '\n\n� Click the verification link in the email to complete your registration.\n\n⚠️ IMPORTANT:\n• Check your spam/junk folder if you don\'t see the email\n• Your data will be saved only after you verify your email\n• Email may take 1-2 minutes to arrive');
+                alert(' Registration Successful!\n\nYour application has been submitted successfully. Our team will review your application and contact you soon.\n\nThank you for applying to Technetics IT Services!');
                 
+                // 6. Reset Form
                 form.reset();
                 
                 // Disable all form inputs
@@ -1316,8 +1289,8 @@
                 document.querySelector('.form-side').scrollTo({ top: 0, behavior: 'smooth' });
 
             } catch (error) {
-                console.error('Error:', error);
-                alert('❌ Submission failed: ' + error.message + '\n\nPlease try again or contact support at support@techneticsitservices.com');
+                console.error('❌ Submission Error:', error);
+                alert('❌ Submission Failed\n\n' + error.message + '\n\nPlease try again or contact support at hr@techneticsitservices.com');
                 submitBtn.innerHTML = 'Submit Application <i class="fa-solid fa-paper-plane"></i>';
                 submitBtn.disabled = false;
             }
