@@ -1258,7 +1258,27 @@
                     SOP: document.getElementById('sop').value
                 };
 
-                // Store all form data in user metadata (will be saved after email verification)
+                // Save data to Google Sheet immediately
+                console.log('Saving data to SheetDB...');
+                const sheetDBResponse = await fetch('https://sheetdb.io/api/v1/2arin0nlif2y2?sheet=Registration', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        data: formDataForStorage
+                    })
+                });
+
+                if (!sheetDBResponse.ok) {
+                    const errorText = await sheetDBResponse.text();
+                    console.error('SheetDB Error:', errorText);
+                    throw new Error('Failed to save data to sheet: ' + errorText);
+                }
+
+                console.log('✅ Data saved successfully to Google Sheet');
+
+                // Send verification email
                 const { data: authData, error: authError } = await supabaseClient.auth.signInWithOtp({
                     email: emailInput,
                     options: {
@@ -1272,11 +1292,11 @@
                     console.warn('Supabase warning:', authError.message);
                 }
 
-                // 4. Success Message (Data will be saved AFTER email verification)
-                submitBtn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Verification Email Sent!';
+                // 4. Success Message
+                submitBtn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Registration Complete!';
                 submitBtn.classList.add('success-state');
                 
-                alert('✅ Verification Email Sent!\n\n📧 Please check your inbox at:\n' + emailInput + '\n\n⚠️ IMPORTANT:\n• Click the verification link in your email\n• Your registration will be saved AFTER you verify\n• Check spam/junk folder if needed\n• Email may take 1-2 minutes to arrive');
+                alert('✅ Registration Successful!\n\n� Your data has been saved to our system\n📧 A verification email has been sent to:\n' + emailInput + '\n\n⚠️ IMPORTANT:\n• Please verify your email by clicking the link\n• Check spam/junk folder if needed\n• Email may take 1-2 minutes to arrive');
                 
                 form.reset();
                 
