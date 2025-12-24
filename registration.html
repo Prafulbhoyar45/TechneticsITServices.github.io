@@ -881,9 +881,9 @@
                         <span class="error-message">Required field.</span>
                     </div>
                     <div class="form-group">
-                        <input type="number" id="yop" class="form-input" placeholder=" " min="1990" max="2030">
-                        <label for="yop" class="form-label">Year of Passing</label>
-                        <span class="error-message">Enter valid year.</span>
+                        <input type="text" id="yop" class="form-input" placeholder=" " maxlength="4" pattern="[0-9]{4}" inputmode="numeric">
+                        <label for="yop" class="form-label">Year of Passing (YYYY)</label>
+                        <span class="error-message">Enter valid 4-digit year (e.g., 2024).</span>
                     </div>
                     <div class="form-group full-width">
                         <input type="text" id="orgName" class="form-input" placeholder=" " autocomplete="off">
@@ -923,6 +923,17 @@
 
                 <h3 class="section-title"><i class="fa-solid fa-laptop-code"></i> Course Details</h3>
                 <div class="form-grid">
+                    <div class="form-group full-width">
+                        <select id="applicationType" class="form-input">
+                            <option value="" disabled selected hidden></option>
+                           
+                            <option value="Job Application">Job Application</option>
+                            <option value="Internship">Internship</option>
+                            <option value="Both Training & Job">Both Internship & Job</option>
+                        </select>
+                        <label for="applicationType" class="form-label">Applying For</label>
+                        <span class="error-message">Please select application type.</span>
+                    </div>
                     <div class="form-group full-width">
                         <select id="course" class="form-input">
                             <option value="" disabled selected hidden></option>
@@ -1065,6 +1076,11 @@
             this.value = this.value.replace(/[^0-9]/g, ''); 
         });
         
+        // Year of Passing - Only allow 4 digits (YYYY format)
+        document.getElementById('yop').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4);
+        });
+        
         // Real-time resume link validation feedback
         document.getElementById('resumeLink').addEventListener('input', function(e) {
             const url = this.value.trim();
@@ -1180,7 +1196,12 @@
             }
 
             validate('degree', document.getElementById('degree').value.trim() === '');
-            validate('yop', document.getElementById('yop').value.length !== 4);
+            
+            const yopValue = document.getElementById('yop').value;
+            const yopYear = parseInt(yopValue);
+            const currentYear = new Date().getFullYear();
+            validate('yop', yopValue.length !== 4 || yopYear < 1950 || yopYear > currentYear + 5);
+            
             validate('orgName', document.getElementById('orgName').value.trim() === '');
             validate('skills', document.getElementById('skills').value.trim() === '');
             validate('expLevel', document.getElementById('expLevel').value === '');
@@ -1192,6 +1213,7 @@
             const resumeVal = document.getElementById('resumeLink').value.trim();
             validate('resumeLink', !isValidResumeLink(resumeVal));
 
+            validate('applicationType', document.getElementById('applicationType').value === '');
             validate('course', document.getElementById('course').value === '');
             validate('batch', document.getElementById('batch').value === '');
             validate('mode', document.getElementById('mode').value === '');
@@ -1218,9 +1240,8 @@
                     FullName: document.getElementById('fullName').value,
                     DOB: document.getElementById('dob').value,
                     Email: emailInput,
-                    CountryCode: document.getElementById('countryCode').value,
+                    'Country code': document.getElementById('countryCode').value,
                     Phone: phoneNumber,
-                    FullPhoneNumber: document.getElementById('countryCode').value + ' ' + phoneNumber,
                     LinkedIn: document.getElementById('linkedin').value,
                     Status: document.querySelector('input[name="status"]:checked').value,
                     Degree: document.getElementById('degree').value,
@@ -1230,6 +1251,7 @@
                     ExperienceLevel: document.getElementById('expLevel').value,
                     Portfolio: document.getElementById('portfolio').value,
                     ResumeLink: document.getElementById('resumeLink').value,
+                    'Applying for..': document.getElementById('applicationType').value,
                     Course: document.getElementById('course').value,
                     Batch: document.getElementById('batch').value,
                     Mode: document.getElementById('mode').value,
