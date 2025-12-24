@@ -1340,27 +1340,31 @@
                         name: authError.name
                     });
                     
-                    // Show detailed error to help debug
-                    alert('⚠️ EMAIL NOT SENT!\n\n' +
-                          'Error: ' + authError.message + '\n' +
-                          'Status: ' + (authError.status || 'N/A') + '\n\n' +
-                          '⚠️ Your registration data HAS been saved.\n\n' +
+                    // Show error but continue since data is saved
+                    alert('⚠️ Your registration data HAS been saved.\n\n' +
+                          '❌ However, email could not be sent:\n' +
+                          authError.message + '\n\n' +
                           '🔧 Possible fixes:\n' +
                           '1. Check Supabase Dashboard → Authentication → Email\n' +
                           '2. Verify email template is configured\n' +
                           '3. Check SMTP settings\n' +
                           '4. Ensure redirect URL is whitelisted\n\n' +
                           'Contact: support@techneticsitservices.com');
+                    
+                    // Don't proceed with success message
+                    submitBtn.innerHTML = 'Submit Application <i class="fa-solid fa-paper-plane"></i>';
+                    submitBtn.disabled = false;
+                    return;
                 } else {
                     console.log('✅ Verification email sent successfully!');
                     console.log('📧 Check your inbox at:', emailInput);
                 }
 
-                // 4. Success Message
+                // 4. Success Message - only shown if no email error
                 submitBtn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Registration Complete!';
                 submitBtn.classList.add('success-state');
                 
-                alert('✅ Registration Successful!\n\n� Your data has been saved to our system\n📧 A verification email has been sent to:\n' + emailInput + '\n\n⚠️ IMPORTANT:\n• Please verify your email by clicking the link\n• Check spam/junk folder if needed\n• Email may take 1-2 minutes to arrive');
+                alert('✅ Registration Successful!\n\n✅ Your data has been saved to our system\n📧 A verification email has been sent to:\n' + emailInput + '\n\n⚠️ IMPORTANT:\n• Please verify your email by clicking the link\n• Check spam/junk folder if needed\n• Email may take 1-2 minutes to arrive');
                 
                 form.reset();
                 
