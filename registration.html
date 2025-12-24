@@ -1146,52 +1146,7 @@
 
     </script>
 
-    <!-- Supabase SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
     <script>
-        // Initialize Supabase Client for Email Authentication
-        const SUPABASE_URL = 'https://upwelsomcdfzbmudjeef.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwd2Vsc29tY2RmemJtdWRqZWVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY0ODMyMjQsImV4cCI6MjA4MjA1OTIyNH0.JpxmZ7JvkB7H2VM01sGIPGmCBOImBgSSviDERhkuL6s';
-        
-        // Validate key format before initializing
-        const keyParts = SUPABASE_ANON_KEY.split('.');
-        if (keyParts.length !== 3) {
-            console.error('❌ INVALID ANON KEY FORMAT! Key must have exactly 3 parts separated by dots.');
-            console.error('   Current parts:', keyParts.length);
-            console.error('   Please get the correct key from: https://supabase.com/dashboard/project/upwelsomcdfzbmudjeef/settings/api');
-            alert('⚠️ CONFIGURATION ERROR\n\nSupabase anon key is invalid.\nPlease check browser console for details.');
-        }
-        
-        const { createClient } = supabase;
-        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        
-        // Test Supabase connection on page load
-        console.log('🔧 Testing Supabase connection...');
-        console.log('📍 Supabase URL:', SUPABASE_URL);
-        console.log('🔑 Anon Key format check:', {
-            starts_with_eyJ: SUPABASE_ANON_KEY.startsWith('eyJ'),
-            parts_count: keyParts.length,
-            first_10_chars: SUPABASE_ANON_KEY.substring(0, 10),
-            last_10_chars: SUPABASE_ANON_KEY.substring(SUPABASE_ANON_KEY.length - 10)
-        });
-        
-        supabaseClient.auth.getSession().then(({ data, error }) => {
-            if (error) {
-                console.error('❌ Supabase connection error:', error);
-                console.error('   Error details:', {
-                    message: error.message,
-                    status: error.status,
-                    statusText: error.statusText
-                });
-            } else {
-                console.log('✅ Supabase connected successfully');
-                console.log('   Session data:', data);
-            }
-        }).catch(err => {
-            console.error('❌ Connection test failed with exception:', err);
-        });
-
         // Form Submission Handler
         form.addEventListener('submit', async function(e) {
             e.preventDefault(); // STOP PAGE RELOAD
@@ -1313,58 +1268,11 @@
 
                 console.log('✅ Data saved successfully to Google Sheet');
 
-                // Send verification email with proper configuration
-                console.log('🔄 Attempting to send verification email to:', emailInput);
-                console.log('📧 Email config:', {
-                    redirectUrl: 'https://www.techneticsitservices.com/verified.html',
-                    shouldCreateUser: true
-                });
-                
-                const { data: authData, error: authError } = await supabaseClient.auth.signInWithOtp({
-                    email: emailInput,
-                    options: {
-                        emailRedirectTo: 'https://www.techneticsitservices.com/verified.html',
-                        shouldCreateUser: true,
-                        data: formDataForStorage // Store complete form data
-                    }
-                });
-                
-                // Log full response for debugging
-                console.log('📬 Supabase Auth Response:', { data: authData, error: authError });
-                
-                if (authError) {
-                    console.error('❌ Supabase Auth Error Details:', {
-                        message: authError.message,
-                        status: authError.status,
-                        code: authError.code,
-                        name: authError.name
-                    });
-                    
-                    // Show error but continue since data is saved
-                    alert('⚠️ Your registration data HAS been saved.\n\n' +
-                          '❌ However, email could not be sent:\n' +
-                          authError.message + '\n\n' +
-                          '🔧 Possible fixes:\n' +
-                          '1. Check Supabase Dashboard → Authentication → Email\n' +
-                          '2. Verify email template is configured\n' +
-                          '3. Check SMTP settings\n' +
-                          '4. Ensure redirect URL is whitelisted\n\n' +
-                          'Contact: support@techneticsitservices.com');
-                    
-                    // Don't proceed with success message
-                    submitBtn.innerHTML = 'Submit Application <i class="fa-solid fa-paper-plane"></i>';
-                    submitBtn.disabled = false;
-                    return;
-                } else {
-                    console.log('✅ Verification email sent successfully!');
-                    console.log('📧 Check your inbox at:', emailInput);
-                }
-
-                // 4. Success Message - only shown if no email error
+                // Success Message
                 submitBtn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Registration Complete!';
                 submitBtn.classList.add('success-state');
                 
-                alert('✅ Registration Successful!\n\n✅ Your data has been saved to our system\n📧 A verification email has been sent to:\n' + emailInput + '\n\n⚠️ IMPORTANT:\n• Please verify your email by clicking the link\n• Check spam/junk folder if needed\n• Email may take 1-2 minutes to arrive');
+                alert('✅ Registration Successful!\n\n✅ Your data has been saved to our system\n\nThank you for registering with Technetics IT Services!\nOur team will contact you shortly.');
                 
                 form.reset();
                 
