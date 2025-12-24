@@ -1146,7 +1146,25 @@
 
     </script>
 
-    <script>
+    <!-- Firebase Integration Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        // 🔥 Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAbc3FDifPdCsOxgSl12W_L_k7EAvkgCjU",
+            authDomain: "technetics-it-services.firebaseapp.com",
+            projectId: "technetics-it-services",
+            storageBucket: "technetics-it-services.firebasestorage.app",
+            messagingSenderId: "16876036396",
+            appId: "1:16876036396:web:4917746b718ae552dfcc89",
+            measurementId: "G-KFBW0TKKTV"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        
         // Form Submission Handler
         form.addEventListener('submit', async function(e) {
             e.preventDefault(); // STOP PAGE RELOAD
@@ -1219,12 +1237,12 @@
                 return; // Stop if invalid
             }
 
-            // 2. Show Loading State
-            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sending Verification...';
+            // 3. Show Loading State
+            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Submitting Application...';
             submitBtn.disabled = true;
 
             try {
-                // 3. Send Email Verification and Store Form Data in User Metadata
+                // 4. Prepare Form Data for SheetDB
                 const formDataForStorage = {
                     Date: new Date().toLocaleString(),
                     FullName: document.getElementById('fullName').value,
@@ -1248,31 +1266,43 @@
                     SOP: document.getElementById('sop').value
                 };
 
-                // Save data to Google Sheet immediately
-                console.log('Saving data to SheetDB...');
-                const sheetDBResponse = await fetch('https://sheetdb.io/api/v1/2arin0nlif2y2?sheet=Registration', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        data: formDataForStorage
-                    })
-                });
-
-                if (!sheetDBResponse.ok) {
-                    const errorText = await sheetDBResponse.text();
-                    console.error('SheetDB Error:', errorText);
-                    throw new Error('Failed to save data to sheet: ' + errorText);
+                // 4. Send verification email (DON'T save to sheet yet)
+                console.log('📧 Creating Firebase account and sending verification email...');
+                
+                // Create temp password
+                const tempPass = "TechPass" + Math.random().toString(36).substring(2, 15) + "!@#";
+                
+                // Encode form data to pass to verified page
+                const formDataEncoded = encodeURIComponent(JSON.stringify(formDataForStorage));
+                const verifyUrl = window.location.origin + '/verified.html?formData=' + formDataEncoded;
+                
+                try {
+                    // Try creating new user
+                    const userCredential = await createUserWithEmailAndPassword(auth, emailInput, tempPass);
+                    await sendEmailVerification(userCredential.user, {
+                        url: verifyUrl,
+                        handleCodeInApp: false
+                    });
+                    console.log('✅ Verification email sent to:', emailInput);
+                } catch (error) {
+                    if (error.code === 'auth/email-already-in-use') {
+                        // If email exists, sign in and resend
+                        const userCredential = await signInWithEmailAndPassword(auth, emailInput, tempPass);
+                        await sendEmailVerification(userCredential.user, {
+                            url: verifyUrl,
+                            handleCodeInApp: false
+                        });
+                        console.log('✅ Existing user - verification email resent');
+                    } else {
+                        throw error;
+                    }
                 }
 
-                console.log('✅ Data saved successfully to Google Sheet');
-
-                // Success Message
-                submitBtn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Registration Complete!';
+                // 5. Success Message - Email sent, waiting for verification
+                submitBtn.innerHTML = '<i class="fa-solid fa-envelope-circle-check"></i> Verification Email Sent!';
                 submitBtn.classList.add('success-state');
                 
-                alert('✅ Registration Successful!\n\n✅ Your data has been saved to our system\n\nThank you for registering with Technetics IT Services!\nOur team will contact you shortly.');
+                alert('📧 Verification Email Sent!\n\n✅ Please check your email: ' + emailInput + '\n\n� Click the verification link in the email to complete your registration.\n\n⚠️ IMPORTANT:\n• Check your spam/junk folder if you don\'t see the email\n• Your data will be saved only after you verify your email\n• Email may take 1-2 minutes to arrive');
                 
                 form.reset();
                 
