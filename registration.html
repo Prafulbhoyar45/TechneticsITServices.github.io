@@ -1152,21 +1152,44 @@
     <script>
         // Initialize Supabase Client for Email Authentication
         const SUPABASE_URL = 'https://upwelsomcdfzbmudjeef.supabase.co';
-        // IMPORTANT: Replace this with your ACTUAL anon key from Supabase Dashboard → Settings → API
-        // It should be a complete JWT token (3 parts separated by dots)
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwd2Vsc29tY2RmemJtdWRqZWVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NTUwNzAsImV4cCI6MjA1MDUzMTA3MH0.sb_secret_CI18ZAqXBDYZFPZ6UAh7XQ_c5NS_83a';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwd2Vsc29tY2RmemJtdWRqZWVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY0ODMyMjQsImV4cCI6MjA4MjA1OTIyNH0.JpxmZ7JvkB7H2VM01sGIPGmCBOImBgSSviDERhkuL6s';
+        
+        // Validate key format before initializing
+        const keyParts = SUPABASE_ANON_KEY.split('.');
+        if (keyParts.length !== 3) {
+            console.error('❌ INVALID ANON KEY FORMAT! Key must have exactly 3 parts separated by dots.');
+            console.error('   Current parts:', keyParts.length);
+            console.error('   Please get the correct key from: https://supabase.com/dashboard/project/upwelsomcdfzbmudjeef/settings/api');
+            alert('⚠️ CONFIGURATION ERROR\n\nSupabase anon key is invalid.\nPlease check browser console for details.');
+        }
         
         const { createClient } = supabase;
         const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
         // Test Supabase connection on page load
         console.log('🔧 Testing Supabase connection...');
+        console.log('📍 Supabase URL:', SUPABASE_URL);
+        console.log('🔑 Anon Key format check:', {
+            starts_with_eyJ: SUPABASE_ANON_KEY.startsWith('eyJ'),
+            parts_count: keyParts.length,
+            first_10_chars: SUPABASE_ANON_KEY.substring(0, 10),
+            last_10_chars: SUPABASE_ANON_KEY.substring(SUPABASE_ANON_KEY.length - 10)
+        });
+        
         supabaseClient.auth.getSession().then(({ data, error }) => {
             if (error) {
                 console.error('❌ Supabase connection error:', error);
+                console.error('   Error details:', {
+                    message: error.message,
+                    status: error.status,
+                    statusText: error.statusText
+                });
             } else {
                 console.log('✅ Supabase connected successfully');
+                console.log('   Session data:', data);
             }
+        }).catch(err => {
+            console.error('❌ Connection test failed with exception:', err);
         });
 
         // Form Submission Handler
