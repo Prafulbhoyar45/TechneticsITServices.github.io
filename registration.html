@@ -1152,7 +1152,7 @@
     <script>
         // Initialize Supabase Client for Email Authentication
         const SUPABASE_URL = 'https://upwelsomcdfzbmudjeef.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_ho8ly0ZWLl25KEEZtHwIiw_PavFhkCm';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwd2Vsc29tY2RmemJtdWRqZWVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NTUwNzAsImV4cCI6MjA1MDUzMTA3MH0.sb_publishable_ho8ly0ZWLl25KEEZtHwIiw_PavFhkCm';
         
         const { createClient } = supabase;
         const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -1278,18 +1278,23 @@
 
                 console.log('✅ Data saved successfully to Google Sheet');
 
-                // Send verification email
+                // Send verification email with proper configuration
+                console.log('Sending verification email to:', emailInput);
                 const { data: authData, error: authError } = await supabaseClient.auth.signInWithOtp({
                     email: emailInput,
                     options: {
-                        emailRedirectTo: window.location.origin + '/verified.html',
+                        emailRedirectTo: 'https://www.techneticsitservices.com/verified.html',
                         shouldCreateUser: true,
                         data: formDataForStorage // Store complete form data
                     }
                 });
                 
                 if (authError) {
-                    console.warn('Supabase warning:', authError.message);
+                    console.error('Supabase Auth Error:', authError);
+                    // Continue anyway as data is already saved
+                    alert('⚠️ Warning: Email verification may not have been sent.\nError: ' + authError.message + '\n\nYour registration data has been saved. Please contact support@techneticsitservices.com');
+                } else {
+                    console.log('✅ Verification email sent successfully');
                 }
 
                 // 4. Success Message
