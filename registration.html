@@ -1152,10 +1152,22 @@
     <script>
         // Initialize Supabase Client for Email Authentication
         const SUPABASE_URL = 'https://upwelsomcdfzbmudjeef.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwd2Vsc29tY2RmemJtdWRqZWVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NTUwNzAsImV4cCI6MjA1MDUzMTA3MH0.sb_publishable_ho8ly0ZWLl25KEEZtHwIiw_PavFhkCm';
+        // IMPORTANT: Replace this with your ACTUAL anon key from Supabase Dashboard → Settings → API
+        // It should be a complete JWT token (3 parts separated by dots)
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwd2Vsc29tY2RmemJtdWRqZWVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NTUwNzAsImV4cCI6MjA1MDUzMTA3MH0.sb_secret_CI18ZAqXBDYZFPZ6UAh7XQ_c5NS_83a';
         
         const { createClient } = supabase;
         const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        // Test Supabase connection on page load
+        console.log('🔧 Testing Supabase connection...');
+        supabaseClient.auth.getSession().then(({ data, error }) => {
+            if (error) {
+                console.error('❌ Supabase connection error:', error);
+            } else {
+                console.log('✅ Supabase connected successfully');
+            }
+        });
 
         // Form Submission Handler
         form.addEventListener('submit', async function(e) {
@@ -1279,7 +1291,12 @@
                 console.log('✅ Data saved successfully to Google Sheet');
 
                 // Send verification email with proper configuration
-                console.log('Sending verification email to:', emailInput);
+                console.log('🔄 Attempting to send verification email to:', emailInput);
+                console.log('📧 Email config:', {
+                    redirectUrl: 'https://www.techneticsitservices.com/verified.html',
+                    shouldCreateUser: true
+                });
+                
                 const { data: authData, error: authError } = await supabaseClient.auth.signInWithOtp({
                     email: emailInput,
                     options: {
@@ -1289,12 +1306,31 @@
                     }
                 });
                 
+                // Log full response for debugging
+                console.log('📬 Supabase Auth Response:', { data: authData, error: authError });
+                
                 if (authError) {
-                    console.error('Supabase Auth Error:', authError);
-                    // Continue anyway as data is already saved
-                    alert('⚠️ Warning: Email verification may not have been sent.\nError: ' + authError.message + '\n\nYour registration data has been saved. Please contact support@techneticsitservices.com');
+                    console.error('❌ Supabase Auth Error Details:', {
+                        message: authError.message,
+                        status: authError.status,
+                        code: authError.code,
+                        name: authError.name
+                    });
+                    
+                    // Show detailed error to help debug
+                    alert('⚠️ EMAIL NOT SENT!\n\n' +
+                          'Error: ' + authError.message + '\n' +
+                          'Status: ' + (authError.status || 'N/A') + '\n\n' +
+                          '⚠️ Your registration data HAS been saved.\n\n' +
+                          '🔧 Possible fixes:\n' +
+                          '1. Check Supabase Dashboard → Authentication → Email\n' +
+                          '2. Verify email template is configured\n' +
+                          '3. Check SMTP settings\n' +
+                          '4. Ensure redirect URL is whitelisted\n\n' +
+                          'Contact: support@techneticsitservices.com');
                 } else {
-                    console.log('✅ Verification email sent successfully');
+                    console.log('✅ Verification email sent successfully!');
+                    console.log('📧 Check your inbox at:', emailInput);
                 }
 
                 // 4. Success Message
