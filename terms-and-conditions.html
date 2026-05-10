@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions | Technetics IT Services</title>
+    <meta name="description" content="Technetics IT Services Terms and Conditions — the rules and guidelines governing use of our website and services.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.techneticsitservices.com/terms-and-conditions">
+    <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            base: '#F6F6F6',
+                            alt: '#F1EFEB',
+                            soft: '#E8E1D5',
+                            border: '#DDD5D5',
+                            neutral: '#EDEDED',
+                            accent: '#D3DCE8',
+                            primary: '#395886',
+                            dark: '#1e293b',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { overflow-x: hidden; scroll-behavior: smooth; }
+        body { overflow-x: hidden; }
+
+        .toc-link {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: #475569;
+            transition: all 0.2s ease;
+            border-left: 2px solid transparent;
+        }
+        .toc-link:hover { color: #395886; background: #EEF2F8; border-left-color: #395886; }
+        .toc-link.active { color: #395886; background: #EEF2F8; border-left-color: #395886; font-weight: 600; }
+
+        .policy-section { scroll-margin-top: 6rem; }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e3454 0%, #2d4a73 50%, #395886 100%);
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #F6F6F6; }
+        ::-webkit-scrollbar-thumb { background: #D3DCE8; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #395886; }
+
+        @media (max-width: 1024px) { .toc-sidebar { display: none; } }
+        .mobile-toc { display: none; }
+        @media (max-width: 1024px) { .mobile-toc { display: block; } }
+
+        .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+        .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+        .updated-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            background: rgba(211, 220, 232, 0.3);
+            border: 1px solid rgba(211, 220, 232, 0.6);
+            color: rgba(255,255,255,0.85);
+        }
+    </style>
+</head>
+<body class="bg-brand-base text-slate-800 font-sans antialiased">
+
+<!-- ── NAVBAR ── -->
+<nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-brand-border shadow-sm" role="navigation">
+    <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+        <a href="index.html" class="flex items-center gap-2" aria-label="Technetics Home">
+            <img src="assets/Logo.png" alt="Technetics IT Services" class="h-10 w-auto">
+        </a>
+        <div class="flex items-center gap-6">
+            <a href="index.html" class="text-sm font-medium text-slate-600 hover:text-brand-primary transition-colors hidden md:block">← Back to Home</a>
+            <a href="privacy-policy.html" class="text-sm font-medium text-slate-500 hover:text-brand-primary transition-colors hidden md:block">Privacy Policy</a>
+            <a href="index.html#contact" class="px-4 py-2 rounded-full bg-brand-primary text-white text-sm font-semibold hover:bg-brand-primary/90 transition-all shadow-sm">
+                Contact Us
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero-gradient pt-28 pb-16 relative overflow-hidden">
+    <div class="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-white/5 pointer-events-none"></div>
+    <div class="absolute -bottom-10 -left-10 w-56 h-56 rounded-full bg-white/5 pointer-events-none"></div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <nav aria-label="Breadcrumb" class="mb-6">
+            <ol class="flex items-center gap-2 text-sm text-white/60">
+                <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                <li><i class="fa-solid fa-chevron-right text-xs"></i></li>
+                <li class="text-white font-medium">Terms &amp; Conditions</li>
+            </ol>
+        </nav>
+
+        <div class="max-w-3xl">
+            <div class="updated-badge mb-4">
+                <i class="fa-solid fa-file-contract"></i>
+                Effective Date: 10 May, 2026
+            </div>
+            <h1 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4 leading-tight">
+                Terms &amp; Conditions
+            </h1>
+            <p class="text-lg text-white/75 max-w-2xl leading-relaxed">
+                These Terms &amp; Conditions govern your access to and use of the Technetics IT Services website and all related services. Please read them carefully before using our platform.
+            </p>
+        </div>
+
+        <div class="mt-10 flex flex-wrap gap-6">
+            <div class="flex items-center gap-2 text-white/70 text-sm">
+                <i class="fa-solid fa-gavel text-brand-accent"></i>
+                Governed by Indian Law
+            </div>
+            <div class="flex items-center gap-2 text-white/70 text-sm">
+                <i class="fa-solid fa-map-pin text-brand-accent"></i>
+                Jurisdiction: Surat, Gujarat
+            </div>
+            <div class="flex items-center gap-2 text-white/70 text-sm">
+                <i class="fa-solid fa-clock text-brand-accent"></i>
+                Last Updated: May 2026
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── ACCEPTANCE BANNER ── -->
+<div class="bg-amber-50 border-b border-amber-100">
+    <div class="container mx-auto px-6 py-3">
+        <p class="text-sm text-amber-800 flex items-start gap-2">
+            <i class="fa-solid fa-triangle-exclamation mt-0.5 flex-shrink-0"></i>
+            <span><strong>Important:</strong> By accessing this website or submitting any form, you agree to be bound by these Terms &amp; Conditions. If you do not agree, please discontinue use of our website immediately.</span>
+        </p>
+    </div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<main class="py-16">
+    <div class="container mx-auto px-6 max-w-7xl">
+        <div class="flex gap-12">
+
+            <!-- ── STICKY TOC (Desktop) ── -->
+            <aside class="toc-sidebar w-64 flex-shrink-0">
+                <div class="sticky top-24">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 px-1">Contents</p>
+                    <nav aria-label="Table of contents">
+                        <ul class="space-y-0.5">
+                            <li><a href="#acceptance" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">1</span>Acceptance of Terms</a></li>
+                            <li><a href="#use-of-website" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">2</span>Use of Website</a></li>
+                            <li><a href="#user-responsibilities" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">3</span>User Responsibilities</a></li>
+                            <li><a href="#intellectual-property" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">4</span>Intellectual Property</a></li>
+                            <li><a href="#services" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">5</span>Our Services</a></li>
+                            <li><a href="#service-availability" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">6</span>Service Availability</a></li>
+                            <li><a href="#limitation-of-liability" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">7</span>Limitation of Liability</a></li>
+                            <li><a href="#disclaimers" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">8</span>Disclaimers</a></li>
+                            <li><a href="#third-party-links" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">9</span>Third-Party Links</a></li>
+                            <li><a href="#termination" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">10</span>Termination</a></li>
+                            <li><a href="#governing-law" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">11</span>Governing Law</a></li>
+                            <li><a href="#changes-to-terms" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">12</span>Changes to Terms</a></li>
+                            <li><a href="#contact-terms" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">13</span>Contact</a></li>
+                        </ul>
+                    </nav>
+
+                    <div class="mt-8 p-4 bg-brand-primary/5 border border-brand-primary/20 rounded-xl">
+                        <p class="text-xs font-semibold text-brand-primary mb-1">Legal questions?</p>
+                        <p class="text-xs text-slate-500 mb-3">We respond within 24 business hours.</p>
+                        <a href="mailto:hr@techneticsitservices.com" class="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1">
+                            <i class="fa-solid fa-envelope"></i> hr@techneticsitservices.com
+                        </a>
+                    </div>
+
+                    <div class="mt-4 p-4 bg-white border border-brand-border rounded-xl">
+                        <p class="text-xs font-semibold text-slate-700 mb-2">Also read</p>
+                        <a href="privacy-policy.html" class="text-xs text-brand-primary hover:underline flex items-center gap-1.5">
+                            <i class="fa-solid fa-shield-halved"></i> Privacy Policy
+                        </a>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ── TERMS CONTENT ── -->
+            <div class="flex-1 min-w-0">
+
+                <!-- Mobile TOC -->
+                <div class="mobile-toc mb-8">
+                    <details class="bg-white border border-brand-border rounded-xl overflow-hidden">
+                        <summary class="px-5 py-4 cursor-pointer font-semibold text-slate-700 flex items-center justify-between text-sm">
+                            <span><i class="fa-solid fa-list mr-2 text-brand-primary"></i> Table of Contents</span>
+                            <i class="fa-solid fa-chevron-down text-brand-primary text-xs"></i>
+                        </summary>
+                        <nav class="px-5 pb-4 space-y-1 text-sm">
+                            <a href="#acceptance" class="block py-1.5 text-slate-600 hover:text-brand-primary">1. Acceptance of Terms</a>
+                            <a href="#use-of-website" class="block py-1.5 text-slate-600 hover:text-brand-primary">2. Use of Website</a>
+                            <a href="#user-responsibilities" class="block py-1.5 text-slate-600 hover:text-brand-primary">3. User Responsibilities</a>
+                            <a href="#intellectual-property" class="block py-1.5 text-slate-600 hover:text-brand-primary">4. Intellectual Property</a>
+                            <a href="#services" class="block py-1.5 text-slate-600 hover:text-brand-primary">5. Our Services</a>
+                            <a href="#service-availability" class="block py-1.5 text-slate-600 hover:text-brand-primary">6. Service Availability</a>
+                            <a href="#limitation-of-liability" class="block py-1.5 text-slate-600 hover:text-brand-primary">7. Limitation of Liability</a>
+                            <a href="#disclaimers" class="block py-1.5 text-slate-600 hover:text-brand-primary">8. Disclaimers</a>
+                            <a href="#third-party-links" class="block py-1.5 text-slate-600 hover:text-brand-primary">9. Third-Party Links</a>
+                            <a href="#termination" class="block py-1.5 text-slate-600 hover:text-brand-primary">10. Termination</a>
+                            <a href="#governing-law" class="block py-1.5 text-slate-600 hover:text-brand-primary">11. Governing Law</a>
+                            <a href="#changes-to-terms" class="block py-1.5 text-slate-600 hover:text-brand-primary">12. Changes to Terms</a>
+                            <a href="#contact-terms" class="block py-1.5 text-slate-600 hover:text-brand-primary">13. Contact</a>
+                        </nav>
+                    </details>
+                </div>
+
+                <!-- ── SECTION 1: Acceptance ── -->
+                <section id="acceptance" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-handshake text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 1</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">Acceptance of Terms</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <p class="text-slate-600 leading-relaxed mb-4">These Terms &amp; Conditions ("Terms") constitute a legally binding agreement between you ("User", "you", or "your") and <strong class="text-slate-800">Technetics IT Services</strong> ("Company", "we", "our", or "us"), a company registered in Surat, Gujarat, India, operating the website at <strong class="text-slate-800">www.techneticsitservices.com</strong> (the "Website").</p>
+                            <p class="text-slate-600 leading-relaxed mb-4">By accessing, browsing, or using our Website in any way — including submitting any inquiry form, viewing content, or engaging with our services — you confirm that:</p>
+                            <ul class="space-y-2 text-sm text-slate-600 mb-4">
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-primary mt-1 flex-shrink-0"></i> You have read and understood these Terms in full</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-primary mt-1 flex-shrink-0"></i> You are at least 18 years of age or have the authority to act on behalf of an organisation</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-primary mt-1 flex-shrink-0"></i> You agree to comply with all applicable laws and regulations</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-primary mt-1 flex-shrink-0"></i> You accept that your use of this Website is subject to these Terms</li>
+                            </ul>
+                            <p class="text-slate-600 leading-relaxed text-sm">If you are using our Website on behalf of a company or other legal entity, you represent that you have the authority to bind that entity to these Terms.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 2: Use of Website ── -->
+                <section id="use-of-website" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-globe text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 2</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">Use of Website</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <p class="text-slate-600 leading-relaxed mb-6">Our Website is provided for informational and business communication purposes. You are granted a limited, non-exclusive, non-transferable, revocable licence to access and use the Website in accordance with these Terms.</p>
+
+                            <h3 class="text-sm font-bold text-slate-800 mb-3 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-green-500"></i> Permitted Uses
+                            </h3>
+                            <ul class="space-y-2 text-sm text-slate-600 mb-6">
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-brand-primary mt-1 text-xs flex-shrink-0"></i> Browsing information about our IT solutions and services</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-brand-primary mt-1 text-xs flex-shrink-0"></i> Submitting genuine business inquiries through our contact form</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-brand-primary mt-1 text-xs flex-shrink-0"></i> Reviewing case studies, team profiles, and industry solutions</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-brand-primary mt-1 text-xs flex-shrink-0"></i> Sharing our public website pages via social media or messaging</li>
+                            </ul>
+
+                            <h3 class="text-sm font-bold text-slate-800 mb-3 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-xmark text-red-500"></i> Prohibited Uses
+                            </h3>
+                            <div class="space-y-2">
+                                <div class="flex items-start gap-3 p-3 bg-red-50 rounded-lg border border-red-100">
+                                    <i class="fa-solid fa-ban text-red-400 mt-0.5 flex-shrink-0 text-xs"></i>
+                                    <p class="text-sm text-slate-700">Using automated scripts, bots, scrapers, or crawlers to extract content from the Website</p>
+                                </div>
+                                <div class="flex items-start gap-3 p-3 bg-red-50 rounded-lg border border-red-100">
+                                    <i class="fa-solid fa-ban text-red-400 mt-0.5 flex-shrink-0 text-xs"></i>
+                                    <p class="text-sm text-slate-700">Attempting to gain unauthorised access to any part of our systems, servers, or databases</p>
+                                </div>
+                                <div class="flex items-start gap-3 p-3 bg-red-50 rounded-lg border border-red-100">
+                                    <i class="fa-solid fa-ban text-red-400 mt-0.5 flex-shrink-0 text-xs"></i>
+                                    <p class="text-sm text-slate-700">Submitting false, misleading, or fraudulent information through any form on the Website</p>
+                                </div>
+                                <div class="flex items-start gap-3 p-3 bg-red-50 rounded-lg border border-red-100">
+                                    <i class="fa-solid fa-ban text-red-400 mt-0.5 flex-shrink-0 text-xs"></i>
+                                    <p class="text-sm text-slate-700">Engaging in any activity that disrupts, damages, or impairs the functionality or performance of the Website</p>
+                                </div>
+                                <div class="flex items-start gap-3 p-3 bg-red-50 rounded-lg border border-red-100">
+                                    <i class="fa-solid fa-ban text-red-400 mt-0.5 flex-shrink-0 text-xs"></i>
+                                    <p class="text-sm text-slate-700">Reproducing, modifying, or distributing our Website's content, code, or materials without prior written consent</p>
+                                </div>
+                                <div class="flex items-start gap-3 p-3 bg-red-50 rounded-lg border border-red-100">
+                                    <i class="fa-solid fa-ban text-red-400 mt-0.5 flex-shrink-0 text-xs"></i>
+                                    <p class="text-sm text-slate-700">Using the Website for any unlawful purpose or in violation of applicable Indian or international law</p>
+                                </div>
+                                <div class="flex items-start gap-3 p-3 bg-red-50 rounded-lg border border-red-100">
+                                    <i class="fa-solid fa-ban text-red-400 mt-0.5 flex-shrink-0 text-xs"></i>
+                                    <p class="text-sm text-slate-700">Transmitting spam, unsolicited communications, or malicious software through any Website channel</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 3: User Responsibilities ── -->
+                <section id="user-responsibilities" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-user-check text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 3</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">User Responsibilities</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <p class="text-slate-600 leading-relaxed mb-6">When engaging with Technetics IT Services — whether through our website, contact forms, email, or any professional engagement — you agree to the following responsibilities:</p>
+                            <div class="space-y-4">
+                                <div class="flex gap-4 p-4 rounded-xl border border-brand-border bg-brand-base hover:border-brand-primary/40 transition-colors">
+                                    <div class="w-8 h-8 rounded-full bg-brand-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <i class="fa-solid fa-pen text-brand-primary text-xs"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800 mb-1">Accuracy of Information</p>
+                                        <p class="text-sm text-slate-500">You are responsible for providing accurate, current, and complete information in all communications and contact forms. Providing false information may result in termination of engagement.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 p-4 rounded-xl border border-brand-border bg-brand-base hover:border-brand-primary/40 transition-colors">
+                                    <div class="w-8 h-8 rounded-full bg-brand-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <i class="fa-solid fa-scale-balanced text-brand-primary text-xs"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800 mb-1">Legal Compliance</p>
+                                        <p class="text-sm text-slate-500">You must use our Website and services in compliance with all applicable laws, regulations, and professional standards in your jurisdiction, including Indian law where applicable.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 p-4 rounded-xl border border-brand-border bg-brand-base hover:border-brand-primary/40 transition-colors">
+                                    <div class="w-8 h-8 rounded-full bg-brand-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <i class="fa-solid fa-comments text-brand-primary text-xs"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800 mb-1">Professional Conduct</p>
+                                        <p class="text-sm text-slate-500">Any communication with Technetics IT Services must be conducted professionally and respectfully. We reserve the right to terminate engagement with users who engage in abusive, threatening, or harassing behaviour.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 p-4 rounded-xl border border-brand-border bg-brand-base hover:border-brand-primary/40 transition-colors">
+                                    <div class="w-8 h-8 rounded-full bg-brand-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <i class="fa-solid fa-lock text-brand-primary text-xs"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800 mb-1">Confidentiality</p>
+                                        <p class="text-sm text-slate-500">Any proprietary or confidential information shared during a business engagement with Technetics must be treated with appropriate care and not disclosed to unauthorised third parties.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 4: Intellectual Property ── -->
+                <section id="intellectual-property" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-copyright text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 4</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">Intellectual Property</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <div class="p-4 bg-brand-primary/5 border border-brand-primary/20 rounded-xl mb-6">
+                                <p class="text-sm font-semibold text-brand-primary mb-1">Ownership Notice</p>
+                                <p class="text-sm text-slate-600">All content on this Website is the exclusive intellectual property of Technetics IT Services or its licensors, unless otherwise stated.</p>
+                            </div>
+
+                            <p class="text-slate-600 leading-relaxed text-sm mb-5">The following materials are protected by applicable intellectual property laws, including copyright and trademark laws of India and international conventions:</p>
+
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+                                <div class="p-3 bg-brand-base border border-brand-border rounded-lg text-center">
+                                    <i class="fa-solid fa-image text-brand-primary mb-2 block"></i>
+                                    <p class="text-xs font-semibold text-slate-700">Logo &amp; Brand Identity</p>
+                                </div>
+                                <div class="p-3 bg-brand-base border border-brand-border rounded-lg text-center">
+                                    <i class="fa-solid fa-file-alt text-brand-primary mb-2 block"></i>
+                                    <p class="text-xs font-semibold text-slate-700">Written Content &amp; Copy</p>
+                                </div>
+                                <div class="p-3 bg-brand-base border border-brand-border rounded-lg text-center">
+                                    <i class="fa-solid fa-code text-brand-primary mb-2 block"></i>
+                                    <p class="text-xs font-semibold text-slate-700">Website Code &amp; Design</p>
+                                </div>
+                                <div class="p-3 bg-brand-base border border-brand-border rounded-lg text-center">
+                                    <i class="fa-solid fa-chart-bar text-brand-primary mb-2 block"></i>
+                                    <p class="text-xs font-semibold text-slate-700">Case Studies &amp; Insights</p>
+                                </div>
+                                <div class="p-3 bg-brand-base border border-brand-border rounded-lg text-center">
+                                    <i class="fa-solid fa-video text-brand-primary mb-2 block"></i>
+                                    <p class="text-xs font-semibold text-slate-700">Videos &amp; Animations</p>
+                                </div>
+                                <div class="p-3 bg-brand-base border border-brand-border rounded-lg text-center">
+                                    <i class="fa-solid fa-diagram-project text-brand-primary mb-2 block"></i>
+                                    <p class="text-xs font-semibold text-slate-700">Methodologies &amp; Frameworks</p>
+                                </div>
+                            </div>
+
+                            <h3 class="text-sm font-bold text-slate-800 mb-3">What you may NOT do without written permission:</h3>
+                            <ul class="space-y-2 text-sm text-slate-600 mb-5">
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-xmark text-red-500 mt-1 flex-shrink-0"></i> Copy, reproduce, or republish any content from this Website</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-xmark text-red-500 mt-1 flex-shrink-0"></i> Modify, adapt, translate, or create derivative works based on our content</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-xmark text-red-500 mt-1 flex-shrink-0"></i> Use our brand name, logo, or trademarks in any marketing or communication</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-xmark text-red-500 mt-1 flex-shrink-0"></i> Frame, mirror, or deep-link to any page on our Website for commercial purposes</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-xmark text-red-500 mt-1 flex-shrink-0"></i> Claim ownership of or falsely attribute our intellectual property to yourself or any third party</li>
+                            </ul>
+
+                            <p class="text-slate-600 text-sm leading-relaxed">Any solutions, deliverables, or intellectual property created during a contracted engagement with Technetics IT Services will be governed by the specific agreement entered into between the parties, which shall take precedence over these general Terms.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 5: Our Services ── -->
+                <section id="services" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-gears text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 5</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">Our Services</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <p class="text-slate-600 leading-relaxed mb-5">Technetics IT Services provides the following categories of services to businesses and individuals:</p>
+                            <div class="grid sm:grid-cols-2 gap-4 mb-5">
+                                <div class="p-4 bg-brand-base border border-brand-border rounded-xl">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <i class="fa-solid fa-microchip text-brand-primary text-sm"></i>
+                                        <p class="text-sm font-semibold text-slate-800">IT Solutions Development</p>
+                                    </div>
+                                    <p class="text-xs text-slate-500">Custom AI, data engineering, and software architecture solutions for businesses across 6+ industries.</p>
+                                </div>
+                                <div class="p-4 bg-brand-base border border-brand-border rounded-xl">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <i class="fa-solid fa-chart-line text-brand-primary text-sm"></i>
+                                        <p class="text-sm font-semibold text-slate-800">Technology Consulting</p>
+                                    </div>
+                                    <p class="text-xs text-slate-500">Strategic IT advisory, architecture reviews, and digital transformation roadmaps.</p>
+                                </div>
+                                <div class="p-4 bg-brand-base border border-brand-border rounded-xl">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <i class="fa-solid fa-flask text-brand-primary text-sm"></i>
+                                        <p class="text-sm font-semibold text-slate-800">Live Project Execution</p>
+                                    </div>
+                                    <p class="text-xs text-slate-500">Production-grade project environment with CI/CD workflows and architecture audits.</p>
+                                </div>
+                                <div class="p-4 bg-brand-base border border-brand-border rounded-xl">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <i class="fa-solid fa-lightbulb text-brand-primary text-sm"></i>
+                                        <p class="text-sm font-semibold text-slate-800">R&amp;D Collaboration</p>
+                                    </div>
+                                    <p class="text-xs text-slate-500">Innovation lab partnerships for AI/ML research, prototyping, and emerging technology exploration.</p>
+                                </div>
+                            </div>
+                            <p class="text-slate-500 text-sm leading-relaxed">All service engagements — including scope, timelines, deliverables, pricing, and ownership — will be governed by a separate written agreement (such as a Statement of Work or Service Agreement) executed between Technetics IT Services and the client. These Terms apply to use of the Website only, not to contracted service engagements.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 6: Service Availability ── -->
+                <section id="service-availability" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-server text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 6</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">Website &amp; Service Availability</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <p class="text-slate-600 leading-relaxed mb-5">We strive to maintain continuous availability of our Website; however, we cannot guarantee uninterrupted access at all times. The Website may be unavailable due to:</p>
+                            <div class="grid sm:grid-cols-2 gap-3 mb-5">
+                                <div class="flex items-center gap-3 p-3 bg-brand-base border border-brand-border rounded-lg">
+                                    <i class="fa-solid fa-wrench text-slate-400 text-sm flex-shrink-0"></i>
+                                    <p class="text-sm text-slate-600">Scheduled maintenance and updates</p>
+                                </div>
+                                <div class="flex items-center gap-3 p-3 bg-brand-base border border-brand-border rounded-lg">
+                                    <i class="fa-solid fa-bolt text-slate-400 text-sm flex-shrink-0"></i>
+                                    <p class="text-sm text-slate-600">Unexpected technical failures or outages</p>
+                                </div>
+                                <div class="flex items-center gap-3 p-3 bg-brand-base border border-brand-border rounded-lg">
+                                    <i class="fa-solid fa-cloud text-slate-400 text-sm flex-shrink-0"></i>
+                                    <p class="text-sm text-slate-600">Third-party hosting or CDN disruptions</p>
+                                </div>
+                                <div class="flex items-center gap-3 p-3 bg-brand-base border border-brand-border rounded-lg">
+                                    <i class="fa-solid fa-shield-halved text-slate-400 text-sm flex-shrink-0"></i>
+                                    <p class="text-sm text-slate-600">Security incidents or DDoS attacks</p>
+                                </div>
+                                <div class="flex items-center gap-3 p-3 bg-brand-base border border-brand-border rounded-lg sm:col-span-2">
+                                    <i class="fa-solid fa-earth-asia text-slate-400 text-sm flex-shrink-0"></i>
+                                    <p class="text-sm text-slate-600">Force majeure events beyond our reasonable control</p>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed">We reserve the right to modify, suspend, or discontinue any part of the Website or our services at any time without prior notice. We will not be liable for any loss or inconvenience arising from planned or unplanned downtime.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 7: Limitation of Liability ── -->
+                <section id="limitation-of-liability" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-scale-balanced text-brand-primary text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 7</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">Limitation of Liability</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <div class="p-4 bg-amber-50 border border-amber-100 rounded-xl mb-6 flex items-start gap-3">
+                                <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-sm text-amber-800">This section limits our legal liability to you. Please read it carefully.</p>
+                            </div>
+                            <p class="text-slate-600 leading-relaxed text-sm mb-5">To the fullest extent permitted by applicable law, Technetics IT Services shall not be liable for any of the following, whether arising in contract, tort, negligence, or otherwise:</p>
+                            <ul class="space-y-2 text-sm text-slate-600 mb-5">
+                                <li class="flex items-start gap-3 p-3 bg-brand-base border border-brand-border rounded-lg"><i class="fa-solid fa-xmark text-slate-400 mt-0.5 flex-shrink-0"></i> Any indirect, incidental, special, consequential, or punitive damages</li>
+                                <li class="flex items-start gap-3 p-3 bg-brand-base border border-brand-border rounded-lg"><i class="fa-solid fa-xmark text-slate-400 mt-0.5 flex-shrink-0"></i> Loss of profits, revenue, data, business opportunities, or goodwill</li>
+                                <li class="flex items-start gap-3 p-3 bg-brand-base border border-brand-border rounded-lg"><i class="fa-solid fa-xmark text-slate-400 mt-0.5 flex-shrink-0"></i> Damages arising from your inability to access or use the Website</li>
+                                <li class="flex items-start gap-3 p-3 bg-brand-base border border-brand-border rounded-lg"><i class="fa-solid fa-xmark text-slate-400 mt-0.5 flex-shrink-0"></i> Errors, inaccuracies, or omissions in Website content</li>
+                                <li class="flex items-start gap-3 p-3 bg-brand-base border border-brand-border rounded-lg"><i class="fa-solid fa-xmark text-slate-400 mt-0.5 flex-shrink-0"></i> Unauthorised access to or alteration of your transmissions or data</li>
+                                <li class="flex items-start gap-3 p-3 bg-brand-base border border-brand-border rounded-lg"><i class="fa-solid fa-xmark text-slate-400 mt-0.5 flex-shrink-0"></i> Actions or omissions of third-party services integrated with our Website</li>
+                            </ul>
+                            <p class="text-slate-600 text-sm leading-relaxed">Where liability cannot be excluded by law, our total aggregate liability to you shall not exceed the amount paid (if any) by you to Technetics IT Services in the three (3) months preceding the event giving rise to the claim, or INR 1,000 — whichever is greater.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 8: Disclaimers ── -->
+                <section id="disclaimers" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-circle-exclamation text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 8</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">Disclaimers</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <p class="text-slate-600 leading-relaxed text-sm mb-5">The Website and its content are provided on an <strong class="text-slate-800">"as is" and "as available"</strong> basis, without any warranties of any kind, express or implied. Specifically:</p>
+                            <div class="space-y-3">
+                                <div class="p-4 bg-brand-base border border-brand-border rounded-xl">
+                                    <p class="text-sm font-semibold text-slate-800 mb-1">No Warranty of Accuracy</p>
+                                    <p class="text-sm text-slate-500">While we strive to keep information current and accurate, we make no representations or warranties about the completeness, accuracy, reliability, or suitability of Website content for any particular purpose.</p>
+                                </div>
+                                <div class="p-4 bg-brand-base border border-brand-border rounded-xl">
+                                    <p class="text-sm font-semibold text-slate-800 mb-1">No Professional Advice</p>
+                                    <p class="text-sm text-slate-500">Content on this Website is for informational purposes only and does not constitute professional legal, financial, technical, or business advice. Always seek appropriate professional advice before making decisions based on Website content.</p>
+                                </div>
+                                <div class="p-4 bg-brand-base border border-brand-border rounded-xl">
+                                    <p class="text-sm font-semibold text-slate-800 mb-1">No Guarantee of Results</p>
+                                    <p class="text-sm text-slate-500">Case studies, metrics, and client outcomes described on this Website represent specific project results and are not guarantees of future performance. Individual results may vary based on project scope, client collaboration, and other factors.</p>
+                                </div>
+                                <div class="p-4 bg-brand-base border border-brand-border rounded-xl">
+                                    <p class="text-sm font-semibold text-slate-800 mb-1">No Virus Warranty</p>
+                                    <p class="text-sm text-slate-500">We do not warrant that our Website is free of viruses, malicious code, or other harmful components. You are responsible for implementing appropriate security measures on your own systems.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 9: Third-Party Links ── -->
+                <section id="third-party-links" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 9</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">Third-Party Links &amp; Resources</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <p class="text-slate-600 leading-relaxed text-sm mb-4">Our Website contains links to external websites and third-party platforms, including:</p>
+                            <div class="flex flex-wrap gap-2 mb-5">
+                                <span class="px-3 py-1.5 bg-brand-base border border-brand-border rounded-full text-xs font-medium text-slate-600 flex items-center gap-1.5"><i class="fa-brands fa-linkedin text-brand-primary"></i> LinkedIn</span>
+                                <span class="px-3 py-1.5 bg-brand-base border border-brand-border rounded-full text-xs font-medium text-slate-600 flex items-center gap-1.5"><i class="fa-brands fa-instagram text-brand-primary"></i> Instagram</span>
+                                <span class="px-3 py-1.5 bg-brand-base border border-brand-border rounded-full text-xs font-medium text-slate-600 flex items-center gap-1.5"><i class="fa-brands fa-facebook text-brand-primary"></i> Facebook</span>
+                                <span class="px-3 py-1.5 bg-brand-base border border-brand-border rounded-full text-xs font-medium text-slate-600 flex items-center gap-1.5"><i class="fa-brands fa-twitter text-brand-primary"></i> X (Twitter)</span>
+                                <span class="px-3 py-1.5 bg-brand-base border border-brand-border rounded-full text-xs font-medium text-slate-600 flex items-center gap-1.5"><i class="fa-solid fa-table text-brand-primary"></i> SheetDB</span>
+                                <span class="px-3 py-1.5 bg-brand-base border border-brand-border rounded-full text-xs font-medium text-slate-600 flex items-center gap-1.5"><i class="fa-brands fa-google text-brand-primary"></i> Google Fonts</span>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-3">These links are provided for your convenience. We do not control, endorse, or take responsibility for the content, privacy practices, or terms of any third-party website. Accessing external links is entirely at your own risk.</p>
+                            <p class="text-slate-600 text-sm leading-relaxed">The presence of a link to a third-party website does not imply our endorsement of that site, its operator, or any products or services offered thereon. We recommend reviewing the privacy policies and terms of any external sites you visit.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 10: Termination ── -->
+                <section id="termination" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-ban text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 10</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">Termination of Access</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <p class="text-slate-600 leading-relaxed text-sm mb-5">We reserve the right, at our sole discretion, to restrict, suspend, or terminate your access to the Website or any of our services at any time, without prior notice, for any of the following reasons:</p>
+                            <ul class="space-y-2 text-sm text-slate-600 mb-5">
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-brand-primary mt-1 text-xs flex-shrink-0"></i> Breach of any provision of these Terms &amp; Conditions</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-brand-primary mt-1 text-xs flex-shrink-0"></i> Fraudulent, abusive, or harmful use of the Website</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-brand-primary mt-1 text-xs flex-shrink-0"></i> Activity that disrupts or threatens the security or integrity of our systems</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-brand-primary mt-1 text-xs flex-shrink-0"></i> Non-compliance with applicable law or regulation</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-brand-primary mt-1 text-xs flex-shrink-0"></i> At our business discretion for any other lawful reason</li>
+                            </ul>
+                            <p class="text-slate-600 text-sm leading-relaxed">Upon termination, your right to use the Website ceases immediately. Sections of these Terms that are intended to survive termination — including intellectual property rights, disclaimers, limitation of liability, and governing law — shall continue to apply.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 11: Governing Law ── -->
+                <section id="governing-law" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-gavel text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 11</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">Governing Law &amp; Dispute Resolution</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <div class="grid sm:grid-cols-3 gap-4 mb-6">
+                                <div class="p-4 bg-brand-base border border-brand-border rounded-xl text-center">
+                                    <i class="fa-solid fa-flag text-brand-primary text-xl mb-2 block"></i>
+                                    <p class="text-xs font-bold text-slate-800">Governing Law</p>
+                                    <p class="text-xs text-slate-500 mt-1">Laws of India</p>
+                                </div>
+                                <div class="p-4 bg-brand-base border border-brand-border rounded-xl text-center">
+                                    <i class="fa-solid fa-location-dot text-brand-primary text-xl mb-2 block"></i>
+                                    <p class="text-xs font-bold text-slate-800">Jurisdiction</p>
+                                    <p class="text-xs text-slate-500 mt-1">Surat, Gujarat, India</p>
+                                </div>
+                                <div class="p-4 bg-brand-base border border-brand-border rounded-xl text-center">
+                                    <i class="fa-solid fa-comments text-brand-primary text-xl mb-2 block"></i>
+                                    <p class="text-xs font-bold text-slate-800">First Step</p>
+                                    <p class="text-xs text-slate-500 mt-1">Good-faith negotiation</p>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-4">These Terms shall be governed by and construed in accordance with the <strong class="text-slate-800">laws of India</strong>, without regard to conflict of law principles. Any disputes arising out of or relating to these Terms or your use of the Website shall be subject to the exclusive jurisdiction of courts located in <strong class="text-slate-800">Surat, Gujarat, India</strong>.</p>
+                            <p class="text-slate-600 text-sm leading-relaxed">Before initiating formal legal proceedings, both parties agree to attempt to resolve any dispute through good-faith negotiation. Either party may contact the other in writing to initiate this process. If the dispute is not resolved within 30 days, either party may pursue formal legal remedies.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 12: Changes to Terms ── -->
+                <section id="changes-to-terms" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-rotate text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 12</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">Changes to These Terms</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <p class="text-slate-600 leading-relaxed text-sm mb-4">Technetics IT Services reserves the right to revise these Terms &amp; Conditions at any time to reflect changes in our services, business model, or applicable law. When material changes are made, we will:</p>
+                            <ul class="space-y-2 text-sm text-slate-600 mb-4">
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-primary mt-1 flex-shrink-0"></i> Update the "Effective Date" at the top of this page</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-primary mt-1 flex-shrink-0"></i> Display a prominent notice on our Website for a reasonable period</li>
+                            </ul>
+                            <p class="text-slate-600 text-sm leading-relaxed">Your continued use of the Website following any changes constitutes your acceptance of the revised Terms. We encourage you to review these Terms periodically. If you do not agree with revised Terms, you must discontinue use of the Website.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 13: Contact ── -->
+                <section id="contact-terms" class="policy-section reveal mb-10">
+                    <div class="bg-brand-primary rounded-2xl overflow-hidden text-white relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-slate-900/40 to-transparent pointer-events-none"></div>
+                        <div class="relative z-10 px-8 py-8">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-headset text-white text-sm"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-bold text-white/60 uppercase tracking-wider">Section 13</span>
+                                    <h2 class="text-lg font-heading font-bold text-white leading-tight">Contact &amp; Legal Notices</h2>
+                                </div>
+                            </div>
+                            <p class="text-white/80 text-sm leading-relaxed mb-6">For questions, clarifications, or legal notices regarding these Terms &amp; Conditions, please contact us using the details below. We aim to respond to all legal inquiries within 1–2 business days.</p>
+                            <div class="grid sm:grid-cols-3 gap-4 mb-6">
+                                <a href="mailto:hr@techneticsitservices.com" class="flex items-center gap-3 p-3 bg-white/10 hover:bg-white/20 rounded-xl transition-all">
+                                    <i class="fa-solid fa-envelope text-brand-accent"></i>
+                                    <div>
+                                        <p class="text-xs font-bold text-white">Email</p>
+                                        <p class="text-xs text-white/70">hr@techneticsitservices.com</p>
+                                    </div>
+                                </a>
+                                <a href="tel:+917016918660" class="flex items-center gap-3 p-3 bg-white/10 hover:bg-white/20 rounded-xl transition-all">
+                                    <i class="fa-solid fa-phone text-brand-accent"></i>
+                                    <div>
+                                        <p class="text-xs font-bold text-white">Phone</p>
+                                        <p class="text-xs text-white/70">+91 70169 18660</p>
+                                    </div>
+                                </a>
+                                <div class="flex items-center gap-3 p-3 bg-white/10 rounded-xl">
+                                    <i class="fa-solid fa-location-dot text-brand-accent"></i>
+                                    <div>
+                                        <p class="text-xs font-bold text-white">Registered Office</p>
+                                        <p class="text-xs text-white/70">Adajan, Surat, Gujarat 395009, India</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-t border-white/10 pt-5">
+                                <p class="text-white/60 text-xs">By continuing to use our website, you acknowledge that you have read, understood, and agree to be bound by these Terms &amp; Conditions. These Terms were last updated on <strong class="text-white/80">10 May, 2026</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div><!-- end terms content -->
+        </div><!-- end flex -->
+    </div>
+</main>
+
+<!-- ── FOOTER ── -->
+<footer class="bg-brand-alt border-t border-brand-border py-10">
+    <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <img src="assets/Logo.png" alt="Technetics IT Services" class="h-8 w-auto">
+                <span class="text-xs text-slate-400">&copy; 2026 Technetics IT Services. All rights reserved.</span>
+            </div>
+            <div class="flex gap-6 text-xs text-slate-500">
+                <a href="index.html" class="hover:text-brand-primary transition-colors">Home</a>
+                <a href="privacy-policy.html" class="hover:text-brand-primary transition-colors">Privacy Policy</a>
+                <a href="terms-and-conditions.html" class="hover:text-brand-primary transition-colors font-semibold text-brand-primary">Terms &amp; Conditions</a>
+                <a href="index.html#contact" class="hover:text-brand-primary transition-colors">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // TOC active highlight
+    const sections = document.querySelectorAll('.policy-section');
+    const tocLinks = document.querySelectorAll('.toc-link');
+
+    function updateTOC() {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.getBoundingClientRect().top;
+            if (sectionTop <= 120) current = section.id;
+        });
+        tocLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateTOC, { passive: true });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>

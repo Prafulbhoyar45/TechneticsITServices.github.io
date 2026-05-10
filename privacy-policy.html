@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Technetics IT Services</title>
+    <meta name="description" content="Technetics IT Services Privacy Policy — how we collect, use, and protect your data.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.techneticsitservices.com/privacy-policy">
+    <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            base: '#F6F6F6',
+                            alt: '#F1EFEB',
+                            soft: '#E8E1D5',
+                            border: '#DDD5D5',
+                            neutral: '#EDEDED',
+                            accent: '#D3DCE8',
+                            primary: '#395886',
+                            dark: '#1e293b',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { overflow-x: hidden; scroll-behavior: smooth; }
+        body { overflow-x: hidden; }
+
+        /* Sticky TOC */
+        .toc-link {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: #475569;
+            transition: all 0.2s ease;
+            border-left: 2px solid transparent;
+        }
+        .toc-link:hover { color: #395886; background: #EEF2F8; border-left-color: #395886; }
+        .toc-link.active { color: #395886; background: #EEF2F8; border-left-color: #395886; font-weight: 600; }
+
+        /* Section cards */
+        .policy-section {
+            scroll-margin-top: 6rem;
+        }
+
+        /* Hero gradient */
+        .hero-gradient {
+            background: linear-gradient(135deg, #395886 0%, #2d4a73 50%, #1e3454 100%);
+        }
+
+        /* Divider dots */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 2rem 0;
+        }
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #DDD5D5;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #F6F6F6; }
+        ::-webkit-scrollbar-thumb { background: #D3DCE8; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #395886; }
+
+        /* TOC Sidebar */
+        @media (max-width: 1024px) {
+            .toc-sidebar { display: none; }
+        }
+
+        /* Mobile TOC dropdown */
+        .mobile-toc {
+            display: none;
+        }
+        @media (max-width: 1024px) {
+            .mobile-toc { display: block; }
+        }
+
+        /* Reveal animation */
+        .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+        .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+        /* Badge */
+        .updated-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            background: rgba(211, 220, 232, 0.3);
+            border: 1px solid rgba(211, 220, 232, 0.6);
+            color: rgba(255,255,255,0.85);
+        }
+    </style>
+</head>
+<body class="bg-brand-base text-slate-800 font-sans antialiased">
+
+<!-- ── NAVBAR ── -->
+<nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-brand-border shadow-sm" role="navigation">
+    <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+        <a href="index.html" class="flex items-center gap-2 group" aria-label="Technetics Home">
+            <img src="assets/Logo.png" alt="Technetics IT Services" class="h-10 w-auto">
+        </a>
+        <div class="flex items-center gap-6">
+            <a href="index.html" class="text-sm font-medium text-slate-600 hover:text-brand-primary transition-colors hidden md:block">← Back to Home</a>
+            <a href="terms-and-conditions.html" class="text-sm font-medium text-slate-500 hover:text-brand-primary transition-colors hidden md:block">Terms &amp; Conditions</a>
+            <a href="index.html#contact" class="px-4 py-2 rounded-full bg-brand-primary text-white text-sm font-semibold hover:bg-brand-primary/90 transition-all shadow-sm">
+                Contact Us
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero-gradient pt-28 pb-16 relative overflow-hidden">
+    <!-- Decorative circles -->
+    <div class="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-white/5 pointer-events-none"></div>
+    <div class="absolute -bottom-10 -left-10 w-56 h-56 rounded-full bg-white/5 pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-white/3 pointer-events-none"></div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <!-- Breadcrumb -->
+        <nav aria-label="Breadcrumb" class="mb-6">
+            <ol class="flex items-center gap-2 text-sm text-white/60">
+                <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                <li><i class="fa-solid fa-chevron-right text-xs"></i></li>
+                <li class="text-white font-medium">Privacy Policy</li>
+            </ol>
+        </nav>
+
+        <div class="max-w-3xl">
+            <div class="updated-badge mb-4">
+                <i class="fa-solid fa-shield-halved"></i>
+                Effective Date: 10 May, 2026
+            </div>
+            <h1 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4 leading-tight">
+                Privacy Policy
+            </h1>
+            <p class="text-lg text-white/75 max-w-2xl leading-relaxed">
+                At Technetics IT Services, your privacy is a core commitment — not an afterthought. This policy explains exactly what data we collect, why we collect it, how we protect it, and what rights you have.
+            </p>
+        </div>
+
+        <!-- Quick stats -->
+        <div class="mt-10 flex flex-wrap gap-6">
+            <div class="flex items-center gap-2 text-white/70 text-sm">
+                <i class="fa-solid fa-lock text-brand-accent"></i>
+                No data sold to third parties
+            </div>
+            <div class="flex items-center gap-2 text-white/70 text-sm">
+                <i class="fa-solid fa-eye-slash text-brand-accent"></i>
+                No advertising tracking
+            </div>
+            <div class="flex items-center gap-2 text-white/70 text-sm">
+                <i class="fa-solid fa-envelope text-brand-accent"></i>
+                24hr response to data requests
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── MAIN CONTENT ── -->
+<main class="py-16">
+    <div class="container mx-auto px-6 max-w-7xl">
+        <div class="flex gap-12">
+
+            <!-- ── STICKY TOC (Desktop) ── -->
+            <aside class="toc-sidebar w-64 flex-shrink-0">
+                <div class="sticky top-24">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 px-1">Contents</p>
+                    <nav aria-label="Table of contents">
+                        <ul class="space-y-0.5">
+                            <li><a href="#overview" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">1</span>Overview</a></li>
+                            <li><a href="#information-collected" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">2</span>Information We Collect</a></li>
+                            <li><a href="#how-we-use" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">3</span>How We Use Your Data</a></li>
+                            <li><a href="#cookies" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">4</span>Cookies &amp; Tracking</a></li>
+                            <li><a href="#third-party" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">5</span>Third-Party Services</a></li>
+                            <li><a href="#data-protection" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">6</span>Data Protection</a></li>
+                            <li><a href="#data-retention" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">7</span>Data Retention</a></li>
+                            <li><a href="#your-rights" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">8</span>Your Rights</a></li>
+                            <li><a href="#childrens-privacy" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">9</span>Children's Privacy</a></li>
+                            <li><a href="#policy-changes" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">10</span>Policy Changes</a></li>
+                            <li><a href="#contact-privacy" class="toc-link"><span class="w-5 h-5 rounded bg-brand-accent/50 text-brand-primary text-xs flex items-center justify-center font-bold flex-shrink-0">11</span>Contact</a></li>
+                        </ul>
+                    </nav>
+
+                    <!-- CTA box -->
+                    <div class="mt-8 p-4 bg-brand-primary/5 border border-brand-primary/20 rounded-xl">
+                        <p class="text-xs font-semibold text-brand-primary mb-1">Have a question?</p>
+                        <p class="text-xs text-slate-500 mb-3">Our team responds within 24 hours.</p>
+                        <a href="mailto:hr@techneticsitservices.com" class="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1">
+                            <i class="fa-solid fa-envelope"></i> hr@techneticsitservices.com
+                        </a>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ── POLICY CONTENT ── -->
+            <div class="flex-1 min-w-0">
+
+                <!-- Mobile TOC -->
+                <div class="mobile-toc mb-8">
+                    <details class="bg-white border border-brand-border rounded-xl overflow-hidden">
+                        <summary class="px-5 py-4 cursor-pointer font-semibold text-slate-700 flex items-center justify-between text-sm">
+                            <span><i class="fa-solid fa-list mr-2 text-brand-primary"></i> Table of Contents</span>
+                            <i class="fa-solid fa-chevron-down text-brand-primary text-xs"></i>
+                        </summary>
+                        <nav class="px-5 pb-4 space-y-1 text-sm">
+                            <a href="#overview" class="block py-1.5 text-slate-600 hover:text-brand-primary">1. Overview</a>
+                            <a href="#information-collected" class="block py-1.5 text-slate-600 hover:text-brand-primary">2. Information We Collect</a>
+                            <a href="#how-we-use" class="block py-1.5 text-slate-600 hover:text-brand-primary">3. How We Use Your Data</a>
+                            <a href="#cookies" class="block py-1.5 text-slate-600 hover:text-brand-primary">4. Cookies &amp; Tracking</a>
+                            <a href="#third-party" class="block py-1.5 text-slate-600 hover:text-brand-primary">5. Third-Party Services</a>
+                            <a href="#data-protection" class="block py-1.5 text-slate-600 hover:text-brand-primary">6. Data Protection</a>
+                            <a href="#data-retention" class="block py-1.5 text-slate-600 hover:text-brand-primary">7. Data Retention</a>
+                            <a href="#your-rights" class="block py-1.5 text-slate-600 hover:text-brand-primary">8. Your Rights</a>
+                            <a href="#childrens-privacy" class="block py-1.5 text-slate-600 hover:text-brand-primary">9. Children's Privacy</a>
+                            <a href="#policy-changes" class="block py-1.5 text-slate-600 hover:text-brand-primary">10. Policy Changes</a>
+                            <a href="#contact-privacy" class="block py-1.5 text-slate-600 hover:text-brand-primary">11. Contact</a>
+                        </nav>
+                    </details>
+                </div>
+
+                <!-- ── SECTION 1: Overview ── -->
+                <section id="overview" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-circle-info text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 1</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">Overview</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7 prose prose-slate max-w-none">
+                            <p class="text-slate-600 leading-relaxed">This Privacy Policy applies to the website <strong class="text-slate-800">www.techneticsitservices.com</strong> and all services, products, and communications operated by <strong class="text-slate-800">Technetics IT Services</strong> ("we", "our", or "us"), a company based in Adajan, Surat, Gujarat, India.</p>
+                            <p class="text-slate-600 leading-relaxed mt-4">By accessing or using our website, submitting a contact form, or engaging with our services, you agree to the collection and use of information as described in this Privacy Policy. If you do not agree with this policy, please discontinue use of our website.</p>
+                            <div class="mt-5 p-4 bg-brand-accent/20 border border-brand-accent rounded-xl flex items-start gap-3">
+                                <i class="fa-solid fa-lightbulb text-brand-primary mt-0.5 flex-shrink-0"></i>
+                                <p class="text-sm text-slate-700 m-0"><strong>Plain language summary:</strong> We only collect information you voluntarily give us through our contact form. We do not sell your data, and we use it solely to respond to your inquiries and improve our services.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 2: Information We Collect ── -->
+                <section id="information-collected" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-database text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 2</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">Information We Collect</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <p class="text-slate-600 leading-relaxed mb-6">We collect information in two primary ways: information you provide directly, and information collected automatically when you browse our website.</p>
+
+                            <h3 class="text-base font-bold text-slate-800 mb-3 flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-brand-primary text-white text-xs flex items-center justify-center font-bold">A</span>
+                                Information You Provide Directly
+                            </h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-4">When you complete our contact form, we collect the following fields:</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                                <div class="flex items-center gap-3 p-3 bg-brand-base rounded-lg border border-brand-border">
+                                    <i class="fa-solid fa-user text-brand-primary text-sm flex-shrink-0"></i>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800">Full Name</p>
+                                        <p class="text-xs text-slate-500">Required — for identification</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3 p-3 bg-brand-base rounded-lg border border-brand-border">
+                                    <i class="fa-solid fa-envelope text-brand-primary text-sm flex-shrink-0"></i>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800">Email Address</p>
+                                        <p class="text-xs text-slate-500">Required — for correspondence</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3 p-3 bg-brand-base rounded-lg border border-brand-border">
+                                    <i class="fa-solid fa-phone text-brand-primary text-sm flex-shrink-0"></i>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800">Phone Number</p>
+                                        <p class="text-xs text-slate-500">Optional — for call-back requests</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3 p-3 bg-brand-base rounded-lg border border-brand-border">
+                                    <i class="fa-solid fa-tag text-brand-primary text-sm flex-shrink-0"></i>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800">Inquiry Type</p>
+                                        <p class="text-xs text-slate-500">Business / R&D / Partnership</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3 p-3 bg-brand-base rounded-lg border border-brand-border sm:col-span-2">
+                                    <i class="fa-solid fa-message text-brand-primary text-sm flex-shrink-0"></i>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800">Message / Project Details</p>
+                                        <p class="text-xs text-slate-500">Optional — description of your needs or inquiry</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-base font-bold text-slate-800 mb-3 flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-brand-primary text-white text-xs flex items-center justify-center font-bold">B</span>
+                                Automatically Collected Information
+                            </h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-3">When you visit our website, our hosting infrastructure and third-party services may automatically record standard technical data, including:</p>
+                            <ul class="space-y-2 text-sm text-slate-600">
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-brand-primary mt-1 text-xs flex-shrink-0"></i> IP address and approximate geographic location (country/city level)</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-brand-primary mt-1 text-xs flex-shrink-0"></i> Browser type, version, and operating system</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-brand-primary mt-1 text-xs flex-shrink-0"></i> Pages visited, time on page, and navigation path</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-brand-primary mt-1 text-xs flex-shrink-0"></i> Referring URL (where you came from before visiting our site)</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-brand-primary mt-1 text-xs flex-shrink-0"></i> Device type (desktop, mobile, tablet)</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-brand-primary mt-1 text-xs flex-shrink-0"></i> Session duration and interaction metrics</li>
+                            </ul>
+                            <p class="text-slate-500 text-xs mt-3 italic">This data is aggregated and anonymised for analytics purposes. It is not linked to personally identifiable information unless you submit a contact form.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 3: How We Use Your Data ── -->
+                <section id="how-we-use" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-gear text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 3</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">How We Use Your Data</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <p class="text-slate-600 leading-relaxed mb-6">We use the information we collect for the following purposes, all of which are grounded in legitimate business interest or your explicit consent:</p>
+                            <div class="space-y-4">
+                                <div class="flex gap-4 p-4 rounded-xl bg-brand-base border border-brand-border hover:border-brand-primary/40 transition-colors">
+                                    <div class="w-8 h-8 rounded-lg bg-green-50 border border-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <i class="fa-solid fa-reply text-green-600 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800 mb-1">Responding to Enquiries</p>
+                                        <p class="text-sm text-slate-500">To follow up on contact form submissions, schedule consultations, and provide information about our IT solutions or collaboration opportunities.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 p-4 rounded-xl bg-brand-base border border-brand-border hover:border-brand-primary/40 transition-colors">
+                                    <div class="w-8 h-8 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <i class="fa-solid fa-chart-line text-blue-600 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800 mb-1">Service Improvement</p>
+                                        <p class="text-sm text-slate-500">To analyse website usage patterns, identify areas for improvement, and enhance the overall user experience on our platform.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 p-4 rounded-xl bg-brand-base border border-brand-border hover:border-brand-primary/40 transition-colors">
+                                    <div class="w-8 h-8 rounded-lg bg-purple-50 border border-purple-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <i class="fa-solid fa-shield-halved text-purple-600 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800 mb-1">Security &amp; Compliance</p>
+                                        <p class="text-sm text-slate-500">To detect and prevent fraudulent activity, protect our infrastructure, and comply with applicable legal obligations under Indian law.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 p-4 rounded-xl bg-brand-base border border-brand-border hover:border-brand-primary/40 transition-colors">
+                                    <div class="w-8 h-8 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <i class="fa-solid fa-envelope-open text-orange-600 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800 mb-1">Service Communications</p>
+                                        <p class="text-sm text-slate-500">To send important updates about our services, project status, or changes to this Privacy Policy — only when relevant to your inquiry or engagement.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-5 p-4 bg-red-50 border border-red-100 rounded-xl flex items-start gap-3">
+                                <i class="fa-solid fa-ban text-red-500 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-sm text-slate-700 m-0"><strong>We do NOT:</strong> sell your personal information to third parties, use your data for unsolicited marketing campaigns, or share your data with advertisers or data brokers.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 4: Cookies & Tracking ── -->
+                <section id="cookies" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-cookie-bite text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 4</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">Cookies &amp; Tracking Technologies</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <p class="text-slate-600 leading-relaxed mb-6">Our website may use cookies and similar tracking technologies to enhance your browsing experience. Below is a transparent breakdown of what we use and why.</p>
+
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm border-collapse">
+                                    <thead>
+                                        <tr class="bg-brand-primary text-white">
+                                            <th class="px-4 py-3 text-left font-semibold rounded-tl-lg">Cookie Type</th>
+                                            <th class="px-4 py-3 text-left font-semibold">Purpose</th>
+                                            <th class="px-4 py-3 text-left font-semibold">Duration</th>
+                                            <th class="px-4 py-3 text-left font-semibold rounded-tr-lg">Essential?</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b border-brand-border hover:bg-brand-base transition-colors">
+                                            <td class="px-4 py-3 font-medium text-slate-700">Strictly Necessary</td>
+                                            <td class="px-4 py-3 text-slate-600">Core website functionality, security tokens</td>
+                                            <td class="px-4 py-3 text-slate-500">Session</td>
+                                            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full bg-green-100 text-green-700 text-xs font-bold">Yes</span></td>
+                                        </tr>
+                                        <tr class="border-b border-brand-border hover:bg-brand-base transition-colors">
+                                            <td class="px-4 py-3 font-medium text-slate-700">Performance / Analytics</td>
+                                            <td class="px-4 py-3 text-slate-600">Measuring page load times, visitor counts, traffic sources</td>
+                                            <td class="px-4 py-3 text-slate-500">Up to 12 months</td>
+                                            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-700 text-xs font-bold">Optional</span></td>
+                                        </tr>
+                                        <tr class="border-b border-brand-border hover:bg-brand-base transition-colors">
+                                            <td class="px-4 py-3 font-medium text-slate-700">Preference</td>
+                                            <td class="px-4 py-3 text-slate-600">Remembering your language or region settings</td>
+                                            <td class="px-4 py-3 text-slate-500">Up to 6 months</td>
+                                            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-700 text-xs font-bold">Optional</span></td>
+                                        </tr>
+                                        <tr class="hover:bg-brand-base transition-colors">
+                                            <td class="px-4 py-3 font-medium text-slate-700 rounded-bl-lg">Third-Party</td>
+                                            <td class="px-4 py-3 text-slate-600">Fonts (Google Fonts), icons (Font Awesome CDN)</td>
+                                            <td class="px-4 py-3 text-slate-500">Varies</td>
+                                            <td class="px-4 py-3 rounded-br-lg"><span class="px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-700 text-xs font-bold">Optional</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <p class="text-slate-600 text-sm mt-5 leading-relaxed">Most modern browsers allow you to control or disable cookies through your browser settings. Disabling cookies may affect the functionality of certain website features. We currently do not use advertising or retargeting cookies.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 5: Third-Party Services ── -->
+                <section id="third-party" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-link text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 5</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">Third-Party Services</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <p class="text-slate-600 leading-relaxed mb-6">Our website integrates certain third-party tools and services to deliver its functionality. Each service has its own privacy policy and data handling practices:</p>
+
+                            <div class="space-y-4">
+                                <div class="p-4 rounded-xl border border-brand-border bg-brand-base">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <i class="fa-solid fa-table text-brand-primary"></i>
+                                        <p class="font-semibold text-slate-800 text-sm">SheetDB (Form Data Storage)</p>
+                                    </div>
+                                    <p class="text-sm text-slate-500 leading-relaxed">Contact form submissions are processed and stored via SheetDB, an API service that saves data to Google Sheets. Your name, email, phone, inquiry type, message, and submission timestamp are stored securely. SheetDB acts as a data processor on our behalf. View their privacy policy at <a href="https://sheetdb.io/privacy-policy" class="text-brand-primary hover:underline" target="_blank" rel="noopener">sheetdb.io/privacy-policy</a>.</p>
+                                </div>
+                                <div class="p-4 rounded-xl border border-brand-border bg-brand-base">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <i class="fa-brands fa-google text-brand-primary"></i>
+                                        <p class="font-semibold text-slate-800 text-sm">Google Fonts</p>
+                                    </div>
+                                    <p class="text-sm text-slate-500 leading-relaxed">We use Google Fonts (Inter and Outfit typefaces) loaded via Google's CDN. When the page loads, your browser may send a request to Google's servers, which may log your IP address. See <a href="https://policies.google.com/privacy" class="text-brand-primary hover:underline" target="_blank" rel="noopener">Google's Privacy Policy</a>.</p>
+                                </div>
+                                <div class="p-4 rounded-xl border border-brand-border bg-brand-base">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <i class="fa-solid fa-star text-brand-primary"></i>
+                                        <p class="font-semibold text-slate-800 text-sm">Font Awesome (Icon CDN)</p>
+                                    </div>
+                                    <p class="text-sm text-slate-500 leading-relaxed">Icons on this website are served via the Font Awesome CDN (Cloudflare). Standard server logs may be recorded. See <a href="https://fontawesome.com/privacy" class="text-brand-primary hover:underline" target="_blank" rel="noopener">Font Awesome's Privacy Policy</a>.</p>
+                                </div>
+                                <div class="p-4 rounded-xl border border-brand-border bg-brand-base">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <i class="fa-solid fa-image text-brand-primary"></i>
+                                        <p class="font-semibold text-slate-800 text-sm">Unsplash (Stock Photography)</p>
+                                    </div>
+                                    <p class="text-sm text-slate-500 leading-relaxed">One background image on the contact section is loaded directly from Unsplash's CDN. No personal data is shared with Unsplash. See <a href="https://unsplash.com/privacy" class="text-brand-primary hover:underline" target="_blank" rel="noopener">Unsplash's Privacy Policy</a>.</p>
+                                </div>
+                                <div class="p-4 rounded-xl border border-brand-border bg-brand-base">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <i class="fa-brands fa-linkedin text-brand-primary"></i>
+                                        <p class="font-semibold text-slate-800 text-sm">Social Media Platforms</p>
+                                    </div>
+                                    <p class="text-sm text-slate-500 leading-relaxed">Our website contains links to our profiles on LinkedIn, Instagram, Facebook, and X (Twitter). Clicking these links will navigate you to those platforms, which have their own privacy policies and data practices. We do not control or share data with these platforms unless you engage with them directly.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 6: Data Protection ── -->
+                <section id="data-protection" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-shield-halved text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 6</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">Data Protection &amp; Security</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <p class="text-slate-600 leading-relaxed mb-6">We take reasonable and appropriate technical and organisational measures to safeguard your personal information against unauthorised access, loss, misuse, or disclosure.</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+                                <div class="p-4 bg-brand-base border border-brand-border rounded-xl flex items-start gap-3">
+                                    <i class="fa-solid fa-lock text-brand-primary mt-0.5 flex-shrink-0"></i>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800">HTTPS Encryption</p>
+                                        <p class="text-xs text-slate-500 mt-0.5">All data transmitted between your browser and our server is encrypted using TLS (HTTPS).</p>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-brand-base border border-brand-border rounded-xl flex items-start gap-3">
+                                    <i class="fa-solid fa-user-lock text-brand-primary mt-0.5 flex-shrink-0"></i>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800">Access Controls</p>
+                                        <p class="text-xs text-slate-500 mt-0.5">Access to contact form data is restricted to authorised team members only on a need-to-know basis.</p>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-brand-base border border-brand-border rounded-xl flex items-start gap-3">
+                                    <i class="fa-solid fa-rotate text-brand-primary mt-0.5 flex-shrink-0"></i>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800">Regular Audits</p>
+                                        <p class="text-xs text-slate-500 mt-0.5">We periodically review our data handling practices and update our security measures as needed.</p>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-brand-base border border-brand-border rounded-xl flex items-start gap-3">
+                                    <i class="fa-solid fa-server text-brand-primary mt-0.5 flex-shrink-0"></i>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800">Secure Storage</p>
+                                        <p class="text-xs text-slate-500 mt-0.5">Form submissions are stored in secured cloud environments with access logging and authentication.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-slate-500 text-sm leading-relaxed">While we implement robust security measures, no method of electronic transmission or storage is 100% secure. We cannot guarantee absolute security but are committed to protecting your data to the best of our ability. In the event of a data breach that affects your personal information, we will notify you as required by applicable law.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 7: Data Retention ── -->
+                <section id="data-retention" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-calendar text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 7</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">Data Retention</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <p class="text-slate-600 leading-relaxed mb-5">We retain personal information only for as long as necessary to fulfil the purposes outlined in this Privacy Policy, or as required by applicable law.</p>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex items-start gap-3 p-3 bg-brand-base rounded-lg border border-brand-border">
+                                    <i class="fa-solid fa-circle-check text-brand-primary mt-0.5 flex-shrink-0"></i>
+                                    <span class="text-slate-600"><strong class="text-slate-800">Contact form submissions:</strong> Retained for up to 24 months from the date of submission, unless an active business relationship continues or you request earlier deletion.</span>
+                                </li>
+                                <li class="flex items-start gap-3 p-3 bg-brand-base rounded-lg border border-brand-border">
+                                    <i class="fa-solid fa-circle-check text-brand-primary mt-0.5 flex-shrink-0"></i>
+                                    <span class="text-slate-600"><strong class="text-slate-800">Website analytics data:</strong> Aggregated and anonymised analytics data may be retained indefinitely as it cannot be linked to individuals.</span>
+                                </li>
+                                <li class="flex items-start gap-3 p-3 bg-brand-base rounded-lg border border-brand-border">
+                                    <i class="fa-solid fa-circle-check text-brand-primary mt-0.5 flex-shrink-0"></i>
+                                    <span class="text-slate-600"><strong class="text-slate-800">Business correspondence:</strong> Email communications related to active or past projects may be retained for up to 5 years for legal and operational purposes.</span>
+                                </li>
+                            </ul>
+                            <p class="text-slate-500 text-sm mt-4 leading-relaxed">Upon request, we will delete your personal information from our systems within 30 days, subject to any legal obligations that require us to retain certain records.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 8: Your Rights ── -->
+                <section id="your-rights" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-scale-balanced text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 8</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">Your Rights</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <p class="text-slate-600 leading-relaxed mb-6">Under applicable data protection principles and Indian law (including the Digital Personal Data Protection Act, 2023), you have the following rights regarding your personal information:</p>
+                            <div class="space-y-3">
+                                <div class="flex gap-4 p-4 rounded-xl border border-brand-border hover:border-brand-primary/40 hover:bg-brand-base transition-all">
+                                    <i class="fa-solid fa-eye text-brand-primary mt-0.5 flex-shrink-0"></i>
+                                    <div>
+                                        <p class="text-sm font-bold text-slate-800">Right to Access</p>
+                                        <p class="text-sm text-slate-500">Request a copy of the personal data we hold about you.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 p-4 rounded-xl border border-brand-border hover:border-brand-primary/40 hover:bg-brand-base transition-all">
+                                    <i class="fa-solid fa-pen text-brand-primary mt-0.5 flex-shrink-0"></i>
+                                    <div>
+                                        <p class="text-sm font-bold text-slate-800">Right to Correction</p>
+                                        <p class="text-sm text-slate-500">Request correction of inaccurate or incomplete personal data we hold about you.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 p-4 rounded-xl border border-brand-border hover:border-brand-primary/40 hover:bg-brand-base transition-all">
+                                    <i class="fa-solid fa-trash text-brand-primary mt-0.5 flex-shrink-0"></i>
+                                    <div>
+                                        <p class="text-sm font-bold text-slate-800">Right to Erasure</p>
+                                        <p class="text-sm text-slate-500">Request deletion of your personal data where it is no longer necessary for the purpose for which it was collected.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 p-4 rounded-xl border border-brand-border hover:border-brand-primary/40 hover:bg-brand-base transition-all">
+                                    <i class="fa-solid fa-hand text-brand-primary mt-0.5 flex-shrink-0"></i>
+                                    <div>
+                                        <p class="text-sm font-bold text-slate-800">Right to Object</p>
+                                        <p class="text-sm text-slate-500">Object to the processing of your personal data for certain purposes, including direct communications.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 p-4 rounded-xl border border-brand-border hover:border-brand-primary/40 hover:bg-brand-base transition-all">
+                                    <i class="fa-solid fa-file-export text-brand-primary mt-0.5 flex-shrink-0"></i>
+                                    <div>
+                                        <p class="text-sm font-bold text-slate-800">Right to Data Portability</p>
+                                        <p class="text-sm text-slate-500">Request a structured, machine-readable copy of your personal data that you have provided to us.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-5 p-4 bg-brand-primary/5 border border-brand-primary/20 rounded-xl">
+                                <p class="text-sm text-slate-700">To exercise any of these rights, please contact us at <a href="mailto:hr@techneticsitservices.com" class="text-brand-primary font-semibold hover:underline">hr@techneticsitservices.com</a>. We will respond to your request within <strong>30 days</strong>. We may ask you to verify your identity before processing your request.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 9: Children's Privacy ── -->
+                <section id="childrens-privacy" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-child text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 9</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">Children's Privacy</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <p class="text-slate-600 leading-relaxed">Our website and services are intended for business professionals and individuals aged <strong>18 years or older</strong>. We do not knowingly collect personal information from individuals under the age of 18. If you believe a minor has submitted personal information to us, please contact us immediately at <a href="mailto:hr@techneticsitservices.com" class="text-brand-primary font-semibold hover:underline">hr@techneticsitservices.com</a> and we will promptly delete such information from our records.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 10: Policy Changes ── -->
+                <section id="policy-changes" class="policy-section reveal mb-10">
+                    <div class="bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden">
+                        <div class="flex items-center gap-4 px-8 py-5 border-b border-brand-border bg-brand-base">
+                            <div class="w-9 h-9 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary flex-shrink-0">
+                                <i class="fa-solid fa-rotate text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Section 10</span>
+                                <h2 class="text-lg font-heading font-bold text-slate-900 leading-tight">Changes to This Policy</h2>
+                            </div>
+                        </div>
+                        <div class="px-8 py-7">
+                            <p class="text-slate-600 leading-relaxed">We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or business operations. When we make material changes, we will:</p>
+                            <ul class="mt-4 space-y-2 text-sm text-slate-600">
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-brand-primary mt-1 text-xs flex-shrink-0"></i> Update the "Effective Date" at the top of this page</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-brand-primary mt-1 text-xs flex-shrink-0"></i> Display a prominent notice on our website for a reasonable period</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-brand-primary mt-1 text-xs flex-shrink-0"></i> Where required by law, seek your consent to changes</li>
+                            </ul>
+                            <p class="text-slate-600 mt-4 leading-relaxed text-sm">Continued use of our website after changes become effective constitutes your acceptance of the revised Privacy Policy. We encourage you to review this page periodically.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── SECTION 11: Contact ── -->
+                <section id="contact-privacy" class="policy-section reveal mb-10">
+                    <div class="bg-brand-primary rounded-2xl overflow-hidden text-white relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-brand-primary/80 to-slate-900/80 pointer-events-none"></div>
+                        <div class="relative z-10 px-8 py-8">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-headset text-white text-sm"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-bold text-white/60 uppercase tracking-wider">Section 11</span>
+                                    <h2 class="text-lg font-heading font-bold text-white leading-tight">Contact Us About Privacy</h2>
+                                </div>
+                            </div>
+                            <p class="text-white/80 text-sm leading-relaxed mb-6">If you have any questions, concerns, or requests regarding this Privacy Policy or your personal data, please reach out to us. We are committed to resolving any privacy-related issues promptly and transparently.</p>
+                            <div class="grid sm:grid-cols-3 gap-4">
+                                <a href="mailto:hr@techneticsitservices.com" class="flex items-center gap-3 p-3 bg-white/10 hover:bg-white/20 rounded-xl transition-all">
+                                    <i class="fa-solid fa-envelope text-brand-accent"></i>
+                                    <div>
+                                        <p class="text-xs font-bold text-white">Email</p>
+                                        <p class="text-xs text-white/70">hr@techneticsitservices.com</p>
+                                    </div>
+                                </a>
+                                <a href="tel:+917016918660" class="flex items-center gap-3 p-3 bg-white/10 hover:bg-white/20 rounded-xl transition-all">
+                                    <i class="fa-solid fa-phone text-brand-accent"></i>
+                                    <div>
+                                        <p class="text-xs font-bold text-white">Phone</p>
+                                        <p class="text-xs text-white/70">+91 70169 18660</p>
+                                    </div>
+                                </a>
+                                <div class="flex items-center gap-3 p-3 bg-white/10 rounded-xl">
+                                    <i class="fa-solid fa-location-dot text-brand-accent"></i>
+                                    <div>
+                                        <p class="text-xs font-bold text-white">Office</p>
+                                        <p class="text-xs text-white/70">Adajan, Surat, Gujarat, India</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div><!-- end policy content -->
+        </div><!-- end flex -->
+    </div>
+</main>
+
+<!-- ── FOOTER ── -->
+<footer class="bg-brand-alt border-t border-brand-border py-10">
+    <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <img src="assets/Logo.png" alt="Technetics IT Services" class="h-8 w-auto">
+                <span class="text-xs text-slate-400">&copy; 2026 Technetics IT Services. All rights reserved.</span>
+            </div>
+            <div class="flex gap-6 text-xs text-slate-500">
+                <a href="index.html" class="hover:text-brand-primary transition-colors">Home</a>
+                <a href="privacy-policy.html" class="hover:text-brand-primary transition-colors font-semibold text-brand-primary">Privacy Policy</a>
+                <a href="terms-and-conditions.html" class="hover:text-brand-primary transition-colors">Terms &amp; Conditions</a>
+                <a href="index.html#contact" class="hover:text-brand-primary transition-colors">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // TOC active highlight on scroll
+    const sections = document.querySelectorAll('.policy-section');
+    const tocLinks = document.querySelectorAll('.toc-link');
+
+    function updateTOC() {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.getBoundingClientRect().top;
+            if (sectionTop <= 120) current = section.id;
+        });
+        tocLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateTOC, { passive: true });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>
